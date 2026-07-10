@@ -80,6 +80,18 @@ export default function ToolPage({ params }: { params: { id: string } }) {
 
       <div className="mx-auto max-w-3xl px-6 py-12">
         <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10 mb-8">
+          {tool.id === "fire-number" && (
+            <div className="mb-6 pb-6 border-b border-white/10">
+              <h2 className="text-xl font-extrabold text-white mb-2">
+                FIRE Number Calculator — What You Need to Retire
+              </h2>
+              <p className="text-sm text-slate-400">
+                FIRE = Financial Independence, Retire Early. Enter your numbers
+                below to calculate the total you need invested to retire
+                comfortably.
+              </p>
+            </div>
+          )}
           <CalculatorWidget toolId={tool.id} />
         </div>
 

@@ -21,7 +21,15 @@ export function FIRENumberCalculator() {
   return (
     <div className="space-y-6">
       <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Annual Expenses ($)" value={annualExpenses} onChange={setAnnualExpenses} min={10000} max={500000} step={1000} />
+        <Field
+          label="Annual Expenses ($)"
+          value={annualExpenses}
+          onChange={setAnnualExpenses}
+          min={10000}
+          max={500000}
+          step={1000}
+          tooltip="How much do you spend per year? Use last year's total or estimate."
+        />
         <Field label="Target Exit Age" value={exitAge} onChange={setExitAge} min={25} max={65} />
         <Field label="Preservation Age" value={preservationAge} onChange={setPreservationAge} min={55} max={67} />
         <Field label="Current Super Balance ($)" value={currentSuper} onChange={setCurrentSuper} min={0} max={5000000} step={1000} />
@@ -46,6 +54,11 @@ export function FIRENumberCalculator() {
           <span className="text-sm font-semibold text-white">Total FIRE Number</span>
           <span className="text-2xl font-extrabold text-white">${totalFireNumber.toLocaleString()}</span>
         </div>
+        <p className="text-xs text-slate-500 mb-3">
+          This is your FIRE number — the total you need invested to retire. The gap
+          fund covers expenses until super access; the super target funds the rest of
+          your life using the 4% safe withdrawal rate.
+        </p>
         <div className="w-full bg-white/10 rounded-full h-3 mb-2">
           <div
             className="bg-gradient-to-r from-emerald-500 to-teal-500 h-3 rounded-full transition-all duration-500"
@@ -80,6 +93,7 @@ function Field({
   min,
   max,
   step = 1,
+  tooltip,
 }: {
   label: string
   value: number
@@ -87,10 +101,14 @@ function Field({
   min: number
   max: number
   step?: number
+  tooltip?: string
 }) {
   return (
     <label className="block">
       <span className="text-sm text-slate-400">{label}</span>
+      {tooltip && (
+        <span className="block text-xs text-slate-600 mt-0.5">{tooltip}</span>
+      )}
       <input
         type="number"
         value={value}

@@ -24,6 +24,89 @@ export interface Module {
 // Seed Lessons
 // ---------------------------------------------------------------------------
 
+const whatIsFireNumber: Module = {
+  id: "what-is-fire-number",
+  title: "What is Your FIRE Number? (And Why It Matters)",
+  description:
+    "FIRE stands for Financial Independence, Retire Early. Learn the total you need to retire, how the 4% rule works, and how to calculate yours.",
+  category: "fire-planning",
+  level: "beginner",
+  content: `## What is Your FIRE Number? (And Why It Matters)
+
+FIRE means **Financial Independence, Retire Early**. Your FIRE number is the total amount of money you need invested to retire comfortably. For most Australians, that's $600k–$800k outside super to bridge the gap to preservation age, plus a healthy super balance. Here's how to calculate yours and why it matters.
+
+### The 4% Safe Withdrawal Rate
+
+The 4% rule comes from the Trinity Study — a landmark piece of research showing that if you withdraw 4% of your portfolio each year, adjusted for inflation, your money has historically lasted 30+ years in almost every market scenario tested.
+
+The formula:
+
+**FIRE Number = Annual Expenses ÷ 0.04**
+
+Which is the same as:
+
+**FIRE Number = Annual Expenses × 25**
+
+### Example: $500k FIRE Number
+
+If you need $20,000 per year in investment income:
+
+$20,000 × 25 = **$500,000**
+
+With $500k invested, you withdraw $20,000/year (4%). Your portfolio survives because long-term market returns historically exceed 4%.
+
+Another example: you spend $60,000 per year.
+
+$60,000 × 25 = **$1,500,000**
+
+Higher expenses = higher FIRE number. Every dollar you cut from annual spending reduces your FIRE number by $25.
+
+### How to Calculate Yours
+
+1. **Add up your annual expenses.** Not your income — your actual spending. Rent or mortgage, food, transport, insurance, subscriptions, everything. Pull your bank statements for the last 12 months if you're not sure.
+
+2. **Multiply by 25.** That's your FIRE number at a 4% withdrawal rate.
+
+3. **Want to be more conservative?** Use 3.5% (multiply by ~29) or 3% (multiply by ~33). A lower withdrawal rate means a bigger number but a safer retirement.
+
+### Why Knowing This Changes Everything
+
+Before you know your FIRE number, retirement is abstract — "someday." After you calculate it, retirement becomes a countdown. You can:
+
+- **Track your progress** as a percentage ("I'm 34% there")
+- **Calculate years remaining** based on your savings rate
+- **Make spending decisions** through the lens of your number ("this $200/month subscription adds $60,000 to my FIRE number")
+- **See the finish line** instead of just running
+
+It turns a vague dream into a concrete plan with a number attached to it.
+
+### Australia-Specific: The Two-Bucket Approach
+
+In Australia, your FIRE number has a twist: superannuation. You can't touch super until preservation age (60 for most people), so you need two buckets:
+
+1. **Gap Fund** — money outside super that covers expenses from your exit age until 60
+2. **Super** — your super balance at 60, which funds the rest of your life using the 4% rule
+
+If you exit at 45 with $60k/year expenses, your gap fund needs to cover 15 years ($900k), and your super needs $1.5M at 60. That's why the AU FIRE number is often larger than the simple 25× formula suggests.
+
+Read [Your FIRE Number If You Earn $X in AU](/lessons/your-fire-number-au) for the full AU-specific calculation.
+
+### Calculate Yours Now
+
+Use the [FIRE Number Calculator](/tools/fire-number) — it takes 3 minutes and accounts for super, the gap between exit and preservation age, and your current balances.`,
+  duration: "8 min",
+  durationMinutes: 8,
+  learningOutcomes: [
+    "Calculate your FIRE number using the 25× rule",
+    "Understand why the 4% safe withdrawal rate works",
+    "See how reducing expenses lowers your FIRE number by 25× each dollar cut",
+  ],
+  tags: ["fire", "fire-number", "4-percent-rule", "beginner"],
+  dateAdded: "2026-07-10",
+  lastUpdated: "2026-07-10",
+  status: "published",
+}
+
 const fireNumberAu: Module = {
   id: "your-fire-number-au",
   title: "Your FIRE Number If You Earn $X in AU",
@@ -765,6 +848,7 @@ The Exit Plan Workbook includes dual-income tabs in every spreadsheet. The FIRE 
 // ---------------------------------------------------------------------------
 
 export const ALL_MODULES: Module[] = [
+  whatIsFireNumber,
   fireNumberAu,
   superContribStrategies,
   coastFireExplained,

@@ -8,18 +8,23 @@ export default function HomePage() {
       <div className={`${siteConfig.theme.heroGradient} py-24 md:py-32`}>
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
+          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
+            FIRE = Financial Independence, Retire Early
+          </p>
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-            <span className="gradient-text-cyan">{siteConfig.copy.heroTitle}</span>
+            <span className="gradient-text-cyan">Know Your FIRE Number. Plan Your Exit.</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
-            {siteConfig.copy.heroSubtitle}
+            Your FIRE number is the total you need invested to retire. Most
+            Australians need $600k–$800k. Find yours in 3 minutes using our free
+            calculator.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/tools"
+              href="/tools/fire-number"
               className="px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105"
             >
-              {siteConfig.copy.ctaButton}
+              Calculate Your FIRE Number
             </Link>
             <Link
               href="/lessons"
