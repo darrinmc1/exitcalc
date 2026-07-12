@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Sparkles, Gift, X, Check } from "lucide-react"
+import { HoneypotField } from "./HoneypotField"
 
 // TODO: Replace with your Mailchimp action URL + honeypot field name
 const MAILCHIMP_ACTION_URL = "https://gmail.us19.list-manage.com/subscribe/post?u=TODO&id=TODO"
@@ -14,6 +15,7 @@ const SUPPRESS_DAYS = 30
 export function WaitlistPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState("")
+  const [honeypot, setHoneypot] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -42,7 +44,20 @@ export function WaitlistPopup() {
     }, 300)
   }
 
-  const handleSubmit = () => markSeen()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (honeypot !== '') return
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, website: honeypot })
+      })
+      if (res.ok) setSubmitted(true)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   if (!isOpen) return null
 
@@ -96,30 +111,25 @@ export function WaitlistPopup() {
                 updates — plus a free one-page FIRE planning cheat sheet.
               </p>
 
-              <iframe
-                name="mailchimp-target"
-                className="hidden"
-                title="Mailchimp submission target"
-                onLoad={() => {
-                  if (email) setSubmitted(true)
-                }}
-              />
-
               <form
-                action={MAILCHIMP_ACTION_URL}
-                method="post"
-                target="mailchimp-target"
                 onSubmit={handleSubmit}
                 className="space-y-4"
               >
+                <HoneypotField />
+                <input
+                  type="hidden"
+                  name="website"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
                 <input
                   type="email"
-                  name="EMAIL"
+                  name="email"
                   required
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200"
+                  className="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-200"
                 />
 
                 <div className="absolute left-[-5000px]" aria-hidden="true">
