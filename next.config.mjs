@@ -7,6 +7,11 @@ const __dirname = path.dirname(__filename)
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      { source: "/pricing", destination: "/products", permanent: true },
+    ]
+  },
   webpack: (config, { dev }) => {
     if (dev) {
       config.resolve.alias['@clerk/nextjs'] = path.resolve(__dirname, './clerk-mock.tsx')

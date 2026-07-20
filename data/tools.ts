@@ -24,7 +24,7 @@ const superProjection: ToolProfile = {
 
 ## How It Works
 
-The calculator compounds your current balance forward year by year, adding employer SG and salary sacrifice contributions (net of 15% contributions tax), then applying your expected return (net of 15% earnings tax inside super).
+The calculator compounds your current balance forward year by year, adding employer SG and salary sacrifice contributions (net of super's contributions tax), then applying your expected return (net of super's earnings tax).
 
 ## Tips
 
@@ -35,8 +35,8 @@ The calculator compounds your current balance forward year by year, adding emplo
   features: [
     "Compound growth projection to any target age",
     "Employer SG + salary sacrifice inputs",
-    "15% contributions tax factored in",
-    "15% earnings tax factored in",
+    "Super contributions tax factored in",
+    "Super earnings tax factored in",
     "Year-by-year balance breakdown",
   ],
   link: "/tools/super-projection",

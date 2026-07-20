@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ALL_TOOLS, getToolById } from "@/data/tools"
 import { siteConfig } from "@/config/site.config"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
+import { Disclaimer } from "@/components/disclaimer"
 import { SuperProjectionCalculator } from "@/components/calculators/super-projection"
 import { FIRENumberCalculator } from "@/components/calculators/fire-number"
 import { CoastFIRECalculator } from "@/components/calculators/coast-fire"
@@ -93,6 +94,9 @@ export default function ToolPage({ params }: { params: { id: string } }) {
             </div>
           )}
           <CalculatorWidget toolId={tool.id} />
+          <div className="mt-6">
+            <Disclaimer variant="full" />
+          </div>
         </div>
 
         <article className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10">

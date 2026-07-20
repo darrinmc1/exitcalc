@@ -51,8 +51,8 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
 
 ### AU-Specific Details
 
-- Super Guarantee rate assumptions (12% for 2026, legislated increases factored in)
-- Concessional and non-concessional cap limits current as of FY2025-26
+- Super Guarantee assumptions built in (using the current legislated rate — confirm at ato.gov.au)
+- How concessional and non-concessional caps work, with pointers to current ATO limits
 - Preservation age rules and transition-to-retirement considerations
 - Division 293 tax impact for higher earners`,
   price: 59,
@@ -63,7 +63,7 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
     "FIRE Number Calculator Spreadsheet",
     "Coast-FIRE Tracker Spreadsheet",
     "Drawdown Planner Spreadsheet",
-    "AU FY2025-26 super rules baked in",
+    "AU super rules framework (check ATO for current figures)",
     "Scenario modelling tabs",
     "Lifetime updates",
   ],

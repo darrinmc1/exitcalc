@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
+import { Disclaimer } from "./disclaimer"
 
 export function Footer() {
   return (
@@ -49,21 +50,26 @@ export function Footer() {
                   Email Us
                 </a>
               </li>
-              <li>
-                <a
-                  href={siteConfig.contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
-                >
-                  GitHub
-                </a>
-              </li>
+              {process.env.NEXT_PUBLIC_SHOW_GITHUB_FOOTER === "true" && (
+                <li>
+                  <a
+                    href={siteConfig.contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-slate-400 hover:text-cyan-400 transition-colors"
+                  >
+                    GitHub
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5">
+          <div className="mb-6 max-w-3xl">
+            <Disclaimer variant="short" />
+          </div>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-xs text-slate-500">
               &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.

@@ -175,37 +175,37 @@ const superContribStrategies: Module = {
   level: "intermediate",
   content: `## Superannuation Contribution Strategies
 
-Super is the most tax-effective vehicle for building your FIRE portfolio in Australia. This lesson covers every lever you can pull.
+Super is the most tax-effective vehicle for building your FIRE portfolio in Australia. This lesson covers the levers you can pull. **Contribution caps, thresholds, and tax rates are set by the ATO and change regularly — this lesson explains how each lever works, not the current dollar figures. Confirm the latest limits on the [ATO website](https://www.ato.gov.au) and [MoneySmart](https://moneysmart.gov.au) before acting.**
 
 ### Concessional Contributions (Before-Tax)
 
-The concessional cap for FY2025-26 is **$30,000** per year. This includes:
+Concessional (before-tax) contributions are capped at an annual limit set by the ATO. They include:
 
-- Employer Super Guarantee (currently 12% of ordinary time earnings)
+- Employer Super Guarantee (a legislated percentage of ordinary time earnings)
 - Salary sacrifice contributions
 - Personal deductible contributions
 
-Tax benefit: contributions are taxed at 15% inside super, versus your marginal rate outside. For someone on $120k, that's a saving of 19.5 cents per dollar contributed.
+Tax benefit: they're taxed at super's concessional rate rather than your marginal rate — so the higher your marginal rate, the bigger the saving. Check the current concessional cap and contributions tax rate on the ATO website.
 
 ### Salary Sacrifice
 
-Ask your employer to redirect part of your pre-tax salary into super. The contribution is taxed at 15% instead of your marginal rate. Simple, automatic, and the single most impactful FIRE lever for most employees.
+Ask your employer to redirect part of your pre-tax salary into super. The contribution is taxed at super's concessional rate instead of your marginal rate. Simple, automatic, and the single most impactful FIRE lever for most employees.
 
 ### Carry-Forward Rule
 
-If you haven't used your full $30,000 concessional cap in previous years (going back 5 years), and your total super balance is under $500,000, you can carry forward unused cap amounts. This is powerful for catch-up contributions after a windfall or bonus.
+If you haven't used your full concessional cap in recent years and your total super balance is under the ATO's threshold, you may be able to carry forward the unused cap. This is powerful for catch-up contributions after a windfall or bonus. The look-back period and balance threshold are set by the ATO — check current details there.
 
 ### Non-Concessional Contributions (After-Tax)
 
-The non-concessional cap is **$120,000** per year (or $360,000 using the bring-forward rule over 3 years). These don't get a tax deduction going in, but earnings inside super are taxed at only 15% (0% in pension phase).
+Non-concessional contributions have their own annual cap, plus a bring-forward rule that lets eligible people use several years at once. They don't get a deduction going in, but earnings inside super are taxed concessionally (and can be tax-free in pension phase). Confirm the current cap, bring-forward limit, and eligibility on the ATO website.
 
 ### Spouse Contribution Splitting
 
-You can split up to 85% of your concessional contributions with your spouse. Useful for balancing super between partners and ensuring both hit preservation age with adequate balances.
+You can split part of your concessional contributions with your spouse — useful for balancing super between partners so both reach preservation age with adequate balances. The proportion allowed is set by regulation; check current rules.
 
 ### Division 293 Tax
 
-If your income + concessional contributions exceed $250,000, you pay an additional 15% tax on contributions (total 30%). Still better than marginal rate for high earners, but factor it into your projections.
+Higher earners pay an additional tax on concessional contributions once their income plus contributions exceeds an ATO-defined threshold. Still generally better than paying your marginal rate, but factor it into projections. Check the current Division 293 threshold and rate on the ATO website.
 
 ### Strategy for FIRE Seekers
 
@@ -216,7 +216,7 @@ If your income + concessional contributions exceed $250,000, you pay an addition
   duration: "14 min",
   durationMinutes: 14,
   learningOutcomes: [
-    "Know the concessional and non-concessional caps for FY2025-26",
+    "Understand how concessional and non-concessional caps work (and where to find current limits)",
     "Use salary sacrifice and carry-forward to maximise super",
     "Understand Division 293 tax and spouse splitting",
   ],
@@ -342,47 +342,51 @@ The [Exit Plan Workbook + Spreadsheet Pack](/products/exit-plan-workbook) includ
 
 const superTaxRules: Module = {
   id: "au-super-tax-rules-2026",
-  title: "AU Super Tax Rules 2026",
+  title: "AU Super Tax Rules Explained",
   description:
-    "Current concessional/non-concessional caps, Division 293, preservation age rules, and transition-to-retirement — updated for FY2025-26.",
+    "How concessional/non-concessional caps, Division 293, preservation age, and transition-to-retirement work — plus where to find the current figures.",
   category: "superannuation",
   level: "intermediate",
-  content: `## AU Super Tax Rules 2026
+  content: `## AU Super Tax Rules Explained
 
-This is a reference lesson covering the key super tax rules for FY2025-26. Bookmark it and check back when you need a quick refresher.
+This is a reference lesson covering how the key super tax rules work. **The specific dollar figures, caps, thresholds, and rates are set by the ATO and change regularly — most are indexed each year. This lesson deliberately avoids quoting numbers that go stale. For every current figure, check the [ATO website](https://www.ato.gov.au) and [MoneySmart](https://moneysmart.gov.au).**
 
 ### Contribution Caps
 
-- **Concessional cap:** $30,000/year (employer SG + salary sacrifice + personal deductible)
-- **Non-concessional cap:** $120,000/year (or $360,000 using bring-forward over 3 years)
-- **Carry-forward:** unused concessional cap from previous 5 years, if total super balance < $500,000
+- **Concessional (before-tax) cap:** an annual limit covering employer SG, salary sacrifice, and personal deductible contributions
+- **Non-concessional (after-tax) cap:** a separate annual limit, with a bring-forward option that lets eligible people use several years' worth at once
+- **Carry-forward:** unused concessional cap from recent years may be available if your total super balance is under the ATO threshold
+
+Current cap amounts, the bring-forward limit, the look-back period, and the balance threshold are all published by the ATO.
 
 ### Tax on Contributions
 
-- Concessional contributions taxed at **15%** inside the fund
-- Non-concessional contributions: **0%** tax going in (already taxed at marginal rate)
-- **Division 293:** additional 15% tax if income + concessional contributions exceed $250,000
+- Concessional contributions are taxed at a concessional rate inside the fund — lower than most people's marginal rate
+- Non-concessional contributions come from already-taxed money, so there's no further tax going in
+- **Division 293:** higher earners pay an extra tax on concessional contributions once income plus contributions exceeds an ATO-defined threshold
+
+Check the current rates and the Division 293 threshold on the ATO website.
 
 ### Tax on Earnings
 
-- Accumulation phase: **15%** on investment earnings
-- Pension phase (after preservation age): **0%** on earnings up to the transfer balance cap ($1.9M for FY2025-26)
+- **Accumulation phase:** investment earnings are taxed at a concessional rate
+- **Pension phase:** earnings can be tax-free, up to the transfer balance cap (below)
 
 ### Preservation Age
 
-For anyone born after 1 July 1964: **60 years old**. You cannot access super before preservation age except in limited hardship circumstances.
+Preservation age is the earliest you can normally access super, and it depends on your date of birth (it's 60 for most people now). You cannot access super earlier except in limited hardship circumstances. Confirm your preservation age on the ATO website.
 
 ### Transition to Retirement (TTR)
 
-From preservation age, you can start a TTR pension while still working. Drawdown between 4–10% of your balance per year. Useful for reducing work hours while supplementing income.
+From preservation age you can start a TTR pension while still working, drawing a regulated percentage of your balance each year. Useful for easing down work hours while supplementing income. Current drawdown limits are on the ATO and MoneySmart sites.
 
 ### Super Guarantee Rate
 
-**12%** of ordinary time earnings for FY2025-26. Legislated to remain at 12%.
+Employers must pay a legislated percentage of your ordinary time earnings into super. The rate has stepped up over recent years — check the current Super Guarantee rate on the ATO website.
 
 ### Transfer Balance Cap
 
-When you start a retirement pension, the maximum you can transfer from accumulation to pension phase is **$1.9M** (indexed). Amounts above this stay in accumulation (15% tax on earnings).
+When you start a retirement-phase pension, there's a lifetime cap on how much you can move from accumulation into the tax-free pension phase. It's indexed, so it changes over time; amounts above it stay in accumulation. Check the current transfer balance cap on the ATO website.
 
 ### Key Dates
 
@@ -392,9 +396,9 @@ When you start a retirement pension, the maximum you can transfer from accumulat
   duration: "12 min",
   durationMinutes: 12,
   learningOutcomes: [
-    "Know the concessional and non-concessional caps for FY2025-26",
-    "Understand Division 293 and when it applies",
-    "Reference preservation age, TTR rules, and transfer balance cap",
+    "Understand how concessional and non-concessional caps work",
+    "Understand what Division 293 is and when it applies",
+    "Know where to find current preservation age, TTR, and transfer balance cap figures",
   ],
   tags: ["super", "tax", "rules", "reference", "intermediate"],
   dateAdded: "2026-07-01",
@@ -548,7 +552,7 @@ Property is a cornerstone of Australian wealth-building culture, but it interact
 
 Investment property can provide steady income post-exit. Gross rental yields in AU typically range from 3–5%, depending on location and property type.
 
-Post-exit, rental income is taxed at your marginal rate — but if your only income is rent and dividends, your effective rate may be very low thanks to the tax-free threshold ($18,200) and low-income offsets.
+Post-exit, rental income is taxed at your marginal rate — but if your only income is rent and dividends, your effective rate may be very low thanks to the tax-free threshold and low-income offsets (check current amounts at ato.gov.au).
 
 ### Negative Gearing
 
@@ -612,7 +616,7 @@ The [Super Projection Calculator](/tools/super-projection) models what your supe
 - **Target age** — the age you want to project to (e.g., 60 for preservation age)
 - **Current super balance** — your total super balance right now
 - **Annual salary** — your gross annual salary before tax
-- **Employer SG rate** — the Super Guarantee rate (default 12%)
+- **Employer SG rate** — the Super Guarantee rate (the calculator pre-fills the current legislated rate; confirm it at ato.gov.au)
 - **Salary sacrifice** — any additional pre-tax contributions per year
 - **Investment return** — expected annual return (default 7% nominal)
 
@@ -624,7 +628,7 @@ It compounds your existing balance forward, adding employer SG and salary sacrif
 
 - Contributions are made annually (simplified from quarterly)
 - Investment returns are applied after contributions for each year
-- 15% tax on contributions and earnings inside super
+- The concessional tax rates that apply to contributions and earnings inside super (current rates at ato.gov.au)
 - Salary is assumed constant (adjust for real terms or re-run periodically)
 
 ### How to Use the Results
