@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
 import { siteConfig } from "@/config/site.config"
 import { WaitlistPopup } from "@/components/waitlist-popup"
+import { FeedbackWidget } from "@/components/feedback-widget"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ export default function RootLayout({
         <ClerkProvider>
           {children}
           <WaitlistPopup />
+          <FeedbackWidget />
         </ClerkProvider>
       </body>
     </html>
