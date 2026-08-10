@@ -10,7 +10,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
-            FIRE = Financial Independence, Retire Early
+            AU Superannuation &amp; FIRE Planning Tools
           </p>
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
             <span className="gradient-text-cyan">Know Your FIRE Number. Plan Your Exit.</span>
