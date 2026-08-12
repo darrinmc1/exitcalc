@@ -205,9 +205,9 @@ export const siteConfig: SiteConfig = {
   copy: {
     heroTitle: "Know Your FIRE Number. Plan Your Exit.",
     heroSubtitle:
-      "Free AU superannuation and FIRE calculators for Australians planning their escape from the 9-to-5. Run your numbers in 60 seconds.",
-    ctaButton: "Try the Calculators",
-    ctaSecondary: "Read the Lessons",
+      "Free AU superannuation and FIRE calculators. Estimate your number with the two-bucket model — gap fund until preservation age, plus a super target — then adjust the inputs to match your life.",
+    ctaButton: "Calculate Your FIRE Number",
+    ctaSecondary: "Browse lessons",
     loginTitle: "Welcome back",
     signupTitle: "Create your account",
     foundingMemberHeading: "Founding Member — Lock In Early Access Pricing",

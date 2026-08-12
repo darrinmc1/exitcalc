@@ -50,18 +50,22 @@ export function Header() {
                   </button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button
-                    className={cn(
-                      "px-5 py-2 text-sm font-bold rounded-xl text-white",
-                      "bg-gradient-to-r from-cyan-500 to-blue-600",
-                      "hover:from-cyan-400 hover:to-blue-500",
-                      "shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40",
-                      "transition-all duration-300 hover:scale-105"
-                    )}
-                  >
-                    {siteConfig.copy.ctaButton}
+                  <button className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                    Sign Up
                   </button>
                 </SignUpButton>
+                <Link
+                  href="/#calculator"
+                  className={cn(
+                    "px-5 py-2 text-sm font-bold rounded-xl text-white",
+                    "bg-gradient-to-r from-emerald-500 to-teal-600",
+                    "hover:from-emerald-400 hover:to-teal-500",
+                    "shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40",
+                    "transition-all duration-300 hover:scale-105"
+                  )}
+                >
+                  {siteConfig.copy.ctaButton}
+                </Link>
               </>
             )}
             {isLoaded && isSignedIn && (
@@ -115,10 +119,17 @@ export function Header() {
                     </button>
                   </SignInButton>
                   <SignUpButton mode="modal">
-                    <button className="block w-full px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600">
-                      {siteConfig.copy.ctaButton}
+                    <button className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5">
+                      Sign Up
                     </button>
                   </SignUpButton>
+                  <Link
+                    href="/#calculator"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block w-full px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600"
+                  >
+                    {siteConfig.copy.ctaButton}
+                  </Link>
                 </>
               )}
               {isLoaded && isSignedIn && (

@@ -55,9 +55,9 @@ export function FIRENumberCalculator() {
           <span className="text-2xl font-extrabold text-white">${totalFireNumber.toLocaleString()}</span>
         </div>
         <p className="text-xs text-slate-500 mb-3">
-          This is your FIRE number — the total you need invested to retire. The gap
-          fund covers expenses until super access; the super target funds the rest of
-          your life using the 4% safe withdrawal rate.
+          Illustrative total using the two-bucket inputs above. Gap fund = expenses
+          × years until preservation age; super target = expenses × 25 (4% rule of
+          thumb). Not a prediction — adjust assumptions to match your plan.
         </p>
         <div className="w-full bg-white/10 rounded-full h-3 mb-2">
           <div

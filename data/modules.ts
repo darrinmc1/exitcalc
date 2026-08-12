@@ -33,7 +33,7 @@ const whatIsFireNumber: Module = {
   level: "beginner",
   content: `## What is Your FIRE Number? (And Why It Matters)
 
-FIRE means **Financial Independence, Retire Early**. Your FIRE number is the total amount of money you need invested to retire comfortably. For most Australians, that's $600k–$800k outside super to bridge the gap to preservation age, plus a healthy super balance. Here's how to calculate yours and why it matters.
+FIRE means **Financial Independence, Retire Early**. Your FIRE number is the total amount of money you need invested so withdrawals can cover your spending. In Australia that usually means two buckets: a gap fund outside super until preservation age, plus a super balance sized with a withdrawal-rate rule of thumb (often annual expenses × 25). The dollar result depends on your spending and exit age — see the worked example in [Your FIRE Number If You Earn $X in AU](/lessons/your-fire-number-au), or run the [FIRE Number Calculator](/tools/fire-number). Here's how the method works and why it matters.
 
 ### The 4% Safe Withdrawal Rate
 
