@@ -15,6 +15,15 @@ export default function TermsPage() {
             By using {siteConfig.name}, you agree to these terms. Please read them
             carefully.
           </p>
+          <h2>Not Financial Advice</h2>
+          <p>
+            Content on {siteConfig.name} — including calculators, lessons, and the
+            workbook — is general information only. It is not personal financial,
+            tax, or legal advice and does not take into account your objectives,
+            financial situation, or needs. Superannuation and tax rules change;
+            confirm current figures with the ATO and MoneySmart, and consider
+            advice from a licensed financial adviser before acting.
+          </p>
           <h2>Use of Service</h2>
           <p>
             You may use our platform for personal, non-commercial learning purposes.
