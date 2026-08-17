@@ -56,7 +56,7 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
 - Preservation age rules and transition-to-retirement considerations
 - Division 293 tax impact for higher earners`,
   price: 59,
-  stripePriceId: "price_TODO_workbook",
+  stripePriceId: "price_1U4Jt5PVyAgWnzPrm2FpenbR",
   features: [
     "40-page Exit Plan Workbook (PDF)",
     "Super Projection Spreadsheet",

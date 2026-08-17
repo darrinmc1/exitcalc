@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Calendar } from "lucide-react"
 import posts from "@/lib/blog"
+import HumorBreak from "@/components/humor-break"
 import { siteConfig } from "@/config/site.config"
 
 type Section = { heading: string; paragraphs: string[] }
@@ -241,7 +242,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       </div>
 
       <article className="mx-auto max-w-3xl px-6 py-12">
-        {sections.map((section) => (
+        {sections.map((section, si) => (
           <div key={section.heading}>
             <h2 className="text-xl font-bold mt-10 mb-4 text-white">{section.heading}</h2>
             {section.paragraphs.map((paragraph, i) => (
@@ -249,6 +250,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 {paragraph}
               </p>
             ))}
+            {si === 1 && <HumorBreak tag="general" />}
           </div>
         ))}
 
