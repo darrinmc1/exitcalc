@@ -1,73 +1,63 @@
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import { ALL_MODULES, getModuleById } from "@/data/modules"
-import { siteConfig } from "@/config/site.config"
-import { MarkdownRenderer } from "@/components/markdown-renderer"
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-export function generateStaticParams() {
-  return ALL_MODULES.map((mod) => ({ id: mod.id }))
+import { getLesson } from "@/lib/lessons";
+import { MarkdownRenderer } from "@/components/markdown-renderer";
+
+interface LessonPageProps {
+  params: {
+    id: string;
+  };
 }
 
-export function generateMetadata({ params }: { params: { id: string } }) {
-  const mod = getModuleById(params.id)
-  if (!mod) return { title: "Not Found" }
-  return {
-    title: `${mod.title} | ${siteConfig.name}`,
-    description: mod.description,
+export async function generateMetadata({
+  params,
+}: LessonPageProps): Promise<Metadata> {
+  const lesson = await getLesson(params.id);
+
+  if (!lesson) {
+    return {
+      title: "Lesson not found",
+    };
   }
+
+  return {
+    title: lesson.title,
+    description: lesson.description,
+  };
 }
 
-export default function LessonPage({ params }: { params: { id: string } }) {
-  const mod = getModuleById(params.id)
-  if (!mod) notFound()
+export default async function LessonPage({ params }: LessonPageProps) {
+  const lesson = await getLesson(params.id);
+
+  if (!lesson) {
+    notFound();
+  }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
-      <div className={`${siteConfig.theme.heroGradient} py-16`}>
-        <div className="mx-auto max-w-3xl px-6">
-          <Link
-            href="/lessons"
-            className="inline-flex items-center text-sm text-slate-400 hover:text-cyan-400 transition-colors mb-6"
-          >
-            <span className="mr-1">&larr;</span> Back to Lessons
-          </Link>
-
-          <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block rounded-full bg-cyan-500/10 border border-cyan-500/20 px-3 py-1 text-xs font-medium text-cyan-400">
-              {mod.level}
-            </span>
-            <span className="text-sm text-slate-500">{mod.duration}</span>
-          </div>
-
-          <h1 className="text-4xl font-extrabold tracking-tight text-white mb-4">
-            {mod.title}
-          </h1>
-          <p className="text-lg text-slate-400">{mod.description}</p>
-        </div>
+    <div className="container mx-auto px-4 py-8 md:py-12">
+      <h1 className="text-4xl font-bold mb-4">{lesson.title}</h1>
+      <p className="text-lg text-gray-600 mb-8 dark:text-gray-300">
+        {lesson.description}
+      </p>
+      <div className="prose max-w-none dark:prose-invert">
+        <MarkdownRenderer markdown={lesson.content} />
       </div>
-
-      <div className="mx-auto max-w-3xl px-6 py-12">
-        <article className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10">
-          <MarkdownRenderer content={mod.content} />
-        </article>
-
-        <div className="mt-8 flex flex-wrap gap-2">
-          {mod.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs text-slate-500"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-12">
-          <Link href="/lessons" className="text-sm text-slate-400 hover:text-cyan-400 transition-colors">
-            &larr; All Lessons
-          </Link>
-        </div>
+      <div className="mt-8">
+        <h2 className="text-2xl font-bold mb-4">How it's Calculated</h2>
+        <p className="mb-4">
+          Understanding the methodology behind our calculations is key to trusting
+          your financial projections. We break down the formulas and assumptions
+          used in ExitCalc to give you full transparency.
+        </p>
+        <p>
+          Our calculations are based on established financial principles and
+          industry best practices. For a detailed explanation of the specific
+          formulas, variables, and assumptions used in each calculator, please
+          refer to the individual documentation provided within each tool or
+          consult our comprehensive guide on financial modeling.
+        </p>
       </div>
     </div>
-  )
+  );
 }
