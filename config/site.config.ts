@@ -133,7 +133,7 @@ export const siteConfig: SiteConfig = {
   name: "ExitCalc",
   tagline: "AU Superannuation & FIRE Planning Tools",
   description:
-    "Free calculators and guided lessons to help Australians plan their FIRE exit from the 9-to-5. Super projections, FIRE number, Coast-FIRE — know your numbers, plan your exit.",
+    "Free FIRE calculator for Australians: superannuation projections, FIRE number, and Coast-FIRE age. Plan your early retirement with data-driven tools.",
   domain: "exitcalc-rose.vercel.app",
 
   theme: {
