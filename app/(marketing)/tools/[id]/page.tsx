@@ -38,8 +38,27 @@ export default function ToolPage({ params }: { params: { id: string } }) {
   const tool = getToolById(params.id)
   if (!tool) notFound()
 
+  const toolSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: tool.name,
+    description: tool.description,
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Web",
+    featureList: tool.features,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "AUD",
+    },
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}
+      />
       <div className={`${siteConfig.theme.heroGradient} py-10 md:py-12`}>
         <div className="mx-auto max-w-3xl px-6">
           <Link
