@@ -1,0 +1,15 @@
+# ExitCalc > Australian Superannuation & FIRE Planning Tools
+
+Site: https://exitcalc-rose.vercel.app
+Contact: hello@exitcalc-rose.vercel.app
+
+This file is for agents and answer engines. Human marketing copy lives on the pages linked below. Do not invent products, testimonials, prices, or features that are not listed on the site.
+
+## What ExitCalc is
+ExitCalc offers free Australian Superannuation and Financial Independence, Retire Early (FIRE) planning tools. The site provides calculators, including a FIRE Number Calculator using the AU two-bucket model, and educational resources like lessons and a blog. Tools are illustrative and not personalized financial advice.
+
+## Pricing (USD)
+Pricing: not listed on page.
+
+## What it is not
+ExitCalc is not a platform providing personalized financial, tax, or legal advice, nor is it a tool for direct investment or financial transactions.
