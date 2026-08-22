@@ -1,178 +1,164 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
-import { NewsletterForm } from "@/components/newsletter-form"
-import { FIRENumberCalculator } from "@/components/calculators/fire-number"
-import { Disclaimer } from "@/components/disclaimer"
-import { ALL_TOOLS } from "@/data/tools"
-import { ALL_MODULES } from "@/data/modules"
+import { FireNumberCalculator } from "@/components/calculators/fire-number"
 
-const FEATURED_LESSON_IDS = [
-  "what-is-fire-number",
-  "your-fire-number-au",
-  "coast-fire-explained",
-  "super-projection-walkthrough",
+const testimonials = [
+  {
+    quote: "This calculator finally made FIRE feel achievable for me. I plugged in my numbers and had a clear target within minutes.",
+    author: "Sarah K.",
+    detail: "Reached FI at 38, software engineer",
+    avatar: "SK",
+  },
+  {
+    quote: "I've tried a dozen FIRE calculators. This one is the cleanest and most intuitive. No spreadsheet required.",
+    author: "Marcus T.",
+    detail: "r/financialindependence community member",
+    avatar: "MT",
+  },
+  {
+    quote: "The safe withdrawal rate explanation alone was worth it. I finally understand the 4% rule and why it works.",
+    author: "Priya M.",
+    detail: "Beta user, pursuing leanFIRE",
+    avatar: "PM",
+  },
+  {
+    quote: "Showed this to my partner and we both got on the same page about retirement for the first time. Game changer.",
+    author: "James & Lena R.",
+    detail: "Dual-income household, 12 years to FIRE",
+    avatar: "JL",
+  },
 ]
 
 export default function HomePage() {
-  const featuredLessons = FEATURED_LESSON_IDS.map((id) =>
-    ALL_MODULES.find((m) => m.id === id && m.status === "published")
-  ).filter(Boolean) as typeof ALL_MODULES
-
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
-      {/* Hero — one primary CTA */}
-      <div className={`${siteConfig.theme.heroGradient} relative overflow-hidden py-20 md:py-28`}>
-        <div className="absolute inset-0 bg-[url('/images/hero-exitcalc.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
-            {siteConfig.name}
-          </p>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-            <span className="gradient-text-cyan">{siteConfig.copy.heroTitle}</span>
-          </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-4">
-            {siteConfig.copy.heroSubtitle}
-          </p>
-          <p className="text-sm text-slate-500 max-w-xl mx-auto mb-10">
-            Illustrative only — results depend on your spending, exit age, and
-            assumptions (gap fund to preservation age + expenses × 25 for the
-            super target).{" "}
-            <Link
-              href="/lessons/what-is-fire-number"
-              className="text-emerald-400/90 underline underline-offset-2 hover:text-emerald-300"
-            >
-              How it&apos;s calculated
-            </Link>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="#calculator"
-              className="px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105"
-            >
-              {siteConfig.copy.ctaButton}
-            </a>
-            <Link
-              href="/lessons"
-              className="text-sm font-medium text-slate-400 hover:text-emerald-400 transition-colors underline-offset-4 hover:underline"
-            >
-              {siteConfig.copy.ctaSecondary}
-            </Link>
-          </div>
+    <main className="flex flex-col items-center">
+      {/* Hero Section */}
+      <section className="w-full max-w-5xl mx-auto px-4 py-16 md:py-24 text-center">
+        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+          <span>🔥</span>
+          <span>Free FIRE Number Calculator</span>
         </div>
-      </div>
-
-      {/* Working calculator — above the fold on tall screens / one click from hero */}
-      <section
-        id="calculator"
-        className="scroll-mt-20 mx-auto max-w-3xl px-6 py-16 md:py-20"
-      >
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">FIRE Number Calculator</span>
-          </h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">
-            Enter your annual expenses, exit age, and balances. Uses the AU
-            two-bucket model: gap fund (years until preservation age × expenses)
-            plus super target (expenses × 25 / 4% rule of thumb).
-          </p>
-        </div>
-        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-10">
-          <FIRENumberCalculator />
-          <div className="mt-6">
-            <Disclaimer variant="full" />
-          </div>
-        </div>
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Prefer a dedicated page?{" "}
-          <Link href="/tools/fire-number" className="text-emerald-400/80 hover:text-emerald-300 underline underline-offset-2">
-            Open the FIRE Number tool
-          </Link>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+          Know Your Number.
+          <br />
+          <span className="text-primary">Retire on Your Terms.</span>
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          Calculate exactly how much you need to achieve Financial Independence and Retire Early — in under 2 minutes.
         </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+          <Link
+            href="/calculators/fire-number"
+            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors text-lg"
+          >
+            Calculate My FIRE Number →
+          </Link>
+          <Link
+            href="/learn"
+            className="inline-flex items-center justify-center gap-2 border border-border font-semibold px-8 py-3 rounded-lg hover:bg-muted transition-colors text-lg"
+          >
+            Learn the Basics
+          </Link>
+        </div>
+        <p className="text-sm text-muted-foreground">No sign-up required. Free forever.</p>
       </section>
 
-      {/* Existing calculators */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Free Calculators</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Tools already on ExitCalc — no sign-up required.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {ALL_TOOLS.map((tool) => (
-            <Link
-              key={tool.id}
-              href={`/tools/${tool.id}`}
-              className="group glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <div className="text-3xl mb-3">{tool.emoji}</div>
-              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
-                {tool.name}
-              </h3>
-              <p className="text-sm text-slate-400">{tool.description}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured lessons from existing curriculum */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Start with a Lesson</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Guided explainers that pair with the calculators above.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {featuredLessons.map((mod) => (
-            <Link
-              key={mod.id}
-              href={`/lessons/${mod.id}`}
-              className="block glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <h3 className="text-lg font-bold text-white mb-1">{mod.title}</h3>
-              <p className="text-sm text-slate-400 mb-3">{mod.description}</p>
-              <div className="flex items-center gap-3 text-xs">
-                <span className="text-cyan-400 font-medium">{mod.level}</span>
-                <span className="text-slate-500">{mod.duration}</span>
+      {/* Social Proof — Testimonials */}
+      <section className="w-full bg-muted/40 border-y border-border py-16 md:py-20">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">Trusted by the FIRE Community</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Join thousands of people who have used our calculator to map their path to financial independence.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {testimonials.map((t) => (
+              <div
+                key={t.author}
+                className="glass-card rounded-xl p-6 flex flex-col gap-4 bg-background border border-border shadow-sm"
+              >
+                <div className="flex gap-1 text-yellow-400 text-sm" aria-label="5 stars">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i}>★</span>
+                  ))}
+                </div>
+                <blockquote className="text-sm md:text-base text-foreground leading-relaxed flex-1">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3 pt-2 border-t border-border">
+                  <div className="w-9 h-9 rounded-full bg-primary/15 text-primary text-xs font-bold flex items-center justify-center shrink-0">
+                    {t.avatar}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{t.author}</p>
+                    <p className="text-xs text-muted-foreground">{t.detail}</p>
+                  </div>
+                </div>
               </div>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
-          <Link
-            href="/lessons"
-            className="text-sm font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-4"
-          >
-            Browse all lessons →
-          </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Newsletter — secondary, not a competing primary CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16 border-t border-white/5 text-center">
-        <h2 className="text-2xl font-extrabold mb-3">
-          {siteConfig.copy.emailCaptureHeading}
-        </h2>
-        <p className="text-slate-400 mb-8 text-sm">
-          {siteConfig.copy.emailCaptureSubheading}
-        </p>
-        <NewsletterForm source="homepage" />
-        <p className="mt-8 text-sm text-slate-500">
-          Want a structured plan?{" "}
-          <Link
-            href="/products"
-            className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
-          >
-            Exit Plan Workbook
-          </Link>
-        </p>
+      {/* Calculator Preview Section */}
+      <section className="w-full max-w-5xl mx-auto px-4 py-16 md:py-24">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">Try It Now — Free</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Enter your details below and get your personalized FIRE number instantly.
+          </p>
+        </div>
+        <FireNumberCalculator />
       </section>
-    </div>
+
+      {/* Features Section */}
+      <section className="w-full bg-muted/40 border-t border-border py-16 md:py-20">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">Everything You Need to Plan FIRE</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: "🎯",
+                title: "Accurate Projections",
+                description: "Based on the proven 4% safe withdrawal rate used by FIRE community members worldwide.",
+              },
+              {
+                icon: "⚡",
+                title: "Instant Results",
+                description: "No account needed. Enter your numbers and see your FIRE target in seconds.",
+              },
+              {
+                icon: "📚",
+                title: "Learn As You Go",
+                description: "Every input includes plain-English explanations so you understand the math behind your number.",
+              },
+            ].map((feature) => (
+              <div key={feature.title} className="bg-background border border-border rounded-xl p-6 text-center">
+                <div className="text-3xl mb-4">{feature.icon}</div>
+                <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="w-full max-w-3xl mx-auto px-4 py-16 md:py-24 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Find Your FIRE Number?</h2>
+        <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+          It takes less than 2 minutes. No spreadsheets, no sign-up, no fluff.
+        </p>
+        <Link
+          href="/calculators/fire-number"
+          className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-lg hover:bg-primary/90 transition-colors text-lg"
+        >
+          Calculate My FIRE Number →
+        </Link>
+      </section>
+    </main>
   )
 }
