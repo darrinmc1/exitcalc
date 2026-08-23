@@ -1,68 +1,75 @@
 "use client"
 
 import { useState } from "react"
+import { HoneypotField } from "@/components/HoneypotField"
 
-export function NewsletterForm({ source = "homepage" }: { source?: string }) {
+export function NewsletterForm() {
   const [email, setEmail] = useState("")
-  const [website, setWebsite] = useState("") // honeypot
-  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle")
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [message, setMessage] = useState("")
+  const [honeypot, setHoneypot] = useState("")
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (website !== "") return // bot
+    if (honeypot) return
+    if (!email) return
+
     setStatus("loading")
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source, website }),
+        body: JSON.stringify({ email }),
       })
-      setStatus(res.ok ? "done" : "error")
+      const data = await res.json()
+      if (res.ok) {
+        setStatus("success")
+        setMessage(data.message || "You're on the list! Check your inbox.")
+        setEmail("")
+      } else {
+        setStatus("error")
+        setMessage(data.error || "Something went wrong. Please try again.")
+      }
     } catch {
       setStatus("error")
+      setMessage("Something went wrong. Please try again.")
     }
   }
 
-  if (status === "done") {
+  if (status === "success") {
     return (
-      <p className="text-emerald-400 font-semibold">
-        You&apos;re in — check your inbox for a welcome email.
-      </p>
+      <div className="text-center py-4">
+        <div className="text-4xl mb-3">🎉</div>
+        <p className="text-white font-semibold text-lg mb-1">You're in!</p>
+        <p className="text-slate-400 text-sm">{message}</p>
+      </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-      <input
-        type="text"
-        name="website"
-        value={website}
-        onChange={(e) => setWebsite(e.target.value)}
-        tabIndex={-1}
-        autoComplete="off"
-        className="absolute left-[-5000px]"
-        aria-hidden="true"
-      />
-      <input
-        type="email"
-        required
-        placeholder="Enter your email address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 px-4 py-3.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
-      />
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:hover:scale-100"
-      >
-        {status === "loading" ? "Joining…" : "Subscribe"}
-      </button>
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          required
+          className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+        />
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-60 text-black font-bold text-sm transition-all whitespace-nowrap"
+        >
+          {status === "loading" ? "Subscribing…" : "Get Weekly Tips"}
+        </button>
+      </div>
       {status === "error" && (
-        <p className="text-red-400 text-xs mt-2 w-full text-center">
-          Something went wrong. Please try again.
-        </p>
+        <p className="text-red-400 text-sm text-center">{message}</p>
       )}
+      <p className="text-xs text-slate-500 text-center">No spam. Unsubscribe anytime.</p>
     </form>
   )
 }
