@@ -1,151 +1,144 @@
 import { notFound } from "next/navigation"
-import Link from "next/link"
-import { ALL_TOOLS, getToolById } from "@/data/tools"
+import { TOOLS } from "@/data/tools"
 import { siteConfig } from "@/config/site.config"
-import { MarkdownRenderer } from "@/components/markdown-renderer"
-import { Disclaimer } from "@/components/disclaimer"
-import { SuperProjectionCalculator } from "@/components/calculators/super-projection"
-import { FIRENumberCalculator } from "@/components/calculators/fire-number"
-import { CoastFIRECalculator } from "@/components/calculators/coast-fire"
+import CoastFireCalculator from "@/components/calculators/coast-fire"
+import FireNumberCalculator from "@/components/calculators/fire-number"
+import SuperProjectionCalculator from "@/components/calculators/super-projection"
 
-export function generateStaticParams() {
-  return ALL_TOOLS.map((tool) => ({ id: tool.id }))
+export async function generateStaticParams() {
+  return TOOLS.map((tool) => ({ id: tool.id }))
 }
 
-export function generateMetadata({ params }: { params: { id: string } }) {
-  const tool = getToolById(params.id)
-  if (!tool) return { title: "Not Found" }
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const tool = TOOLS.find((t) => t.id === params.id)
+  if (!tool) return {}
   return {
     title: `${tool.name} | ${siteConfig.name}`,
     description: tool.description,
   }
 }
 
-function CalculatorWidget({ toolId }: { toolId: string }) {
-  switch (toolId) {
-    case "super-projection":
-      return <SuperProjectionCalculator />
-    case "fire-number":
-      return <FIRENumberCalculator />
-    case "coast-fire":
-      return <CoastFIRECalculator />
-    default:
-      return null
-  }
+const calculatorFaqs: Record<string, { question: string; answer: string }[]> = {
+  "fire-number": [
+    {
+      question: "What is a FIRE number?",
+      answer: "Your FIRE number is the total amount of savings and investments you need to retire early and live off investment returns indefinitely, typically calculated as 25x your annual expenses using the 4% safe withdrawal rate.",
+    },
+    {
+      question: "How is the FIRE number calculated?",
+      answer: "The FIRE number is calculated by multiplying your expected annual expenses in retirement by 25. This is derived from the 4% rule, which suggests you can safely withdraw 4% of your portfolio each year without running out of money.",
+    },
+    {
+      question: "What is the 4% rule?",
+      answer: "The 4% rule is a guideline suggesting that retirees can withdraw 4% of their portfolio in the first year of retirement, then adjust for inflation each subsequent year, with a high probability of not outliving their savings over a 30-year period.",
+    },
+  ],
+  "coast-fire": [
+    {
+      question: "What is Coast FIRE?",
+      answer: "Coast FIRE is a financial independence milestone where you have saved enough money that, even without additional contributions, your investments will grow to fund your retirement by a target age through compound interest alone.",
+    },
+    {
+      question: "How do I calculate my Coast FIRE number?",
+      answer: "Your Coast FIRE number is calculated by taking your full FIRE number and discounting it back to today using your expected investment return rate and the number of years until your target retirement age.",
+    },
+    {
+      question: "What is the difference between Coast FIRE and regular FIRE?",
+      answer: "Regular FIRE means you have enough saved to retire immediately. Coast FIRE means you have saved enough that you can stop contributing and let compound growth do the rest, but you still need income to cover current expenses until retirement age.",
+    },
+  ],
+  "super-projection": [
+    {
+      question: "What does the super projection calculator show?",
+      answer: "The super projection calculator estimates how your superannuation balance will grow over time based on your current balance, contributions, salary, and expected investment returns, helping you plan for retirement.",
+    },
+    {
+      question: "What is superannuation?",
+      answer: "Superannuation (super) is Australia's compulsory retirement savings system where employers contribute a percentage of your salary into a super fund, which is invested and grows tax-effectively until you reach preservation age.",
+    },
+    {
+      question: "How much super do I need to retire comfortably in Australia?",
+      answer: "According to the Association of Superannuation Funds of Australia (ASFA), a comfortable retirement for a single person requires approximately $595,000 in super at retirement, while couples need around $690,000, based on 2024 figures.",
+    },
+  ],
 }
 
 export default function ToolPage({ params }: { params: { id: string } }) {
-  const tool = getToolById(params.id)
+  const tool = TOOLS.find((t) => t.id === params.id)
   if (!tool) notFound()
 
-  const toolSchema = {
+  const faqs = calculatorFaqs[tool.id] ?? []
+
+  const softwareApplicationSchema = {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     name: tool.name,
     description: tool.description,
     applicationCategory: "FinanceApplication",
     operatingSystem: "Web",
-    featureList: tool.features,
     offers: {
       "@type": "Offer",
       price: "0",
-      priceCurrency: "AUD",
+      priceCurrency: "USD",
+    },
+    url: `${siteConfig.url}/tools/${tool.id}`,
+    provider: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
   }
 
+  const faqSchema =
+    faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
+    <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
       />
-      <div className={`${siteConfig.theme.heroGradient} py-10 md:py-12`}>
-        <div className="mx-auto max-w-3xl px-6">
-          <Link
-            href="/tools"
-            className="inline-flex items-center text-sm text-slate-400 hover:text-emerald-400 transition-colors mb-4"
-          >
-            <span className="mr-1">&larr;</span> All Calculators
-          </Link>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      <div className="max-w-3xl mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-2">{tool.name}</h1>
+        <p className="text-slate-400 mb-8">{tool.description}</p>
 
-          <div className="flex items-center gap-4 mb-3">
-            <span className="text-4xl">{tool.emoji}</span>
-            <div>
-              <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
-                {tool.name}
-              </h1>
-              <span className="inline-block mt-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-xs font-medium text-emerald-400">
-                {tool.toolType}
-              </span>
+        {tool.id === "fire-number" && <FireNumberCalculator />}
+        {tool.id === "coast-fire" && <CoastFireCalculator />}
+        {tool.id === "super-projection" && <SuperProjectionCalculator />}
+
+        {faqs.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+            <div className="space-y-6">
+              {faqs.map((faq) => (
+                <div key={faq.question} className="glass-card p-6 rounded-2xl">
+                  <h3 className="font-bold text-white mb-2">{faq.question}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{faq.answer}</p>
+                </div>
+              ))}
             </div>
           </div>
-
-          <p className="text-base text-slate-400">{tool.description}</p>
-        </div>
+        )}
       </div>
-
-      <div className="mx-auto max-w-3xl px-6 py-8 md:py-10">
-        <div
-          id="calculator"
-          className="scroll-mt-20 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-10 mb-8"
-        >
-          {tool.id === "fire-number" && (
-            <div className="mb-6 pb-6 border-b border-white/10">
-              <h2 className="text-xl font-extrabold text-white mb-2">
-                FIRE Number Calculator — What You Need to Retire
-              </h2>
-              <p className="text-sm text-slate-400">
-                FIRE = Financial Independence, Retire Early. Enter your numbers
-                below. Method: gap fund (years to preservation age × expenses)
-                plus super target (expenses × 25 / 4% rule of thumb). Illustrative
-                only — not a prediction of what you will need.
-              </p>
-            </div>
-          )}
-          <CalculatorWidget toolId={tool.id} />
-          <div className="mt-6">
-            <Disclaimer variant="full" />
-          </div>
-        </div>
-
-        <div className="rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 p-5 mb-8">
-          <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wide mb-3">
-            Features
-          </h3>
-          <ul className="space-y-2">
-            {tool.features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-2 text-slate-300 text-sm">
-                <span className="text-emerald-500 mt-0.5">&#10003;</span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <article className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10">
-          <MarkdownRenderer content={tool.content} />
-        </article>
-
-        <div className="mt-6 flex flex-wrap gap-2">
-          {tool.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs text-slate-500"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-12">
-          <Link
-            href="/tools"
-            className="text-sm text-slate-400 hover:text-emerald-400 transition-colors"
-          >
-            &larr; All Calculators
-          </Link>
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
