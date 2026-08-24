@@ -23,6 +23,12 @@ export async function POST(req: NextRequest) {
   if (!product) {
     return NextResponse.json({ error: "Product not found" }, { status: 404 })
   }
+  if (product.comingSoon) {
+    return NextResponse.json(
+      { error: "This product is not available for purchase yet" },
+      { status: 503 }
+    )
+  }
 
   const origin = req.headers.get("origin") ?? req.nextUrl.origin
 

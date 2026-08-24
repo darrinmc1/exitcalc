@@ -211,10 +211,10 @@ export default function HomePage() {
         <p className="mt-8 text-sm text-slate-500">
           Want a structured plan?{" "}
           <Link
-            href="/products"
+            href="/products/exit-plan-workbook"
             className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
           >
-            Exit Plan Workbook
+            Exit Plan Workbook (Coming Soon)
           </Link>
         </p>
       </section>

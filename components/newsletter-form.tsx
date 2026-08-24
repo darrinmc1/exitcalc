@@ -2,7 +2,15 @@
 
 import { useState } from "react"
 
-export function NewsletterForm({ source = "homepage" }: { source?: string }) {
+export function NewsletterForm({
+  source = "homepage",
+  buttonLabel = "Subscribe",
+  align = "center",
+}: {
+  source?: string
+  buttonLabel?: string
+  align?: "center" | "start"
+}) {
   const [email, setEmail] = useState("")
   const [website, setWebsite] = useState("") // honeypot
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle")
@@ -32,7 +40,10 @@ export function NewsletterForm({ source = "homepage" }: { source?: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className={`flex flex-col sm:flex-row gap-3 max-w-md ${align === "start" ? "mx-0" : "mx-auto"}`}
+    >
       <input
         type="text"
         name="website"
@@ -56,7 +67,7 @@ export function NewsletterForm({ source = "homepage" }: { source?: string }) {
         disabled={status === "loading"}
         className="px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:hover:scale-100"
       >
-        {status === "loading" ? "Joining…" : "Subscribe"}
+        {status === "loading" ? "Joining…" : buttonLabel}
       </button>
       {status === "error" && (
         <p className="text-red-400 text-xs mt-2 w-full text-center">

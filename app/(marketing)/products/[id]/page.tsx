@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ALL_PRODUCTS, getProductById } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
+import { ProductComingSoonCta } from "@/components/product-coming-soon-cta"
 import { Check } from "lucide-react"
 
 export function generateStaticParams() {
@@ -39,9 +40,16 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <h1 className="text-4xl font-extrabold tracking-tight text-white">
                 {product.name}
               </h1>
-              <span className="inline-block mt-1 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs font-medium text-amber-400">
-                {product.category}
-              </span>
+              <div className="mt-1 flex flex-wrap items-center gap-2">
+                <span className="inline-block rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs font-medium text-amber-400">
+                  {product.category}
+                </span>
+                {product.comingSoon && (
+                  <span className="inline-block rounded-full bg-white/5 border border-white/15 px-3 py-1 text-xs font-medium text-slate-300">
+                    Coming Soon
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
@@ -68,21 +76,25 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <MarkdownRenderer content={product.content} />
         </article>
 
-        <div className="mt-8 flex items-center gap-6">
-          <div>
-            <span className="text-4xl font-extrabold text-white">${product.price}</span>
-            <span className="text-slate-400 ml-1">one-time</span>
+        {product.comingSoon ? (
+          <ProductComingSoonCta price={product.price} productId={product.id} />
+        ) : (
+          <div className="mt-8 flex items-center gap-6">
+            <div>
+              <span className="text-4xl font-extrabold text-white">${product.price}</span>
+              <span className="text-slate-400 ml-1">one-time</span>
+            </div>
+            <form action="/api/checkout" method="POST">
+              <input type="hidden" name="productId" value={product.id} />
+              <button
+                type="submit"
+                className="px-8 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all"
+              >
+                Buy Now
+              </button>
+            </form>
           </div>
-          <form action="/api/checkout" method="POST">
-            <input type="hidden" name="productId" value={product.id} />
-            <button
-              type="submit"
-              className="px-8 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all"
-            >
-              Buy Now
-            </button>
-          </form>
-        </div>
+        )}
 
         <div className="mt-6 flex flex-wrap gap-2">
           {product.tags.map((tag) => (
