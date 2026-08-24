@@ -34,7 +34,7 @@ Covering everything from your FIRE number to drawdown strategies, super contribu
 
 ### Exit Plan Workbook
 
-For those ready to get serious: a structured 40-page workbook with companion spreadsheets that walk you through building a complete exit plan. $59 one-time.
+For those ready to get serious: a structured 40-page workbook with companion spreadsheets is coming soon ($59 one-time when available). Join the waitlist on the products page.
 
 ### Coming Soon
 

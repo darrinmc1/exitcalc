@@ -36,7 +36,7 @@ export const exitCalcFaqs = [
   {
     question: "How much does ExitCalc cost?",
     answer:
-      "The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack is a one-time purchase of $59, and there are optional membership plans starting at $5/month.",
+      "The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack ($59) is coming soon — join the waitlist on the products page. Optional membership plans start at $5/month.",
   },
   {
     question: "Does ExitCalc give financial advice?",
@@ -85,7 +85,7 @@ ${updateBlock}
 - Founder: USD ${siteConfig.pricing.founder.monthly}/month — ${base}/pricing
 - Standard: USD ${siteConfig.pricing.standard.monthly}/month — ${base}/pricing
 - Premium: USD ${siteConfig.pricing.premium.monthly}/month — ${base}/pricing
-- One-time product purchases: ${base}/products
+- Exit Plan Workbook ($59, coming soon / waitlist): ${base}/products
 
 ## FAQs
 

@@ -32,8 +32,15 @@ export default function ProductsPage() {
               <div className="text-4xl mb-3">{product.emoji}</div>
               <h2 className="text-lg font-bold text-white mb-1">{product.name}</h2>
               <p className="text-sm text-slate-400 mb-4 flex-1">{product.description}</p>
-              <div className="flex items-end justify-between">
-                <span className="text-2xl font-extrabold text-white">${product.price}</span>
+              <div className="flex items-end justify-between gap-3">
+                <div>
+                  <span className="text-2xl font-extrabold text-white">${product.price}</span>
+                  {product.comingSoon && (
+                    <span className="ml-2 text-xs font-medium text-amber-400">
+                      Coming Soon
+                    </span>
+                  )}
+                </div>
                 <span className="text-xs text-cyan-400 font-medium">{product.category}</span>
               </div>
             </Link>

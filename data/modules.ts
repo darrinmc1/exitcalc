@@ -326,7 +326,7 @@ Spend 2–3 hours on your first pass. Fill in real numbers, not aspirational one
 
 ### Get the Workbook
 
-The [Exit Plan Workbook + Spreadsheet Pack](/products/exit-plan-workbook) includes all chapters and companion spreadsheets.`,
+The [Exit Plan Workbook + Spreadsheet Pack](/products/exit-plan-workbook) is coming soon — join the waitlist for chapters and companion spreadsheets.`,
   duration: "8 min",
   durationMinutes: 8,
   learningOutcomes: [
@@ -523,7 +523,7 @@ This extends portfolio longevity significantly but requires spending flexibility
 
 ### Modelling Your Drawdown
 
-The [Exit Plan Workbook](/products/exit-plan-workbook) includes a Drawdown Planner spreadsheet that models all three strategies with your actual numbers.`,
+The [Exit Plan Workbook](/products/exit-plan-workbook) (coming soon) will include a Drawdown Planner spreadsheet that models all three strategies with your actual numbers.`,
   duration: "16 min",
   durationMinutes: 16,
   learningOutcomes: [

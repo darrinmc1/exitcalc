@@ -7,9 +7,8 @@ const STORAGE_KEY = "humor-enabled"
 const TOGGLE_EVENT = "humor:toggle"
 
 export function humorEnabled(): boolean {
-  if (typeof window === "undefined") return true
-  const v = window.localStorage.getItem(STORAGE_KEY)
-  return v === null ? true : v === "true"
+  // Hard rule: humor stays off on AU super/FIRE calculators.
+  return false
 }
 
 export function setHumorEnabled(enabled: boolean) {

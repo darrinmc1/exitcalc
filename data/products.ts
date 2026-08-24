@@ -15,6 +15,8 @@ export interface Product {
   emoji: string
   tags: string[]
   dateAdded: string
+  /** No checkout or download file yet — show Coming Soon / waitlist. */
+  comingSoon?: boolean
 }
 
 // ---------------------------------------------------------------------------
@@ -72,6 +74,7 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
   emoji: "\u{1F4D3}",
   tags: ["fire", "workbook", "spreadsheet", "super", "planning"],
   dateAdded: "2026-07-01",
+  comingSoon: true,
 }
 
 // ---------------------------------------------------------------------------
