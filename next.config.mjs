@@ -25,8 +25,16 @@ const nextConfig = {
   },
   webpack: (config, { dev }) => {
     if (dev) {
-      config.resolve.alias['@clerk/nextjs'] = path.resolve(__dirname, './clerk-mock.tsx')
-      config.resolve.alias['@clerk/nextjs/server'] = path.resolve(__dirname, './clerk-mock.tsx')
+      // Exact aliases only — a prefix alias for `@clerk/nextjs` breaks
+      // `@clerk/nextjs/server` in middleware compilation.
+      config.resolve.alias['@clerk/nextjs$'] = path.resolve(
+        __dirname,
+        './clerk-mock.tsx'
+      )
+      config.resolve.alias['@clerk/nextjs/server$'] = path.resolve(
+        __dirname,
+        './clerk-mock.tsx'
+      )
     }
     return config
   },
