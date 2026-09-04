@@ -93,7 +93,7 @@ Read [Your FIRE Number If You Earn $X in AU](/lessons/your-fire-number-au) for t
 
 ### Calculate Yours Now
 
-Use the [FIRE Number Calculator](/tools/fire-number) to apply the same two-bucket arithmetic: gap fund = expenses × years to preservation age, super target = expenses × 25. It does not grow either bucket, apply inflation, or discount the super target to today. The full formula list is in [How the calculators work](/lessons/how-its-calculated).`
+Use the [FIRE Number Calculator](/tools/fire-number) to apply the same two-bucket arithmetic: gap fund = expenses × years to preservation age, super target = expenses × 25. It does not grow either bucket, apply inflation, or discount the super target to today. The full formula list is in [How the calculators work](/lessons/how-its-calculated).`,
   duration: "8 min",
   durationMinutes: 8,
   learningOutcomes: [
@@ -164,7 +164,7 @@ Those questions are planning steps. They are not extra buttons on the FIRE Numbe
 
 ### Try the Calculator
 
-Use the [FIRE Number Calculator](/tools/fire-number) with a lean expense figure and a comfortable one. Treat the two totals as a range, not a verdict.`
+Use the [FIRE Number Calculator](/tools/fire-number) with a lean expense figure and a comfortable one. Treat the two totals as a range, not a verdict.`,
   duration: "10 min",
   durationMinutes: 10,
   learningOutcomes: [
@@ -537,7 +537,7 @@ This extends portfolio longevity significantly but requires spending flexibility
 
 ### Modelling Your Drawdown
 
-ExitCalc does not have a drawdown calculator. The [Exit Plan Workbook](/products/exit-plan-workbook) is Coming Soon and does not include a live Drawdown Planner file today. The [FIRE Number Calculator](/tools/fire-number) only sizes a gap fund as expenses × years — it does not test bucket, bond-tent, or dynamic rules.`
+ExitCalc does not have a drawdown calculator. The [Exit Plan Workbook](/products/exit-plan-workbook) is Coming Soon and does not include a live Drawdown Planner file today. The [FIRE Number Calculator](/tools/fire-number) only sizes a gap fund as expenses × years — it does not test bucket, bond-tent, or dynamic rules.`,
   duration: "16 min",
   durationMinutes: 16,
   learningOutcomes: [
@@ -599,7 +599,7 @@ Self-managed super funds can hold property, but the rules are complex:
 
 ### Modelling Property in Your Plan
 
-There is no live property calculator on ExitCalc. The [Exit Plan Workbook](/products/exit-plan-workbook) is Coming Soon and is not a downloadable file yet. Until it ships, treat this lesson as a checklist of questions (yield, gearing while you still have salary, CGT, PPOR vs rent) and run any numbers in your own spreadsheet or with a licensed adviser.`
+There is no live property calculator on ExitCalc. The [Exit Plan Workbook](/products/exit-plan-workbook) is Coming Soon and is not a downloadable file yet. Until it ships, treat this lesson as a checklist of questions (yield, gearing while you still have salary, CGT, PPOR vs rent) and run any numbers in your own spreadsheet or with a licensed adviser.`,
   duration: "14 min",
   durationMinutes: 14,
   learningOutcomes: [
@@ -851,7 +851,7 @@ This is common. Focus on:
 
 ### Modelling as a Couple
 
-The on-site [FIRE Number Calculator](/tools/fire-number) does **not** have a partner mode. For a household sketch, enter **combined** annual expenses and add both super balances into the super field (and both non-super balances into the non-super field). The Exit Plan Workbook is [Coming Soon](/products/exit-plan-workbook); it is not a live download and does not yet include dual-income spreadsheet tabs.`
+The on-site [FIRE Number Calculator](/tools/fire-number) does **not** have a partner mode. For a household sketch, enter **combined** annual expenses and add both super balances into the super field (and both non-super balances into the non-super field). The Exit Plan Workbook is [Coming Soon](/products/exit-plan-workbook); it is not a live download and does not yet include dual-income spreadsheet tabs.`,
   duration: "12 min",
   durationMinutes: 12,
   learningOutcomes: [
