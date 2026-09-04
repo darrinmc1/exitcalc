@@ -58,7 +58,9 @@ export function SuperProjectionCalculator() {
           ${finalBalance.toLocaleString()}
         </p>
         <p className="text-xs text-slate-500 mt-2">
-          After 15% contributions tax &amp; 15% earnings tax inside super
+          Illustration only: 15% contributions tax and 15% earnings tax are
+          hardcoded. No caps, fees, salary growth, or inflation. Not a fund
+          forecast.
         </p>
       </div>
 

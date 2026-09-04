@@ -37,7 +37,7 @@ FIRE means **Financial Independence, Retire Early**. Your FIRE number is the tot
 
 ### The 4% Safe Withdrawal Rate
 
-The 4% rule comes from the Trinity Study — a landmark piece of research showing that if you withdraw 4% of your portfolio each year, adjusted for inflation, your money has historically lasted 30+ years in almost every market scenario tested.
+The 4% rule is associated with the Trinity Study: US historical portfolios tested at different withdrawal rates over long (often 30-year) periods. A 4% initial withdrawal, then adjusted for inflation, survived many of those historical paths. It is a rule of thumb, not a guarantee for every future market, and a retirement longer than 30 years is a harder test than the original papers.
 
 The formula:
 
@@ -53,7 +53,7 @@ If you need $20,000 per year in investment income:
 
 $20,000 × 25 = **$500,000**
 
-With $500k invested, you withdraw $20,000/year (4%). Your portfolio survives because long-term market returns historically exceed 4%.
+With $500k invested, a 4% first-year withdrawal is $20,000. Whether that lasts depends on returns, inflation, fees, and how long you draw. The calculator does not simulate those paths.
 
 Another example: you spend $60,000 per year.
 
@@ -93,7 +93,7 @@ Read [Your FIRE Number If You Earn $X in AU](/lessons/your-fire-number-au) for t
 
 ### Calculate Yours Now
 
-Use the [FIRE Number Calculator](/tools/fire-number) — it takes 3 minutes and accounts for super, the gap between exit and preservation age, and your current balances.`,
+Use the [FIRE Number Calculator](/tools/fire-number) to apply the same two-bucket arithmetic: gap fund = expenses × years to preservation age, super target = expenses × 25. It does not grow either bucket, apply inflation, or discount the super target to today. The full formula list is in [How the calculators work](/lessons/how-its-calculated).`,
   duration: "8 min",
   durationMinutes: 8,
   learningOutcomes: [
@@ -103,7 +103,7 @@ Use the [FIRE Number Calculator](/tools/fire-number) — it takes 3 minutes and 
   ],
   tags: ["fire", "fire-number", "4-percent-rule", "beginner"],
   dateAdded: "2026-07-10",
-  lastUpdated: "2026-07-10",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -148,11 +148,23 @@ The global FIRE formula ignores two things that matter here:
 
 **Super needed at 60:** $60,000 × 25 = $1,500,000
 
-So your total FIRE number is $900k accessible + $1.5M in super by 60. The calculators on this site model this precisely with compound growth.
+So a **simple** two-bucket sketch is $900k accessible + $1.5M in super at 60. That is what the [FIRE Number Calculator](/tools/fire-number) prints: expenses × years, plus expenses × 25.
+
+### What the on-site calculator does not add
+
+The FIRE Number tool does **not** compound the gap fund, inflate expenses, or grow today's super to age 60 before comparing it with $1.5M. Progress % is today's combined balances divided by that simple total.
+
+A more complete plan would also ask:
+
+- Will the gap fund earn a return while you draw it, and what if the first years are a downturn?
+- What will expenses be in later years (inflation, paid-off mortgage, health)?
+- Will the [Super Projection Calculator](/tools/super-projection) get your current super near the $1.5M target under a return and contribution assumption you accept?
+
+Those questions are planning steps. They are not extra buttons on the FIRE Number page. See [How the calculators work](/lessons/how-its-calculated) for the exact formulas.
 
 ### Try the Calculator
 
-Use the [FIRE Number Calculator](/tools/fire-number) to plug in your actual numbers and see where you stand.`,
+Use the [FIRE Number Calculator](/tools/fire-number) with a lean expense figure and a comfortable one. Treat the two totals as a range, not a verdict.`,
   duration: "10 min",
   durationMinutes: 10,
   learningOutcomes: [
@@ -162,7 +174,7 @@ Use the [FIRE Number Calculator](/tools/fire-number) to plug in your actual numb
   ],
   tags: ["fire", "basics", "calculator", "beginner"],
   dateAdded: "2026-07-01",
-  lastUpdated: "2026-07-01",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -253,18 +265,20 @@ If your super + investments are already $346,000 at age 38, you've hit Coast-FIR
 
 ### AU Super Context
 
-Because super compounds with employer contributions even if you stop salary sacrificing, the coast number for your super bucket is even lower. The calculator separates super and non-super assets for this reason.
+Employer Super Guarantee can still be paid while you work, even if you stop salary sacrificing. That is **not** inside the Coast-FIRE calculator. The tool has two balance fields so you can type super and non-super separately; it then **adds them** and discounts one FIRE number at one growth rate.
 
 ### Using the Calculator
 
-The [Coast-FIRE Calculator](/tools/coast-fire) lets you input:
+The [Coast-FIRE Calculator](/tools/coast-fire) uses:
 
 - Current age and target retirement age
-- Current super balance and non-super investments
-- Expected growth rate (default 7% nominal)
-- Your target FIRE number
+- A FIRE number **you type** (it is not imported from the other tool)
+- Current super and non-super balances (summed)
+- One expected growth rate (default 7% nominal — type a real rate if you want inflation-adjusted)
 
-It tells you whether you've already hit Coast-FIRE, and if not, how much more you need to reach it.
+It reports whether today's total is already at or above the discounted coast number, and if not, a simple years-until-coast estimate. That estimate assumes the same growth rate every year and no further contributions — including no future SG.
+
+If you want SG and salary sacrifice in the picture, use the [Super Projection Calculator](/tools/super-projection). Formulas: [How the calculators work](/lessons/how-its-calculated).
 
 ### What to Do After Coast-FIRE
 
@@ -281,7 +295,7 @@ It tells you whether you've already hit Coast-FIRE, and if not, how much more yo
   ],
   tags: ["coast-fire", "compound-growth", "calculator", "beginner"],
   dateAdded: "2026-07-01",
-  lastUpdated: "2026-07-01",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -523,7 +537,7 @@ This extends portfolio longevity significantly but requires spending flexibility
 
 ### Modelling Your Drawdown
 
-The [Exit Plan Workbook](/products/exit-plan-workbook) (coming soon) will include a Drawdown Planner spreadsheet that models all three strategies with your actual numbers.`,
+ExitCalc does not have a drawdown calculator. The [Exit Plan Workbook](/products/exit-plan-workbook) is Coming Soon and does not include a live Drawdown Planner file today. The [FIRE Number Calculator](/tools/fire-number) only sizes a gap fund as expenses × years — it does not test bucket, bond-tent, or dynamic rules.`,
   duration: "16 min",
   durationMinutes: 16,
   learningOutcomes: [
@@ -533,7 +547,7 @@ The [Exit Plan Workbook](/products/exit-plan-workbook) (coming soon) will includ
   ],
   tags: ["drawdown", "retirement", "risk", "advanced"],
   dateAdded: "2026-07-01",
-  lastUpdated: "2026-07-01",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -585,7 +599,7 @@ Self-managed super funds can hold property, but the rules are complex:
 
 ### Modelling Property in Your Plan
 
-The Exit Plan Workbook includes a property analysis tab that models rental yield, mortgage repayments, tax implications, and how property fits into your overall FIRE timeline.`,
+There is no live property calculator on ExitCalc. The [Exit Plan Workbook](/products/exit-plan-workbook) is Coming Soon and is not a downloadable file yet. Until it ships, treat this lesson as a checklist of questions (yield, gearing while you still have salary, CGT, PPOR vs rent) and run any numbers in your own spreadsheet or with a licensed adviser.`,
   duration: "14 min",
   durationMinutes: 14,
   learningOutcomes: [
@@ -595,7 +609,7 @@ The Exit Plan Workbook includes a property analysis tab that models rental yield
   ],
   tags: ["property", "investment", "cgt", "ppor", "intermediate"],
   dateAdded: "2026-07-01",
-  lastUpdated: "2026-07-01",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -633,14 +647,18 @@ It compounds your existing balance forward, adding employer SG and salary sacrif
 
 ### How to Use the Results
 
-The projected balance tells you whether your super alone will be enough for the "Bucket 2" portion of your FIRE plan. Compare it to your FIRE number for the super bucket.
+The projected balance is only a super figure. Compare it yourself with the **super target** from the [FIRE Number Calculator](/tools/fire-number) (expenses × 25 on that page). This tool does **not** print that gap.
 
-If it's short, the calculator shows the gap — which you can close by:
+### What is hardcoded
 
-1. Increasing salary sacrifice
-2. Making non-concessional contributions
-3. Extending your working years by 1–2 years
-4. Targeting a higher return (with proportionally more risk)
+- **15%** tax on concessional contributions and **15%** tax on earnings, every year
+- Annual contributions (not quarterly SG)
+- Constant salary and a single return rate
+- No cap check, no Division 293, no fees
+
+If the projection is below the super target you have in mind, the inputs you can change here are salary sacrifice, target age, salary, SG rate, and return. Non-concessional contributions are not a field. A higher return assumption is not free — it implies more investment risk. None of those changes is advice; they are scenario switches.
+
+See [How the calculators work](/lessons/how-its-calculated) for the year-by-year loop.
 
 ### Try It Now
 
@@ -654,7 +672,7 @@ Open the [Super Projection Calculator](/tools/super-projection) and plug in your
   ],
   tags: ["super", "projection", "calculator", "beginner"],
   dateAdded: "2026-07-01",
-  lastUpdated: "2026-07-01",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -833,7 +851,7 @@ This is common. Focus on:
 
 ### Modelling as a Couple
 
-The Exit Plan Workbook includes dual-income tabs in every spreadsheet. The FIRE Number Calculator also supports partner mode with separate super balances.`,
+The on-site [FIRE Number Calculator](/tools/fire-number) does **not** have a partner mode. For a household sketch, enter **combined** annual expenses and add both super balances into the super field (and both non-super balances into the non-super field). The Exit Plan Workbook is [Coming Soon](/products/exit-plan-workbook); it is not a live download and does not yet include dual-income spreadsheet tabs.`,
   duration: "12 min",
   durationMinutes: 12,
   learningOutcomes: [
@@ -843,7 +861,140 @@ The Exit Plan Workbook includes dual-income tabs in every spreadsheet. The FIRE 
   ],
   tags: ["couple", "partner", "super-splitting", "intermediate"],
   dateAdded: "2026-07-01",
-  lastUpdated: "2026-07-01",
+  lastUpdated: "2026-09-04",
+  status: "published",
+}
+
+const howItsCalculated: Module = {
+  id: "how-its-calculated",
+  title: "How the Calculators Work",
+  description:
+    "The exact formulas used by the FIRE Number, Super Projection, and Coast-FIRE calculators — including what they omit.",
+  category: "fire-planning",
+  level: "beginner",
+  content: `## How the Calculators Work
+
+ExitCalc has **three** working calculators. This page describes the arithmetic they actually run. It is general information for education, not a forecast and not personal financial, tax, or legal advice. Super and tax figures change; confirm current rules with the [ATO](https://www.ato.gov.au) and [MoneySmart](https://moneysmart.gov.au).
+
+The three tools:
+
+- [FIRE Number Calculator](/tools/fire-number)
+- [Super Projection Calculator](/tools/super-projection)
+- [Coast-FIRE Calculator](/tools/coast-fire)
+
+There is no financial-health score, no credit score, and no hidden engine. If an address under /tools/ is not one of those three, it is Coming Soon — not a broken download and not a product for sale.
+
+### Shared limits
+
+All three tools:
+
+- Run in the browser from the numbers you type
+- Use one set of assumptions at a time (no Monte Carlo, no historical return series)
+- Do not look up live ATO caps, Age Pension rates, or your super fund
+- Do not know your tax residency, insurance, debts, or dependents
+
+### 1. FIRE Number
+
+Inputs: annual expenses, target exit age, preservation age, current super, current non-super.
+
+**Gap years = max(preservation age − exit age, 0)**
+
+**Gap fund = annual expenses × gap years**
+
+**Super target = annual expenses × 25**
+
+**Total = gap fund + super target**
+
+**Progress % = the smaller of 100 and round((current super + current non-super) ÷ total × 100)**
+
+The 25× multiplier is the 4% rule of thumb (expenses ÷ 0.04). The Trinity Study is US historical research on withdrawal rates over long periods. It is a planning shortcut, not a promise that 4% will last in every future market, especially for retirements longer than 30 years.
+
+What this calculator does **not** do:
+
+- Grow the gap fund while you draw it down
+- Discount the super target back to today
+- Grow today's super to preservation age before comparing it with the super target
+- Model inflation, Age Pension, withdrawal tax, or a partner's second super account
+
+So the progress bar is a snapshot against two future-dated targets, not a funded percentage.
+
+Worked sketch: expenses $60,000, exit 45, preservation 60.
+
+- Gap years = 15
+- Gap fund = $900,000
+- Super target = $1,500,000
+- Total shown = $2,400,000
+
+If you already hold $50,000 outside super and $120,000 in super, the tool reports a non-super shortfall of $850,000 and a super shortfall of $1,380,000. It does not say those shortfalls must be saved as cash; it only subtracts today's balances from those targets.
+
+### 2. Super Projection
+
+Inputs: current age, target age, current balance, annual gross salary, employer SG rate, annual salary sacrifice, expected return.
+
+Each year:
+
+**Gross contributions = salary × (SG% ÷ 100) + salary sacrifice**
+
+**Contributions after tax = gross contributions × 0.85**
+
+**Earnings after tax = (balance + contributions after tax) × (return% ÷ 100) × 0.85**
+
+**New balance = balance + contributions after tax + earnings after tax**
+
+The 15% deductions are **hardcoded**. They match common accumulation-phase concessional tax, not Division 293, not a tax-free component, and not pension phase.
+
+What this calculator does **not** do:
+
+- Enforce concessional or non-concessional caps
+- Grow salary or apply inflation to the final dollars
+- Subtract fees or insurance
+- Add non-concessional (after-tax) contributions as a separate line
+- Compare the projection with the FIRE Number super target (you do that yourself)
+
+The year-by-year table is the same loop, one row per year.
+
+### 3. Coast-FIRE
+
+Inputs: current age, target retirement age, FIRE number, current super, current non-super, expected growth.
+
+**Years = max(target age − current age, 1)**
+
+**Coast number today = FIRE number ÷ (1 + growth rate)^years**
+
+**Current total = current super + current non-super**
+
+If current total is at least the coast number, the tool says you have reached Coast-FIRE **under these assumptions**. If not, it grows current total at the same rate for up to 50 years and checks the discounted FIRE number at each age. That is the “years until coast” figure.
+
+What this calculator does **not** do:
+
+- Keep super and non-super on separate coast paths after you enter them (it adds them)
+- Add future employer SG if you keep working
+- Convert a nominal return into a real return
+- Stress-test a crash in year one
+
+You type the FIRE number. It is not imported from the FIRE Number page.
+
+### Using the three tools together
+
+1. Estimate a spending-based total on the FIRE Number page (try a lean and a comfortable expense figure).
+2. See whether current saving plus SG can approach the super target on the Super Projection page.
+3. See whether today's balances, with no extra contributions, would reach a number you choose by a date you choose on the Coast-FIRE page.
+
+If the three pictures disagree, that is expected: they answer different questions with different omissions. Adjust inputs; do not treat any single total as a decision.
+
+### Not financial advice
+
+These calculators are educational. They do not take your objectives, financial situation, or needs into account. Before you change contributions, investments, or work hours, check current ATO and MoneySmart material and consider a licensed financial adviser or registered tax agent.`,
+  duration: "14 min",
+  durationMinutes: 14,
+  learningOutcomes: [
+    "State the exact FIRE Number, Super Projection, and Coast-FIRE formulas used on this site",
+    "List the main omissions in each calculator (tax, inflation, caps, SG while coasting)",
+    "Use the three tools together without treating any one total as a forecast",
+  ],
+  tags: ["calculators", "methodology", "4-percent-rule", "beginner"],
+  dateAdded: "2026-09-04",
+  lastUpdated: "2026-09-04",
   status: "published",
 }
 
@@ -852,6 +1003,7 @@ The Exit Plan Workbook includes dual-income tabs in every spreadsheet. The FIRE 
 // ---------------------------------------------------------------------------
 
 export const ALL_MODULES: Module[] = [
+  howItsCalculated,
   whatIsFireNumber,
   fireNumberAu,
   superContribStrategies,

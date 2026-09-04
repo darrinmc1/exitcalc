@@ -2,6 +2,18 @@ import React from "react"
 
 function inlineFormat(text: string): string {
   return text
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label: string, href: string) => {
+      const safe =
+        href.startsWith("/") ||
+        href.startsWith("https://") ||
+        href.startsWith("http://")
+      if (!safe) return label
+      const external = href.startsWith("http")
+      const attrs = external
+        ? ' target="_blank" rel="noopener noreferrer"'
+        : ""
+      return `<a href="${href}" class="text-emerald-400 underline underline-offset-2 hover:text-emerald-300"${attrs}>${label}</a>`
+    })
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
     .replace(/\*(.+?)\*/g, '<em class="text-cyan-300">$1</em>')
 }
