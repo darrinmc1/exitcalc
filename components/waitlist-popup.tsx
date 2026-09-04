@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { Sparkles, Gift, X, Check } from "lucide-react"
 import { HoneypotField } from "./HoneypotField"
 
@@ -13,6 +14,7 @@ const SHOW_AFTER_MS = 5000
 const SUPPRESS_DAYS = 30
 
 export function WaitlistPopup() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [honeypot, setHoneypot] = useState("")
@@ -20,6 +22,7 @@ export function WaitlistPopup() {
   const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
+    if (pathname === "/") return
     const lastSeen = localStorage.getItem(POPUP_STORAGE_KEY)
     if (lastSeen) {
       const daysSince =
@@ -31,7 +34,7 @@ export function WaitlistPopup() {
       setTimeout(() => setIsAnimating(true), 50)
     }, SHOW_AFTER_MS)
     return () => clearTimeout(timer)
-  }, [])
+  }, [pathname])
 
   const markSeen = () =>
     localStorage.setItem(POPUP_STORAGE_KEY, Date.now().toString())
@@ -59,6 +62,8 @@ export function WaitlistPopup() {
     }
   }
 
+  // Homepage pack: no auto-modals on the fold.
+  if (pathname === "/") return null
   if (!isOpen) return null
 
   return (

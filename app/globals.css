@@ -103,3 +103,29 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-float { animation: none !important; }
 }
+
+/* ScrollCraft homepage */
+.sc-dots {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.sc-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.sc-reveal-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-reveal,
+  .sc-reveal-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
