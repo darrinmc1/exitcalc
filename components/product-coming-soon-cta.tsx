@@ -3,8 +3,7 @@
 import { NewsletterForm } from "@/components/newsletter-form"
 
 /**
- * FlowVault pattern: disabled Buy Now — $price (Coming Soon), plus Notify me.
- * Do not wire Stripe or invent a downloadable file here.
+ * Honest waitlist CTA. No Buy button — checkout and the download file are not live.
  */
 export function ProductComingSoonCta({
   price,
@@ -18,7 +17,7 @@ export function ProductComingSoonCta({
       <div className="flex flex-wrap items-center gap-6">
         <div>
           <span className="text-4xl font-extrabold text-white">${price}</span>
-          <span className="text-slate-400 ml-1">one-time</span>
+          <span className="text-slate-400 ml-1">listed price</span>
           <span className="ml-3 inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-400">
             Coming Soon
           </span>
@@ -26,11 +25,10 @@ export function ProductComingSoonCta({
         <button
           type="button"
           disabled
-          title="Checkout coming soon"
-          className="cursor-not-allowed rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 font-bold text-white opacity-75 shadow-lg shadow-cyan-500/25"
+          title="Checkout is not live"
+          className="cursor-not-allowed rounded-xl border border-white/15 bg-white/5 px-8 py-3 font-bold text-slate-300"
         >
-          Buy Now — ${price}
-          <span className="ml-2 text-xs font-medium opacity-70">(Coming Soon)</span>
+          Coming Soon
         </button>
       </div>
 

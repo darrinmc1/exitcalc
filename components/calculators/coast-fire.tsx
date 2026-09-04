@@ -69,9 +69,11 @@ export function CoastFIRECalculator() {
 
       {hasReachedCoast ? (
         <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-5 text-center">
-          <p className="text-lg font-bold text-emerald-400">You&apos;ve reached Coast-FIRE!</p>
+          <p className="text-lg font-bold text-emerald-400">Coast-FIRE under these assumptions</p>
           <p className="text-sm text-slate-400 mt-1">
-            Your existing savings will compound to ${fireNumber.toLocaleString()} by age {targetAge} — even without another dollar of contributions.
+            Today&apos;s super plus non-super, grown at {growthRate}% with no further
+            contributions (including no future SG), reaches ${fireNumber.toLocaleString()} by age {targetAge}.
+            Change the growth rate or FIRE number and the result changes.
           </p>
         </div>
       ) : (

@@ -4,7 +4,8 @@ import { siteConfig } from "@/config/site.config"
 
 export const metadata = {
   title: `Products | ${siteConfig.name}`,
-  description: "Browse our digital products and bundles.",
+  description:
+    "One listed product: the Exit Plan Workbook. Coming Soon — no checkout and no download file.",
 }
 
 export default function ProductsPage() {
@@ -16,7 +17,8 @@ export default function ProductsPage() {
             <span className="gradient-text-cyan">Products</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Digital resources to accelerate your progress.
+            One listed product. Checkout is not live. Any other /products/
+            address is Coming Soon.
           </p>
         </div>
       </div>
