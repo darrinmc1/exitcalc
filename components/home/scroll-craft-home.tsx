@@ -72,10 +72,10 @@ export function ScrollCraftHome({
             Calculators
           </p>
           <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            Three working tools. No sign-up.
+            FIRE number, super projection, Coast-FIRE.
           </h2>
           <p className="mt-3 max-w-xl text-sm text-slate-400">
-            Already live on ExitCalc — open any tool and change the inputs.
+            Open any tool and change the inputs. No account required.
           </p>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -106,10 +106,10 @@ export function ScrollCraftHome({
             Lessons
           </p>
           <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            Method behind the inputs
+            How the two-bucket numbers are built
           </h2>
           <p className="mt-3 max-w-xl text-sm text-slate-400">
-            Short written explainers that sit next to the calculators.
+            Short written explainers that sit next to the calculators: method, assumptions, and how to read the result.
           </p>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -249,11 +249,11 @@ function WhatYouGet() {
                 What you get
               </p>
               <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-white md:text-5xl">
-                A calculator product, not a slogan stack.
+                Gap fund, super target, and the method behind both.
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-                Live tools for Australians planning an exit. Change the inputs.
-                Read the method. No invented reviews.
+                Change the inputs on the live calculators. Read how the
+                two-bucket result is built.
               </p>
             </Reveal>
           </div>

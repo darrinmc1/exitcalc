@@ -46,7 +46,7 @@ export function FIRENumberCalculator({
               Calculator · FIRE number
             </p>
             <p className="mt-0.5 text-sm font-semibold text-white">
-              Your first exit estimate
+              Example two-bucket result
             </p>
           </div>
           <p className="shrink-0 text-xs font-medium text-slate-400">
