@@ -205,9 +205,9 @@ export const siteConfig: SiteConfig = {
   copy: {
     heroTitle: "The exit calculator for your FIRE number",
     heroSubtitle:
-      "Two-bucket model. Gap fund until preservation age, then a super target. Edit the example to match your expenses and exit age.",
+      "Working FIRE and exit calculators, plus written method lessons. Edit the live example to match your expenses and exit age.",
     ctaButton: "Use the exit calculator",
-    ctaSecondary: "Browse lessons",
+    ctaSecondary: "Browse method lessons",
     loginTitle: "Welcome back",
     signupTitle: "Create your account",
     foundingMemberHeading: "Founding Member — Lock In Early Access Pricing",
