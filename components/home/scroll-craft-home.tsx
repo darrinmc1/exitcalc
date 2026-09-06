@@ -179,7 +179,7 @@ function HeroFold({
         style={layer(-0.04, 36)}
       >
         <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-400 sm:text-xs">
-          Australian FIRE planning tools
+          FIRE / exit calculators · method lessons
         </p>
         <h1 className="mt-2 font-display text-[1.7rem] font-extrabold leading-[1.15] tracking-tight text-white sm:mt-4 sm:text-4xl md:text-5xl lg:text-[3.15rem]">
           {siteConfig.copy.heroTitle}
@@ -206,7 +206,7 @@ function HeroFold({
           </a>
           <Link
             href="/lessons"
-            className="hidden text-sm font-medium text-slate-400 underline-offset-4 hover:text-emerald-400 hover:underline sm:inline"
+            className="inline text-sm font-medium text-slate-400 underline-offset-4 hover:text-emerald-400 hover:underline"
           >
             {siteConfig.copy.ctaSecondary}
           </Link>
