@@ -1,7 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type CSSProperties } from "react"
 import { cn } from "@/lib/utils"
+import {
+  formatAud,
+  motionAmount,
+  useProductIntro,
+} from "@/components/home/motion"
 
 export function FIRENumberCalculator({
   variant = "full",
@@ -14,6 +19,7 @@ export function FIRENumberCalculator({
   const [currentSuper, setCurrentSuper] = useState(120000)
   const [currentNonSuper, setCurrentNonSuper] = useState(50000)
   const isFold = variant === "fold"
+  const { t, introDone, skip } = useProductIntro(isFold)
 
   const gapYears = Math.max(preservationAge - exitAge, 0)
   const gapFundTarget = annualExpenses * gapYears
@@ -23,6 +29,13 @@ export function FIRENumberCalculator({
   const progressPct = totalFireNumber > 0 ? Math.min(Math.round((currentTotal / totalFireNumber) * 100), 100) : 0
   const gapShortfall = Math.max(gapFundTarget - currentNonSuper, 0)
   const superShortfall = Math.max(superTarget - currentSuper, 0)
+  const gapFunded = gapFundTarget > 0 ? Math.min(currentNonSuper / gapFundTarget, 1) : 0
+  const superFunded = superTarget > 0 ? Math.min(currentSuper / superTarget, 1) : 0
+
+  const setField = (write: (value: number) => void) => (value: number) => {
+    skip()
+    write(value)
+  }
 
   return (
     <div className={isFold ? "space-y-3" : "space-y-6"}>
@@ -47,7 +60,7 @@ export function FIRENumberCalculator({
           compact={isFold}
           label="Annual Expenses"
           value={annualExpenses}
-          onChange={setAnnualExpenses}
+          onChange={isFold ? setField(setAnnualExpenses) : setAnnualExpenses}
           min={10000}
           max={500000}
           step={1000}
@@ -57,7 +70,7 @@ export function FIRENumberCalculator({
           compact={isFold}
           label="Target Exit Age"
           value={exitAge}
-          onChange={setExitAge}
+          onChange={isFold ? setField(setExitAge) : setExitAge}
           min={25}
           max={65}
         />
@@ -66,7 +79,7 @@ export function FIRENumberCalculator({
           className={isFold ? "hidden sm:block" : undefined}
           label="Preservation Age"
           value={preservationAge}
-          onChange={setPreservationAge}
+          onChange={isFold ? setField(setPreservationAge) : setPreservationAge}
           min={55}
           max={67}
         />
@@ -75,7 +88,7 @@ export function FIRENumberCalculator({
           className={isFold ? "hidden sm:block" : undefined}
           label="Current Super"
           value={currentSuper}
-          onChange={setCurrentSuper}
+          onChange={isFold ? setField(setCurrentSuper) : setCurrentSuper}
           min={0}
           max={5000000}
           step={1000}
@@ -85,47 +98,81 @@ export function FIRENumberCalculator({
           className={isFold ? "hidden sm:block col-span-2" : undefined}
           label="Current Non-Super"
           value={currentNonSuper}
-          onChange={setCurrentNonSuper}
+          onChange={isFold ? setField(setCurrentNonSuper) : setCurrentNonSuper}
           min={0}
           max={5000000}
           step={1000}
         />
       </div>
 
-      <div className={`grid sm:grid-cols-2 ${isFold ? "hidden gap-2 sm:grid md:gap-3" : "gap-4"}`}>
-        <div className={`rounded-xl bg-teal-500/10 border border-teal-500/20 ${isFold ? "p-3" : "p-5"}`}>
-          <p className="text-xs text-slate-400 mb-1 uppercase tracking-wide">Gap Fund Needed (Non-Super)</p>
-          <p className={`${isFold ? "text-xl" : "text-2xl"} font-extrabold text-teal-400`}>${gapFundTarget.toLocaleString()}</p>
-          <p className="text-xs text-slate-500 mt-1">{gapYears} years × ${annualExpenses.toLocaleString()}/yr</p>
+      {isFold ? (
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          <BucketVessel
+            tone="teal"
+            label="Gap fund"
+            caption={`${gapYears} yrs × expenses`}
+            amount={motionAmount(gapFundTarget, t)}
+            fill={t}
+            funded={gapFunded * t}
+          />
+          <BucketVessel
+            tone="emerald"
+            label={`Super at ${preservationAge}`}
+            caption="Expenses × 25"
+            amount={motionAmount(superTarget, t)}
+            fill={t}
+            funded={superFunded * t}
+          />
         </div>
-        <div className={`rounded-xl bg-emerald-500/10 border border-emerald-500/20 ${isFold ? "p-3" : "p-5"}`}>
-          <p className="text-xs text-slate-400 mb-1 uppercase tracking-wide">Super Target (at {preservationAge})</p>
-          <p className={`${isFold ? "text-xl" : "text-2xl"} font-extrabold text-emerald-400`}>${superTarget.toLocaleString()}</p>
-          <p className="text-xs text-slate-500 mt-1">${annualExpenses.toLocaleString()}/yr × 25 (4% rule)</p>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border border-teal-500/20 bg-teal-500/10 p-5">
+            <p className="mb-1 text-xs uppercase tracking-wide text-slate-400">Gap Fund Needed (Non-Super)</p>
+            <p className="text-2xl font-extrabold text-teal-400">${gapFundTarget.toLocaleString()}</p>
+            <p className="mt-1 text-xs text-slate-500">{gapYears} years × ${annualExpenses.toLocaleString()}/yr</p>
+          </div>
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+            <p className="mb-1 text-xs uppercase tracking-wide text-slate-400">Super Target (at {preservationAge})</p>
+            <p className="text-2xl font-extrabold text-emerald-400">${superTarget.toLocaleString()}</p>
+            <p className="mt-1 text-xs text-slate-500">${annualExpenses.toLocaleString()}/yr × 25 (4% rule)</p>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className={`rounded-xl bg-white/5 border border-white/10 ${isFold ? "p-3 sm:p-4" : "p-6"}`}>
-        <div className="flex items-center justify-between mb-2 gap-3">
+      <div className={`rounded-xl border border-white/10 bg-white/5 ${isFold ? "p-3 sm:p-4" : "p-6"}`}>
+        <div className="mb-2 flex items-center justify-between gap-3">
           <span className="text-sm font-semibold text-white">Total FIRE Number</span>
-          <span className={`${isFold ? "text-xl sm:text-2xl" : "text-2xl"} font-extrabold text-white`}>${totalFireNumber.toLocaleString()}</span>
+          <span
+            className={`${isFold ? "text-xl sm:text-2xl" : "text-2xl"} font-extrabold tabular-nums text-white`}
+            aria-hidden={isFold && !introDone}
+          >
+            {formatAud(isFold ? motionAmount(totalFireNumber, t) : totalFireNumber)}
+          </span>
         </div>
+        {isFold && (
+          <p className="sr-only" aria-live="polite">
+            {introDone ? `Total FIRE number ${formatAud(totalFireNumber)}` : ""}
+          </p>
+        )}
         {!isFold && (
-          <p className="text-xs text-slate-500 mb-3">
+          <p className="mb-3 text-xs text-slate-500">
             Illustrative total using the two-bucket inputs above. Gap fund = expenses
             × years until preservation age; super target = expenses × 25 (4% rule of
             thumb). Not a prediction — adjust assumptions to match your plan.
           </p>
         )}
-        <div className={`w-full bg-white/10 rounded-full ${isFold ? "h-2 mb-1.5" : "h-3 mb-2"}`}>
+        <div className={`w-full rounded-full bg-white/10 ${isFold ? "mb-1.5 h-2" : "mb-2 h-3"}`}>
           <div
-            className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-500"
-            style={{ width: `${progressPct}%` }}
+            className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-500"
+            style={{
+              width: `${isFold ? Math.round(progressPct * t) : progressPct}%`,
+              transition: isFold ? undefined : "width 500ms ease",
+            }}
           />
         </div>
         <div className="flex justify-between text-xs text-slate-400">
-          <span>Current: ${currentTotal.toLocaleString()}</span>
-          <span>{progressPct}% there</span>
+          <span>Current: {formatAud(isFold ? motionAmount(currentTotal, t) : currentTotal)}</span>
+          <span>{isFold ? Math.round(progressPct * t) : progressPct}% there</span>
         </div>
       </div>
 
@@ -140,6 +187,70 @@ export function FIRENumberCalculator({
           )}
         </div>
       )}
+    </div>
+  )
+}
+
+function BucketVessel({
+  tone,
+  label,
+  caption,
+  amount,
+  fill,
+  funded,
+}: {
+  tone: "teal" | "emerald"
+  label: string
+  caption: string
+  amount: number
+  fill: number
+  funded: number
+}) {
+  const isTeal = tone === "teal"
+  return (
+    <div
+      className={cn(
+        "ec-bucket flex h-[5.5rem] flex-col justify-between rounded-xl border p-2.5 sm:h-32 sm:p-3",
+        isTeal
+          ? "border-teal-400/30 bg-teal-950/40"
+          : "border-emerald-400/30 bg-emerald-950/40"
+      )}
+      style={
+        {
+          "--fill": fill,
+          "--funded": funded,
+        } as CSSProperties
+      }
+      aria-hidden="true"
+    >
+      <div
+        className={cn(
+          "ec-bucket-liquid",
+          isTeal
+            ? "bg-gradient-to-t from-teal-500/80 via-teal-400/55 to-teal-300/25"
+            : "bg-gradient-to-t from-emerald-500/80 via-emerald-400/55 to-emerald-300/25"
+        )}
+      />
+      <div
+        className={cn(
+          "ec-bucket-funded",
+          isTeal ? "bg-teal-200/25" : "bg-emerald-200/25"
+        )}
+      />
+      <div className="relative z-10">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300 sm:text-xs">
+          {label}
+        </p>
+        <p className="text-[10px] text-slate-400 sm:text-xs">{caption}</p>
+      </div>
+      <p
+        className={cn(
+          "relative z-10 text-lg font-extrabold tabular-nums sm:text-2xl",
+          isTeal ? "text-teal-200" : "text-emerald-200"
+        )}
+      >
+        {formatAud(amount)}
+      </p>
     </div>
   )
 }

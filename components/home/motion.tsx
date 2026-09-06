@@ -22,6 +22,74 @@ export function usePrefersReducedMotion() {
   return reduced
 }
 
+/** ExitCalc homepage signature: 5–8s bucket fill + FIRE number count-up. */
+export const PRODUCT_INTRO_MS = 6800
+
+function easeOutCubic(t: number) {
+  return 1 - (1 - t) ** 3
+}
+
+/**
+ * Calculator-native intro clock. One shot, 6.8s. `skip()` jumps to the
+ * settled result when the visitor edits an input. Reduced motion is off.
+ */
+export function useProductIntro(active: boolean) {
+  const reduced = usePrefersReducedMotion()
+  const startAt = reduced || !active ? 1 : 0
+  const [t, setT] = useState(startAt)
+  const [introDone, setIntroDone] = useState(startAt === 1)
+  const skipped = useRef(false)
+  const startedAt = useRef<number | null>(null)
+
+  const skip = () => {
+    skipped.current = true
+    setT(1)
+    setIntroDone(true)
+  }
+
+  useEffect(() => {
+    if (!active || reduced || skipped.current) {
+      setT(1)
+      setIntroDone(true)
+      return
+    }
+
+    if (startedAt.current == null) {
+      startedAt.current = performance.now()
+    }
+
+    let frame = 0
+    const start = startedAt.current
+    const tick = (now: number) => {
+      if (skipped.current) {
+        setT(1)
+        setIntroDone(true)
+        return
+      }
+      const raw = Math.min(1, (now - start) / PRODUCT_INTRO_MS)
+      setT(easeOutCubic(raw))
+      if (raw < 1) {
+        frame = requestAnimationFrame(tick)
+      } else {
+        setT(1)
+        setIntroDone(true)
+      }
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [active, reduced])
+
+  return { t, introDone, skip, reduced }
+}
+
+export function motionAmount(target: number, t: number) {
+  return Math.round(target * t)
+}
+
+export function formatAud(n: number) {
+  return `$${Math.round(n).toLocaleString("en-AU")}`
+}
+
 /** Layered scroll offsets for the homepage scene. */
 export function useParallax() {
   const reduced = usePrefersReducedMotion()
