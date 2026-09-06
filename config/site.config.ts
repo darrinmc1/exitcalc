@@ -203,17 +203,17 @@ export const siteConfig: SiteConfig = {
   },
 
   copy: {
-    heroTitle: "Know Your FIRE Number. Plan Your Exit.",
+    heroTitle: "The exit calculator for your FIRE number",
     heroSubtitle:
-      "Free AU superannuation and FIRE calculators. Estimate your number with the two-bucket model — gap fund until preservation age, plus a super target — then adjust the inputs to match your life.",
-    ctaButton: "Calculate Your FIRE Number",
+      "Two-bucket model. Gap fund until preservation age, then a super target. Edit the example to match your expenses and exit age.",
+    ctaButton: "Use the exit calculator",
     ctaSecondary: "Browse lessons",
     loginTitle: "Welcome back",
     signupTitle: "Create your account",
     foundingMemberHeading: "Founding Member — Lock In Early Access Pricing",
-    emailCaptureHeading: "Weekly FIRE Planning Tips",
+    emailCaptureHeading: "Calculator and lesson updates",
     emailCaptureSubheading:
-      "AU super strategies, FIRE milestones, and calculator updates — straight to your inbox.",
+      "When a tool or written explainer ships, it goes here. AU super and FIRE only.",
     feedbackPlaceholder: "What topic should we cover next?",
   },
 
