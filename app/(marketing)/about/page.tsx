@@ -32,10 +32,10 @@ export default function AboutPage() {
             problem, franking credits, or Division 293. ExitCalc does.
           </p>
           <p className="text-slate-300 leading-relaxed mb-4">
-            The free calculators give you your numbers in 60 seconds. The lessons
-            explain the strategy behind the numbers. And the Exit Plan Workbook
-            gives you a structured framework to turn those numbers into an
-            actionable plan.
+            Three free calculators give you an illustrated total from the inputs
+            you type. Fourteen written lessons explain the method and the limits
+            of those tools. The Exit Plan Workbook is listed and is Coming Soon
+            — it is not a live download.
           </p>
           <p className="text-slate-300 leading-relaxed">
             Questions or feedback? Reach out at{" "}

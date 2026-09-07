@@ -31,8 +31,10 @@ export default function TermsPage() {
           </p>
           <h2>Payments and Refunds</h2>
           <p>
-            All purchases are processed through Stripe. Refund requests within 14
-            days of purchase will be honored.
+            No digital product is for sale on this site yet. The Exit Plan
+            Workbook is listed as Coming Soon. There is no live checkout and no
+            downloadable file. When a purchase path exists, payment details will
+            be published here.
           </p>
           <h2>Contact</h2>
           <p>

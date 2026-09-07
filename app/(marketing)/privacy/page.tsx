@@ -18,13 +18,14 @@ export default function PrivacyPage() {
           </p>
           <h2>Information We Collect</h2>
           <p>
-            We collect information you provide directly: email address, name, and
-            payment information when you make a purchase.
+            We collect information you provide directly, such as an email address
+            for the waitlist or newsletter. Checkout is not live, so we do not
+            currently collect payment card details on this site.
           </p>
           <h2>How We Use Your Information</h2>
           <p>
-            We use your information to provide our services, process payments, send
-            updates you&apos;ve opted into, and improve our platform.
+            We use your information to operate the site, send updates you have
+            opted into, and improve the calculators and lessons.
           </p>
           <h2>Contact</h2>
           <p>

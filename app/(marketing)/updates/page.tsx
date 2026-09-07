@@ -15,7 +15,9 @@ export default function UpdatesPage() {
           <h1 className="text-4xl font-extrabold tracking-tight mb-4">
             <span className="gradient-text-cyan">Updates</span>
           </h1>
-          <p className="text-lg text-slate-400">Stay current with the latest.</p>
+          <p className="text-lg text-slate-400">
+            Site notes. One launch update is published.
+          </p>
         </div>
       </div>
 

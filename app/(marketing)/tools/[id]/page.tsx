@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_TOOLS, getToolById } from "@/data/tools"
 import { siteConfig } from "@/config/site.config"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { Disclaimer } from "@/components/disclaimer"
+import { ComingSoonResource } from "@/components/coming-soon-resource"
 import { SuperProjectionCalculator } from "@/components/calculators/super-projection"
 import { FIRENumberCalculator } from "@/components/calculators/fire-number"
 import { CoastFIRECalculator } from "@/components/calculators/coast-fire"
@@ -14,7 +14,13 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }) {
   const tool = getToolById(params.id)
-  if (!tool) return { title: "Not Found" }
+  if (!tool) {
+    return {
+      title: `Coming Soon | ${siteConfig.name}`,
+      description:
+        "This calculator is not live yet. ExitCalc currently has three working tools.",
+    }
+  }
   return {
     title: `${tool.name} | ${siteConfig.name}`,
     description: tool.description,
@@ -36,7 +42,9 @@ function CalculatorWidget({ toolId }: { toolId: string }) {
 
 export default function ToolPage({ params }: { params: { id: string } }) {
   const tool = getToolById(params.id)
-  if (!tool) notFound()
+  if (!tool) {
+    return <ComingSoonResource kind="calculator" requestedId={params.id} />
+  }
 
   const toolSchema = {
     "@context": "https://schema.org",
@@ -103,6 +111,17 @@ export default function ToolPage({ params }: { params: { id: string } }) {
             </div>
           )}
           <CalculatorWidget toolId={tool.id} />
+          <p className="mt-5 text-sm text-slate-400">
+            Exact formulas, tax assumptions, and what this tool does not model
+            are on{" "}
+            <Link
+              href="/lessons/how-its-calculated"
+              className="text-emerald-400 underline underline-offset-2 hover:text-emerald-300"
+            >
+              How the calculators work
+            </Link>
+            .
+          </p>
           <div className="mt-6">
             <Disclaimer variant="full" />
           </div>

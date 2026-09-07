@@ -4,7 +4,8 @@ import { siteConfig } from "@/config/site.config"
 
 export const metadata = {
   title: `Lessons | ${siteConfig.name}`,
-  description: "Browse all available lessons.",
+  description:
+    "14 written lessons on Australian FIRE planning, super, and the three ExitCalc calculators. Educational only — not personal financial advice.",
 }
 
 export default function LessonsPage() {
@@ -16,7 +17,8 @@ export default function LessonsPage() {
             <span className="gradient-text-cyan">Lessons</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Browse our complete curriculum.
+            14 written lessons. Educational calculators only — not personal
+            financial advice. No invented extra courses.
           </p>
         </div>
       </div>

@@ -58,8 +58,9 @@ export async function GET(req: NextRequest) {
   }
 
   const product = getProductById(downloadId)
-  if (!product) {
-    return NextResponse.json({ error: "Product not found" }, { status: 404 })
+  const productPage = new URL(`/products/${downloadId}`, req.nextUrl.origin)
+  if (!product || product.comingSoon) {
+    return NextResponse.redirect(productPage, 303)
   }
 
   const entitlements = await getUserEntitlements(userId)
@@ -70,10 +71,7 @@ export async function GET(req: NextRequest) {
 
   const url = await getSignedDownloadUrl("downloads", product.downloadPath)
   if (!url) {
-    return NextResponse.json(
-      { error: "Download unavailable" },
-      { status: 503 }
-    )
+    return NextResponse.redirect(productPage, 303)
   }
 
   return NextResponse.redirect(url, 303)

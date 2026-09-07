@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_PRODUCTS, getProductById } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { ProductComingSoonCta } from "@/components/product-coming-soon-cta"
+import { ComingSoonResource } from "@/components/coming-soon-resource"
 import { Check } from "lucide-react"
 
 export function generateStaticParams() {
@@ -12,7 +12,13 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }) {
   const product = getProductById(params.id)
-  if (!product) return { title: "Not Found" }
+  if (!product) {
+    return {
+      title: `Coming Soon | ${siteConfig.name}`,
+      description:
+        "This download is not available. ExitCalc lists one product, and it is coming soon.",
+    }
+  }
   return {
     title: `${product.name} | ${siteConfig.name}`,
     description: product.description,
@@ -21,7 +27,9 @@ export function generateMetadata({ params }: { params: { id: string } }) {
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const product = getProductById(params.id)
-  if (!product) notFound()
+  if (!product) {
+    return <ComingSoonResource kind="download" requestedId={params.id} />
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
