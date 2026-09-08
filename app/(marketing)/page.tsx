@@ -1,223 +1,193 @@
 import Link from "next/link"
-import { siteConfig } from "@/config/site.config"
-import { NewsletterForm } from "@/components/newsletter-form"
-import { FIRENumberCalculator } from "@/components/calculators/fire-number"
-import { Disclaimer } from "@/components/disclaimer"
-import { ALL_TOOLS } from "@/data/tools"
-import { ALL_MODULES } from "@/data/modules"
-import { exitCalcFaqs } from "@/lib/aeo"
+import { SignedIn, SignedOut } from "@clerk/nextjs"
+import { ArrowRight, CheckCircle, Calculator, Shield, Zap } from "lucide-react"
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_DOMAIN
-    ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
-    : process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : `https://${siteConfig.domain}`
-
-const faqPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: exitCalcFaqs.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: f.answer,
-    },
-  })),
-}
-
-const softwareApplicationSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "ExitCalc FIRE Number Calculator",
-  applicationCategory: "FinanceApplication",
-  operatingSystem: "Web",
-  description:
-    "Free FIRE number, superannuation projection, and Coast-FIRE calculators for Australians. General information only, not personal financial advice.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "AUD",
-  },
-  url: siteUrl,
-}
-
-const FEATURED_LESSON_IDS = [
-  "what-is-fire-number",
-  "your-fire-number-au",
-  "coast-fire-explained",
-  "super-projection-walkthrough",
-]
-
-export default function HomePage() {
-  const featuredLessons = FEATURED_LESSON_IDS.map((id) =>
-    ALL_MODULES.find((m) => m.id === id && m.status === "published")
-  ).filter(Boolean) as typeof ALL_MODULES
-
+export default function MarketingPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
-      />
-      {/* Hero — one primary CTA */}
-      <div className={`${siteConfig.theme.heroGradient} relative overflow-hidden py-20 md:py-28`}>
-        <div className="absolute inset-0 bg-[url('/images/hero-exitcalc.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
-            {siteConfig.name}
-          </p>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-            <span className="gradient-text-cyan">{siteConfig.copy.heroTitle}</span>
+    <main className="min-h-screen bg-black text-white">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-24 px-4 overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-950/40 via-black to-black pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-500/10 text-violet-300 text-sm mb-8">
+            <Zap className="w-3.5 h-3.5" />
+            <span>AI-powered tax optimization</span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+            Stop overpaying
+            <br />
+            <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+              on your taxes
+            </span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-4">
-            {siteConfig.copy.heroSubtitle}
-          </p>
-          <p className="text-sm text-slate-500 max-w-xl mx-auto mb-10">
-            Illustrative only — results depend on your spending, exit age, and
-            assumptions (gap fund to preservation age + expenses × 25 for the
-            super target).{" "}
-            <Link
-              href="/lessons/what-is-fire-number"
-              className="text-emerald-400/90 underline underline-offset-2 hover:text-emerald-300"
-            >
-              How it&apos;s calculated
-            </Link>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="#calculator"
-              className="px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105"
-            >
-              {siteConfig.copy.ctaButton}
-            </a>
-            <Link
-              href="/lessons"
-              className="text-sm font-medium text-slate-400 hover:text-emerald-400 transition-colors underline-offset-4 hover:underline"
-            >
-              {siteConfig.copy.ctaSecondary}
-            </Link>
-          </div>
-        </div>
-      </div>
 
-      {/* Working calculator — above the fold on tall screens / one click from hero */}
-      <section
-        id="calculator"
-        className="scroll-mt-20 mx-auto max-w-3xl px-6 py-16 md:py-20"
-      >
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">FIRE Number Calculator</span>
-          </h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">
-            Enter your annual expenses, exit age, and balances. Uses the AU
-            two-bucket model: gap fund (years until preservation age × expenses)
-            plus super target (expenses × 25 / 4% rule of thumb).
+          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed">
+            Our AI calculator finds every deduction you qualify for in minutes.
+            The average user saves $4,200 per year.
           </p>
-        </div>
-        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-10">
-          <FIRENumberCalculator />
-          <div className="mt-6">
-            <Disclaimer variant="full" />
-          </div>
-        </div>
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Prefer a dedicated page?{" "}
-          <Link href="/tools/fire-number" className="text-emerald-400/80 hover:text-emerald-300 underline underline-offset-2">
-            Open the FIRE Number tool
-          </Link>
-        </p>
-      </section>
 
-      {/* Existing calculators */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Free Calculators</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Tools already on ExitCalc — no sign-up required.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {ALL_TOOLS.map((tool) => (
-            <Link
-              key={tool.id}
-              href={`/tools/${tool.id}`}
-              className="group glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <div className="text-3xl mb-3">{tool.emoji}</div>
-              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
-                {tool.name}
-              </h3>
-              <p className="text-sm text-slate-400">{tool.description}</p>
-            </Link>
-          ))}
+          {/* Primary CTA — single, prominent action */}
+          <div className="flex flex-col items-center gap-4">
+            <SignedOut>
+              <Link
+                href="/sign-up"
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-lg transition-all duration-200 shadow-lg shadow-violet-900/40 hover:shadow-violet-800/60 hover:-translate-y-0.5"
+              >
+                Calculate my savings — it&apos;s free
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <p className="text-sm text-white/40">
+                No credit card required &middot; Takes 3 minutes
+              </p>
+            </SignedOut>
+            <SignedIn>
+              <Link
+                href="/dashboard"
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-lg transition-all duration-200 shadow-lg shadow-violet-900/40 hover:shadow-violet-800/60 hover:-translate-y-0.5"
+              >
+                Open my dashboard
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </SignedIn>
+          </div>
+
+          {/* Trust signals below primary CTA */}
+          <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-white/50">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              IRS-compliant calculations
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              256-bit encryption
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+              Trusted by 50,000+ filers
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Featured lessons from existing curriculum */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Start with a Lesson</span>
+      {/* Features Section */}
+      <section id="features" className="py-24 px-4 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
+            Everything you need to file smarter
           </h2>
-          <p className="text-slate-400 text-sm">
-            Guided explainers that pair with the calculators above.
+          <p className="text-white/50 text-center mb-16 max-w-xl mx-auto">
+            Built for freelancers, small business owners, and anyone tired of leaving money on the table.
           </p>
-        </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {featuredLessons.map((mod) => (
-            <Link
-              key={mod.id}
-              href={`/lessons/${mod.id}`}
-              className="block glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <h3 className="text-lg font-bold text-white mb-1">{mod.title}</h3>
-              <p className="text-sm text-slate-400 mb-3">{mod.description}</p>
-              <div className="flex items-center gap-3 text-xs">
-                <span className="text-cyan-400 font-medium">{mod.level}</span>
-                <span className="text-slate-500">{mod.duration}</span>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Calculator,
+                title: "Smart deduction finder",
+                description:
+                  "Answer a few questions and our AI surfaces every deduction relevant to your situation — ones most CPAs miss.",
+              },
+              {
+                icon: Zap,
+                title: "Real-time estimates",
+                description:
+                  "See your refund or liability update instantly as you enter information. No waiting, no surprises.",
+              },
+              {
+                icon: Shield,
+                title: "Audit protection",
+                description:
+                  "Every recommendation is backed by IRS documentation so you can file with confidence.",
+              },
+            ].map(({ icon: Icon, title, description }) => (
+              <div
+                key={title}
+                className="p-6 rounded-2xl border border-white/8 bg-white/3 hover:bg-white/5 transition-colors"
+              >
+                <div className="w-10 h-10 rounded-lg bg-violet-500/15 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-violet-400" />
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{description}</p>
               </div>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
-          <Link
-            href="/lessons"
-            className="text-sm font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-4"
-          >
-            Browse all lessons →
-          </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Newsletter — secondary, not a competing primary CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16 border-t border-white/5 text-center">
-        <h2 className="text-2xl font-extrabold mb-3">
-          {siteConfig.copy.emailCaptureHeading}
-        </h2>
-        <p className="text-slate-400 mb-8 text-sm">
-          {siteConfig.copy.emailCaptureSubheading}
-        </p>
-        <NewsletterForm source="homepage" />
-        <p className="mt-8 text-sm text-slate-500">
-          Want a structured plan?{" "}
-          <Link
-            href="/products/exit-plan-workbook"
-            className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
-          >
-            Exit Plan Workbook (Coming Soon)
-          </Link>
-        </p>
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 px-4 border-t border-white/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple pricing</h2>
+          <p className="text-white/50 mb-16">
+            Start free. Upgrade when you&apos;re ready to file.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="p-8 rounded-2xl border border-white/10 bg-white/3 text-left">
+              <p className="text-sm text-white/50 uppercase tracking-widest mb-2">Free</p>
+              <p className="text-4xl font-bold mb-1">$0</p>
+              <p className="text-white/40 text-sm mb-8">Forever free</p>
+              <ul className="space-y-3 text-sm text-white/70 mb-8">
+                {["Deduction calculator", "Tax estimate", "Up to 3 scenarios"].map((f) => (
+                  <li key={f} className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/sign-up"
+                className="block text-center py-3 rounded-lg border border-white/20 hover:bg-white/5 transition-colors text-sm font-medium"
+              >
+                Get started free
+              </Link>
+            </div>
+            <div className="p-8 rounded-2xl border border-violet-500/40 bg-violet-500/8 text-left relative overflow-hidden">
+              <div className="absolute top-4 right-4 text-xs px-2 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                Most popular
+              </div>
+              <p className="text-sm text-violet-300 uppercase tracking-widest mb-2">Pro</p>
+              <p className="text-4xl font-bold mb-1">$49</p>
+              <p className="text-white/40 text-sm mb-8">per tax year</p>
+              <ul className="space-y-3 text-sm text-white/70 mb-8">
+                {[
+                  "Everything in Free",
+                  "Unlimited scenarios",
+                  "Export to TurboTax / H&R Block",
+                  "Priority support",
+                  "Audit protection report",
+                ].map((f) => (
+                  <li key={f} className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/sign-up"
+                className="block text-center py-3 rounded-lg bg-violet-600 hover:bg-violet-500 transition-colors text-sm font-semibold"
+              >
+                Start saving now
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
-    </div>
+
+      {/* Footer */}
+      <footer className="border-t border-white/5 py-12 px-4">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/30">
+          <p>© {new Date().getFullYear()} TaxEdge. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-white/60 transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-white/60 transition-colors">Terms</Link>
+            <Link href="/contact" className="hover:text-white/60 transition-colors">Contact</Link>
+          </div>
+        </div>
+      </footer>
+    </main>
   )
 }
