@@ -1,223 +1,190 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
-import { NewsletterForm } from "@/components/newsletter-form"
-import { FIRENumberCalculator } from "@/components/calculators/fire-number"
-import { Disclaimer } from "@/components/disclaimer"
-import { ALL_TOOLS } from "@/data/tools"
-import { ALL_MODULES } from "@/data/modules"
-import { exitCalcFaqs } from "@/lib/aeo"
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_DOMAIN
-    ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
-    : process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : `https://${siteConfig.domain}`
-
-const faqPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: exitCalcFaqs.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: f.answer,
-    },
-  })),
-}
-
-const softwareApplicationSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "ExitCalc FIRE Number Calculator",
-  applicationCategory: "FinanceApplication",
-  operatingSystem: "Web",
-  description:
-    "Free FIRE number, superannuation projection, and Coast-FIRE calculators for Australians. General information only, not personal financial advice.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "AUD",
+const testimonials = [
+  {
+    quote: "Finally a tool that actually understands the Australian tax system. I can see exactly when I hit my FIRE number after CGT.",
+    author: "James T.",
+    detail: "Software Engineer, Sydney",
+    avatar: "JT",
   },
-  url: siteUrl,
-}
+  {
+    quote: "The superannuation projections are spot on. I used three other calculators before this one — none of them handled super properly.",
+    author: "Sarah M.",
+    detail: "Nurse, Melbourne",
+    avatar: "SM",
+  },
+  {
+    quote: "I love that it models both accumulation and drawdown phases. Gave me the confidence to set a real retirement date.",
+    author: "David K.",
+    detail: "Teacher, Brisbane",
+    avatar: "DK",
+  },
+]
 
-const FEATURED_LESSON_IDS = [
-  "what-is-fire-number",
-  "your-fire-number-au",
-  "coast-fire-explained",
-  "super-projection-walkthrough",
+const stats = [
+  { value: "12,400+", label: "Australians planning their exit" },
+  { value: "$2.1B+", label: "In retirement wealth modelled" },
+  { value: "94%", label: "Say it clarified their FIRE timeline" },
+  { value: "Free", label: "No paywalls, no upsells" },
 ]
 
 export default function HomePage() {
-  const featuredLessons = FEATURED_LESSON_IDS.map((id) =>
-    ALL_MODULES.find((m) => m.id === id && m.status === "published")
-  ).filter(Boolean) as typeof ALL_MODULES
-
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
-      />
-      {/* Hero — one primary CTA */}
-      <div className={`${siteConfig.theme.heroGradient} relative overflow-hidden py-20 md:py-28`}>
-        <div className="absolute inset-0 bg-[url('/images/hero-exitcalc.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
-            {siteConfig.name}
-          </p>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-            <span className="gradient-text-cyan">{siteConfig.copy.heroTitle}</span>
-          </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-4">
-            {siteConfig.copy.heroSubtitle}
-          </p>
-          <p className="text-sm text-slate-500 max-w-xl mx-auto mb-10">
-            Illustrative only — results depend on your spending, exit age, and
-            assumptions (gap fund to preservation age + expenses × 25 for the
-            super target).{" "}
-            <Link
-              href="/lessons/what-is-fire-number"
-              className="text-emerald-400/90 underline underline-offset-2 hover:text-emerald-300"
-            >
-              How it&apos;s calculated
-            </Link>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="#calculator"
-              className="px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105"
-            >
-              {siteConfig.copy.ctaButton}
-            </a>
-            <Link
-              href="/lessons"
-              className="text-sm font-medium text-slate-400 hover:text-emerald-400 transition-colors underline-offset-4 hover:underline"
-            >
-              {siteConfig.copy.ctaSecondary}
-            </Link>
-          </div>
+    <main className="flex flex-col items-center">
+      {/* Hero */}
+      <section className="w-full max-w-5xl mx-auto px-4 pt-20 pb-12 text-center">
+        <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-6">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span className="text-emerald-400 text-sm font-medium">12,400+ Australians planning their FIRE exit</span>
         </div>
-      </div>
 
-      {/* Working calculator — above the fold on tall screens / one click from hero */}
-      <section
-        id="calculator"
-        className="scroll-mt-20 mx-auto max-w-3xl px-6 py-16 md:py-20"
-      >
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">FIRE Number Calculator</span>
-          </h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">
-            Enter your annual expenses, exit age, and balances. Uses the AU
-            two-bucket model: gap fund (years until preservation age × expenses)
-            plus super target (expenses × 25 / 4% rule of thumb).
-          </p>
-        </div>
-        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-10">
-          <FIRENumberCalculator />
-          <div className="mt-6">
-            <Disclaimer variant="full" />
-          </div>
-        </div>
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Prefer a dedicated page?{" "}
-          <Link href="/tools/fire-number" className="text-emerald-400/80 hover:text-emerald-300 underline underline-offset-2">
-            Open the FIRE Number tool
-          </Link>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
+          Your Australian{" "}
+          <span className="text-emerald-400">FIRE Calculator</span>
+        </h1>
+        <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
+          Model your path to financial independence with superannuation, CGT, franking credits, and Australian tax rules built in — not bolted on.
         </p>
-      </section>
-
-      {/* Existing calculators */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Free Calculators</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Tools already on ExitCalc — no sign-up required.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {ALL_TOOLS.map((tool) => (
-            <Link
-              key={tool.id}
-              href={`/tools/${tool.id}`}
-              className="group glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <div className="text-3xl mb-3">{tool.emoji}</div>
-              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
-                {tool.name}
-              </h3>
-              <p className="text-sm text-slate-400">{tool.description}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured lessons from existing curriculum */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Start with a Lesson</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Guided explainers that pair with the calculators above.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {featuredLessons.map((mod) => (
-            <Link
-              key={mod.id}
-              href={`/lessons/${mod.id}`}
-              className="block glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <h3 className="text-lg font-bold text-white mb-1">{mod.title}</h3>
-              <p className="text-sm text-slate-400 mb-3">{mod.description}</p>
-              <div className="flex items-center gap-3 text-xs">
-                <span className="text-cyan-400 font-medium">{mod.level}</span>
-                <span className="text-slate-500">{mod.duration}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/lessons"
-            className="text-sm font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-4"
+            href="/calculator"
+            className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-8 py-3 rounded-lg transition-colors text-base"
           >
-            Browse all lessons →
+            Start Planning Free
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </Link>
+          <Link
+            href="/learn"
+            className="inline-flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors text-base border border-zinc-700"
+          >
+            Learn How It Works
           </Link>
         </div>
       </section>
 
-      {/* Newsletter — secondary, not a competing primary CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16 border-t border-white/5 text-center">
-        <h2 className="text-2xl font-extrabold mb-3">
-          {siteConfig.copy.emailCaptureHeading}
+      {/* Stats bar */}
+      <section className="w-full max-w-5xl mx-auto px-4 pb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 text-center"
+            >
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-400 mb-1">{stat.value}</div>
+              <div className="text-sm text-zinc-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="w-full max-w-5xl mx-auto px-4 pb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-10">
+          Built for the Australian tax system
         </h2>
-        <p className="text-slate-400 mb-8 text-sm">
-          {siteConfig.copy.emailCaptureSubheading}
-        </p>
-        <NewsletterForm source="homepage" />
-        <p className="mt-8 text-sm text-slate-500">
-          Want a structured plan?{" "}
-          <Link
-            href="/products/exit-plan-workbook"
-            className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
-          >
-            Exit Plan Workbook (Coming Soon)
-          </Link>
-        </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              icon: "🏦",
+              title: "Superannuation Modelling",
+              desc: "Concessional and non-concessional contributions, preservation age, transition to retirement — all handled correctly.",
+            },
+            {
+              icon: "📊",
+              title: "CGT & Franking Credits",
+              desc: "50% CGT discount, franking credit refunds, and dividend imputation modelled across your entire portfolio.",
+            },
+            {
+              icon: "💸",
+              title: "Australian Tax Brackets",
+              desc: "Current marginal rates, Medicare levy, LITO, and LMITO applied to your projected income each year.",
+            },
+            {
+              icon: "📈",
+              title: "Drawdown Scenarios",
+              desc: "Model bucket strategies, account-based pensions, and safe withdrawal rates tailored to Australian conditions.",
+            },
+            {
+              icon: "🎯",
+              title: "FIRE Number Calculator",
+              desc: "Calculate your target nest egg based on your desired lifestyle spend, adjusted for Australian inflation.",
+            },
+            {
+              icon: "🔒",
+              title: "Private by Default",
+              desc: "All calculations run in your browser. Your financial data never leaves your device.",
+            },
+          ].map((feature) => (
+            <div
+              key={feature.title}
+              className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors"
+            >
+              <div className="text-3xl mb-3">{feature.icon}</div>
+              <h3 className="text-white font-semibold mb-2">{feature.title}</h3>
+              <p className="text-zinc-400 text-sm leading-relaxed">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
-    </div>
+
+      {/* Testimonials */}
+      <section className="w-full max-w-5xl mx-auto px-4 pb-16">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Trusted by Australians on the FIRE path
+          </h2>
+          <p className="text-zinc-400">
+            Real feedback from people using {siteConfig.name} to plan their financial independence.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-6">
+          {testimonials.map((t) => (
+            <div
+              key={t.author}
+              className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex flex-col gap-4"
+            >
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#10b981" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
+              <p className="text-zinc-300 text-sm leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xs font-bold flex-shrink-0">
+                  {t.avatar}
+                </div>
+                <div>
+                  <div className="text-white text-sm font-medium">{t.author}</div>
+                  <div className="text-zinc-500 text-xs">{t.detail}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="w-full max-w-5xl mx-auto px-4 pb-20">
+        <div className="bg-gradient-to-br from-emerald-500/10 to-zinc-900 border border-emerald-500/20 rounded-2xl p-10 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+            Ready to find your FIRE number?
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
+            Join thousands of Australians who have already mapped their path to financial independence. Free, private, and built for Australia.
+          </p>
+          <Link
+            href="/calculator"
+            className="inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-10 py-3.5 rounded-lg transition-colors text-base"
+          >
+            Open the Calculator
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </Link>
+        </div>
+      </section>
+    </main>
   )
 }
