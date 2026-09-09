@@ -31,8 +31,9 @@ export default function TermsPage() {
           </p>
           <h2>Payments and Refunds</h2>
           <p>
-            All purchases are processed through Stripe. Refund requests within 14
-            days of purchase will be honored.
+            Checkout is not live. There is no payment method yet. When purchases
+            open, they will be processed through Stripe and refund requests
+            within 14 days of purchase will be honored.
           </p>
           <h2>Contact</h2>
           <p>
