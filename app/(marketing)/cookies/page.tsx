@@ -23,9 +23,8 @@ export default function CookiesPage() {
           <h2>How We Use Cookies</h2>
           <ul>
             <li>
-              <strong>Essential cookies</strong> — required for signing in,
-              keeping your session, and delivering purchased content. These
-              cannot be disabled.
+              <strong>Essential cookies</strong> — required for signing in and
+              keeping your session. These cannot be disabled.
             </li>
             <li>
               <strong>Authentication cookies</strong> — set by our auth
@@ -38,15 +37,15 @@ export default function CookiesPage() {
           </ul>
           <h2>Third-Party Cookies</h2>
           <p>
-            We use third-party services (such as our authentication and payment
-            providers) that may set their own cookies. These are governed by the
-            privacy policies of those providers.
+            We use third-party services (such as our authentication provider)
+            that may set their own cookies. These are governed by the privacy
+            policies of those providers. Payment-provider cookies will only
+            apply when checkout is live.
           </p>
           <h2>Managing Cookies</h2>
           <p>
             You can control or delete cookies through your browser settings.
-            Disabling essential cookies may prevent you from signing in or
-            accessing purchased content.
+            Disabling essential cookies may prevent you from signing in.
           </p>
           <h2>Contact</h2>
           <p>

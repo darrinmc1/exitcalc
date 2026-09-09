@@ -3,11 +3,12 @@ import { auth } from "@clerk/nextjs/server"
 import { stripe } from "@/lib/stripe"
 import { getProductById } from "@/data/products"
 import { getUserEntitlements, getSignedDownloadUrl } from "@/lib/entitlements"
+import { isPurchasesOpen } from "@/lib/purchases"
 
 export async function POST(req: NextRequest) {
-  if (!stripe) {
+  if (!isPurchasesOpen() || !stripe) {
     return NextResponse.json(
-      { error: "Stripe not configured" },
+      { error: "Checkout is not live. There is no payment method yet." },
       { status: 503 }
     )
   }

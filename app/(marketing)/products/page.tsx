@@ -1,10 +1,12 @@
 import Link from "next/link"
 import { ALL_PRODUCTS } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
+import { ProductComingSoonCta } from "@/components/product-coming-soon-cta"
 
 export const metadata = {
   title: `Products | ${siteConfig.name}`,
-  description: "Browse our digital products and bundles.",
+  description:
+    "Digital FIRE planning resources. Checkout is not live — join the waitlist to be notified.",
 }
 
 export default function ProductsPage() {
@@ -16,7 +18,8 @@ export default function ProductsPage() {
             <span className="gradient-text-cyan">Products</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Digital resources to accelerate your progress.
+            Priced packs for when checkout is live. Nothing here is for sale yet
+            — use Notify me if you want an email when a pack is available.
           </p>
         </div>
       </div>
@@ -24,26 +27,39 @@ export default function ProductsPage() {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {ALL_PRODUCTS.map((product) => (
-            <Link
+            <article
               key={product.id}
-              href={`/products/${product.id}`}
-              className="glass-card p-6 rounded-2xl transition-all hover:scale-[1.02] flex flex-col"
+              className="glass-card p-6 rounded-2xl flex flex-col"
             >
               <div className="text-4xl mb-3">{product.emoji}</div>
               <h2 className="text-lg font-bold text-white mb-1">{product.name}</h2>
               <p className="text-sm text-slate-400 mb-4 flex-1">{product.description}</p>
-              <div className="flex items-end justify-between gap-3">
+              <div className="flex items-end justify-between gap-3 mb-4">
                 <div>
-                  <span className="text-2xl font-extrabold text-white">${product.price}</span>
-                  {product.comingSoon && (
-                    <span className="ml-2 text-xs font-medium text-amber-400">
-                      Coming Soon
-                    </span>
-                  )}
+                  <span className="text-2xl font-extrabold text-white">
+                    ${product.price}
+                  </span>
+                  <span className="ml-1 text-sm font-normal text-slate-500">
+                    one-time
+                  </span>
                 </div>
-                <span className="text-xs text-cyan-400 font-medium">{product.category}</span>
+                <span className="text-xs text-cyan-400 font-medium">
+                  {product.comingSoon ? "Coming Soon" : product.category}
+                </span>
               </div>
-            </Link>
+              <ProductComingSoonCta
+                price={product.price}
+                productId={product.id}
+                comingSoon={product.comingSoon}
+                layout="card"
+              />
+              <Link
+                href={`/products/${product.id}`}
+                className="mt-4 text-center text-sm text-slate-400 hover:text-emerald-400 transition-colors"
+              >
+                View details
+              </Link>
+            </article>
           ))}
         </div>
       </div>
