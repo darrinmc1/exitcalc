@@ -1,148 +1,130 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import {
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  useUser,
-} from "@clerk/nextjs"
+import { useState } from "react"
 import { siteConfig } from "@/config/site.config"
-import { cn } from "@/lib/utils"
-import { Menu, X } from "lucide-react"
 
-export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { isSignedIn, isLoaded } = useUser()
+export default function Header() {
+  const [open, setOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl group-hover:animate-float">
-              {siteConfig.theme.emoji}
-            </span>
-            <span className="font-display text-lg font-bold gradient-text-cyan">
-              {siteConfig.name}
-            </span>
-          </Link>
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+        <Link href="/" className="flex items-center gap-2 font-bold text-white text-lg tracking-tight">
+          <span className="text-emerald-400">⚡</span>
+          <span>{siteConfig.name}</span>
+        </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
-            {siteConfig.nav.marketing.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 rounded-lg hover:bg-white/5 transition-all duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
+          <Link href="/lessons" className="hover:text-white transition-colors">Lessons</Link>
+          <Link href="/tools" className="hover:text-white transition-colors">Tools</Link>
+          <Link href="/products" className="hover:text-white transition-colors">Products</Link>
+          <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+          <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
+        </nav>
 
-          <div className="hidden md:flex items-center gap-3">
-            {isLoaded && !isSignedIn && (
-              <>
-                <SignInButton mode="modal">
-                  <button className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
-                    Log In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-                <Link
-                  href="/#calculator"
-                  className={cn(
-                    "px-5 py-2 text-sm font-bold rounded-xl text-white",
-                    "bg-gradient-to-r from-emerald-500 to-teal-600",
-                    "hover:from-emerald-400 hover:to-teal-500",
-                    "shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40",
-                    "transition-all duration-300 hover:scale-105"
-                  )}
-                >
-                  {siteConfig.copy.ctaButton}
-                </Link>
-              </>
-            )}
-            {isLoaded && isSignedIn && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/account"
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
-                >
-                  Account
-                </Link>
-                <UserButton appearance={{ elements: { avatarBox: "h-9 w-9" } }} />
-              </>
-            )}
-          </div>
-
-          <button
-            className="md:hidden p-2 text-slate-300 hover:text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/sign-in"
+            className="text-sm text-slate-300 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            Sign in
+          </Link>
+          <Link
+            href="/sign-up"
+            className="text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-1.5 rounded-lg transition-colors"
+          >
+            Get started
+          </Link>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-lg hover:bg-white/10 transition-colors"
+        >
+          <span
+            className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+              open ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+              open ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+              open ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
+        </button>
       </div>
 
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl">
-          <div className="px-4 py-4 space-y-2">
-            {siteConfig.nav.marketing.map((link) => (
+      {/* Mobile menu */}
+      {open && (
+        <div className="md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-md">
+          <nav className="flex flex-col px-4 py-4 gap-1">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest px-3 mb-1">Learn</p>
+            <Link
+              href="/lessons"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors text-sm font-medium"
+            >
+              <span className="text-base">📚</span> Lessons
+            </Link>
+            <Link
+              href="/tools"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors text-sm font-medium"
+            >
+              <span className="text-base">🧮</span> Tools
+            </Link>
+
+            <div className="my-2 border-t border-white/10" />
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest px-3 mb-1">Explore</p>
+            <Link
+              href="/products"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors text-sm font-medium"
+            >
+              <span className="text-base">🛍️</span> Products
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors text-sm font-medium"
+            >
+              <span className="text-base">✍️</span> Blog
+            </Link>
+            <Link
+              href="/pricing"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 px-3 py-3 rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors text-sm font-medium"
+            >
+              <span className="text-base">💳</span> Pricing
+            </Link>
+
+            <div className="my-2 border-t border-white/10" />
+            <div className="flex flex-col gap-2 pt-1">
               <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 text-sm font-medium text-slate-300 hover:text-cyan-400 rounded-lg hover:bg-white/5 transition-all"
+                href="/sign-in"
+                onClick={() => setOpen(false)}
+                className="w-full text-center text-sm font-medium text-slate-200 border border-white/20 hover:border-white/40 px-4 py-2.5 rounded-xl transition-colors"
               >
-                {link.label}
+                Sign in
               </Link>
-            ))}
-            <div className="pt-4 border-t border-white/10 space-y-2">
-              {isLoaded && !isSignedIn && (
-                <>
-                  <SignInButton mode="modal">
-                    <button className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5">
-                      Log In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5">
-                      Sign Up
-                    </button>
-                  </SignUpButton>
-                  <Link
-                    href="/#calculator"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600"
-                  >
-                    {siteConfig.copy.ctaButton}
-                  </Link>
-                </>
-              )}
-              {isLoaded && isSignedIn && (
-                <Link
-                  href="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5"
-                >
-                  Dashboard
-                </Link>
-              )}
+              <Link
+                href="/sign-up"
+                onClick={() => setOpen(false)}
+                className="w-full text-center text-sm font-semibold bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-2.5 rounded-xl transition-colors"
+              >
+                Get started — it&apos;s free
+              </Link>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </header>
