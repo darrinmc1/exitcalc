@@ -3,155 +3,158 @@ import { siteConfig } from "@/config/site.config"
 
 export const metadata = {
   title: `Pricing | ${siteConfig.name}`,
-  description: "Free FIRE calculators forever. Upgrade to Pro for guided lessons, advanced projections, and expert resources.",
+  description: "Simple, transparent pricing. Start free, upgrade when you're ready.",
 }
-
-const freeTierFeatures = [
-  "FIRE Number Calculator",
-  "Coast FIRE Calculator",
-  "Super / Pension Projection Tool",
-  "All future free calculators",
-  "Community blog & updates",
-  "No account required",
-]
-
-const proTierFeatures = [
-  "Everything in Free",
-  "Full guided lesson library",
-  "Step-by-step FIRE roadmap modules",
-  "Advanced scenario modelling",
-  "Downloadable worksheets & checklists",
-  "XP progress tracking & badges",
-  "Priority email support",
-  "Early access to new tools & lessons",
-]
 
 export default function PricingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-      {/* Hero */}
-      <section className="py-20 px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <span className="inline-block bg-emerald-500/10 text-emerald-400 text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-emerald-500/20">
-            Simple, transparent pricing
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-            Calculators are free. <br />
-            <span className="text-emerald-400">Mastery is Pro.</span>
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-white">
+      <div className="max-w-5xl mx-auto px-4 py-20">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Simple, Transparent Pricing
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Every FIRE calculator on {siteConfig.name} is free, forever. Upgrade to Pro when you\'re ready for structured lessons, deeper tools, and a clear path to financial independence.
+            Everything you need to plan your exit — start free, go deeper when you're ready.
           </p>
         </div>
-      </section>
 
-      {/* Pricing Cards */}
-      <section className="pb-24 px-4">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-start">
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
 
           {/* Free Tier */}
-          <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-8 flex flex-col">
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/50 p-8 flex flex-col">
             <div className="mb-6">
-              <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-2">Free</p>
-              <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">$0</span>
-                <span className="text-slate-400 mb-2">/ forever</span>
-              </div>
-              <p className="text-slate-400 text-sm">No credit card. No account needed. Just open a calculator and go.</p>
+              <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-2">Free</p>
+              <p className="text-5xl font-bold text-white">$0</p>
+              <p className="text-slate-400 mt-1">Forever free</p>
             </div>
-            <ul className="space-y-3 mb-8 flex-1">
-              {freeTierFeatures.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-sm text-slate-300">
-                  <span className="mt-0.5 text-emerald-400 text-base">✓</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/tools"
-              className="block text-center rounded-xl border border-emerald-500/40 text-emerald-400 font-semibold py-3 px-6 hover:bg-emerald-500/10 transition-colors"
-            >
-              Open Free Calculators
-            </Link>
-          </div>
-
-          {/* Pro Tier */}
-          <div className="rounded-2xl border border-emerald-500/50 bg-gradient-to-br from-emerald-950/60 to-slate-900/80 p-8 flex flex-col relative overflow-hidden">
-            <div className="absolute top-4 right-4 bg-emerald-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Most Popular
-            </div>
-            <div className="mb-6">
-              <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-2">Pro</p>
-              <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">$9</span>
-                <span className="text-slate-400 mb-2">/ month</span>
-              </div>
-              <p className="text-slate-400 text-sm">Cancel anytime. Billed monthly. Annual plan coming soon.</p>
-            </div>
-            <ul className="space-y-3 mb-8 flex-1">
-              {proTierFeatures.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-sm text-slate-200">
-                  <span className="mt-0.5 text-emerald-400 text-base">✓</span>
-                  {f}
-                </li>
-              ))}
+            <ul className="space-y-3 text-sm text-slate-300 flex-1 mb-8">
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> FIRE number calculator</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Coast FIRE calculator</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Super projection tool</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Free lessons &amp; guides</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Newsletter access</li>
             </ul>
             <Link
               href="/sign-up"
-              className="block text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-6 transition-colors"
+              className="block text-center rounded-xl border border-slate-600 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-700 transition-colors"
             >
-              Get Pro Access
+              Get started free
+            </Link>
+          </div>
+
+          {/* Workbook */}
+          <div className="rounded-2xl border border-emerald-500 bg-slate-800/50 p-8 flex flex-col relative">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+              <span className="bg-emerald-500 text-slate-950 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+                Most Popular
+              </span>
+            </div>
+            <div className="mb-6">
+              <p className="text-sm font-semibold text-emerald-400 uppercase tracking-widest mb-2">Exit Workbook</p>
+              <p className="text-5xl font-bold text-white">$59</p>
+              <p className="text-slate-400 mt-1">One-time purchase</p>
+            </div>
+            <ul className="space-y-3 text-sm text-slate-300 flex-1 mb-8">
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Everything in Free</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Step-by-step exit planning workbook</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Printable &amp; fillable PDF</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Lifetime access &amp; updates</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> No subscription required</li>
+            </ul>
+            <Link
+              href="/products"
+              className="block text-center rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-400 transition-colors"
+            >
+              Buy the workbook — $59
+            </Link>
+          </div>
+
+          {/* Membership */}
+          <div className="rounded-2xl border border-slate-700 bg-slate-800/50 p-8 flex flex-col">
+            <div className="mb-6">
+              <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-2">Membership</p>
+              <p className="text-5xl font-bold text-white">$5<span className="text-2xl font-normal text-slate-400">/mo</span></p>
+              <p className="text-slate-400 mt-1">Cancel anytime</p>
+            </div>
+            <ul className="space-y-3 text-sm text-slate-300 flex-1 mb-8">
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Everything in Free</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Full lesson library access</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Progress tracking &amp; XP badges</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Members-only tools &amp; updates</li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span> Priority support</li>
+            </ul>
+            <Link
+              href="/sign-up"
+              className="block text-center rounded-xl border border-emerald-500 px-6 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/10 transition-colors"
+            >
+              Start membership — $5/mo
             </Link>
           </div>
         </div>
-      </section>
 
-      {/* FAQ */}
-      <section className="pb-24 px-4">
+        {/* Comparison table */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold text-center mb-8">Compare plans</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <thead>
+                <tr className="border-b border-slate-700">
+                  <th className="py-3 pr-6 text-slate-400 font-medium w-1/2">Feature</th>
+                  <th className="py-3 px-4 text-center text-slate-400 font-medium">Free</th>
+                  <th className="py-3 px-4 text-center text-emerald-400 font-medium">Workbook</th>
+                  <th className="py-3 px-4 text-center text-slate-400 font-medium">Membership</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800">
+                {[
+                  ["FIRE calculators", true, true, true],
+                  ["Free lessons", true, true, true],
+                  ["Newsletter", true, true, true],
+                  ["Exit planning workbook (PDF)", false, true, false],
+                  ["Lifetime workbook updates", false, true, false],
+                  ["Full lesson library", false, false, true],
+                  ["Progress tracking &amp; XP", false, false, true],
+                  ["Members-only tools", false, false, true],
+                  ["Priority support", false, false, true],
+                ].map(([feature, free, workbook, member]) => (
+                  <tr key={String(feature)}>
+                    <td className="py-3 pr-6 text-slate-300" dangerouslySetInnerHTML={{ __html: String(feature) }} />
+                    <td className="py-3 px-4 text-center">{free ? <span className="text-emerald-400">✓</span> : <span className="text-slate-600">—</span>}</td>
+                    <td className="py-3 px-4 text-center">{workbook ? <span className="text-emerald-400">✓</span> : <span className="text-slate-600">—</span>}</td>
+                    <td className="py-3 px-4 text-center">{member ? <span className="text-emerald-400">✓</span> : <span className="text-slate-600">—</span>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* FAQ */}
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Frequently asked questions</h2>
           <div className="space-y-6">
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Are the calculators really free?</h3>
-              <p className="text-slate-400 text-sm">Yes — every calculator on {siteConfig.name} is completely free to use with no account required. We believe everyone deserves access to the core tools for planning financial independence.</p>
+            <div>
+              <h3 className="font-semibold text-white mb-1">Is the free tier really free?</h3>
+              <p className="text-slate-400 text-sm">Yes — the calculators, free lessons, and newsletter are free forever. No credit card required.</p>
             </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">What do I get with Pro?</h3>
-              <p className="text-slate-400 text-sm">Pro unlocks the full guided lesson library, structured FIRE roadmap modules, XP tracking, badges, downloadable resources, and early access to new features. It&apos;s for people who want a clear, step-by-step path — not just numbers.</p>
+            <div>
+              <h3 className="font-semibold text-white mb-1">What's included in the $59 workbook?</h3>
+              <p className="text-slate-400 text-sm">A comprehensive, printable PDF workbook that walks you through every step of planning your financial exit. One-time purchase, lifetime access, free updates.</p>
             </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Can I cancel anytime?</h3>
-              <p className="text-slate-400 text-sm">Absolutely. Cancel your Pro subscription at any time from your account settings. You&apos;ll retain access until the end of your billing period.</p>
+            <div>
+              <h3 className="font-semibold text-white mb-1">Can I cancel my membership anytime?</h3>
+              <p className="text-slate-400 text-sm">Absolutely. Cancel anytime from your account settings — no questions asked, no lock-in.</p>
             </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Is there a free trial for Pro?</h3>
-              <p className="text-slate-400 text-sm">We&apos;re working on a trial offer. In the meantime, sign up and explore the free tier — it&apos;s genuinely useful on its own. Upgrade when you&apos;re ready to go deeper.</p>
+            <div>
+              <h3 className="font-semibold text-white mb-1">Do I need both the workbook and a membership?</h3>
+              <p className="text-slate-400 text-sm">They're separate products designed for different needs. The workbook is a one-time deep-dive; the membership gives you ongoing access to lessons and tools. Many members find value in both.</p>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="pb-24 px-4">
-        <div className="max-w-2xl mx-auto text-center rounded-2xl border border-emerald-500/30 bg-emerald-950/30 p-12">
-          <h2 className="text-3xl font-bold mb-4">Start free. Upgrade when ready.</h2>
-          <p className="text-slate-400 mb-8">Open any calculator right now — no sign-up needed. When you want a structured plan to reach FIRE, Pro is here.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/tools"
-              className="rounded-xl border border-emerald-500/40 text-emerald-400 font-semibold py-3 px-8 hover:bg-emerald-500/10 transition-colors"
-            >
-              Try Free Calculators
-            </Link>
-            <Link
-              href="/sign-up"
-              className="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-8 transition-colors"
-            >
-              Get Pro Access
-            </Link>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
   )
 }
