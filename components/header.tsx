@@ -1,150 +1,58 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import {
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  useUser,
-} from "@clerk/nextjs"
+import { usePathname } from "next/navigation"
 import { siteConfig } from "@/config/site.config"
-import { cn } from "@/lib/utils"
-import { Menu, X } from "lucide-react"
 
-export function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { isSignedIn, isLoaded } = useUser()
+export default function Header() {
+  const pathname = usePathname()
+
+  const navLinks = [
+    { href: "/lessons", label: "Lessons" },
+    { href: "/tools", label: "Tools" },
+    { href: "/products", label: "Products" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/blog", label: "Blog" },
+  ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl group-hover:animate-float">
-              {siteConfig.theme.emoji}
-            </span>
-            <span className="font-display text-lg font-bold gradient-text-cyan">
-              {siteConfig.name}
-            </span>
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-1">
-            {siteConfig.nav.marketing.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 rounded-lg hover:bg-white/5 transition-all duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden md:flex items-center gap-3">
-            {isLoaded && !isSignedIn && (
-              <>
-                <SignInButton mode="modal">
-                  <button className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
-                    Log In
-                  </button>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-                <Link
-                  href="/#calculator"
-                  className={cn(
-                    "px-5 py-2 text-sm font-bold rounded-xl text-white",
-                    "bg-gradient-to-r from-emerald-500 to-teal-600",
-                    "hover:from-emerald-400 hover:to-teal-500",
-                    "shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40",
-                    "transition-all duration-300 hover:scale-105"
-                  )}
-                >
-                  {siteConfig.copy.ctaButton}
-                </Link>
-              </>
-            )}
-            {isLoaded && isSignedIn && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/account"
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
-                >
-                  Account
-                </Link>
-                <UserButton appearance={{ elements: { avatarBox: "h-9 w-9" } }} />
-              </>
-            )}
-          </div>
-
-          <button
-            className="md:hidden p-2 text-slate-300 hover:text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
+    <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <Link href="/" className="font-bold text-white text-lg tracking-tight">
+          {siteConfig.name}
+        </Link>
+        <nav className="hidden md:flex items-center gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`text-sm transition-colors ${
+                pathname === link.href
+                  ? "text-white font-semibold"
+                  : link.href === "/pricing"
+                  ? "text-emerald-400 font-semibold hover:text-emerald-300"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/sign-in"
+            className="text-sm text-slate-400 hover:text-white transition-colors"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            Sign in
+          </Link>
+          <Link
+            href="/sign-up"
+            className="text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-4 py-2 rounded-lg transition-colors"
+          >
+            Get started free
+          </Link>
         </div>
       </div>
-
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl">
-          <div className="px-4 py-4 space-y-2">
-            {siteConfig.nav.marketing.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 text-sm font-medium text-slate-300 hover:text-cyan-400 rounded-lg hover:bg-white/5 transition-all"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-white/10 space-y-2">
-              {isLoaded && !isSignedIn && (
-                <>
-                  <SignInButton mode="modal">
-                    <button className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5">
-                      Log In
-                    </button>
-                  </SignInButton>
-                  <SignUpButton mode="modal">
-                    <button className="block w-full px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5">
-                      Sign Up
-                    </button>
-                  </SignUpButton>
-                  <Link
-                    href="/#calculator"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600"
-                  >
-                    {siteConfig.copy.ctaButton}
-                  </Link>
-                </>
-              )}
-              {isLoaded && isSignedIn && (
-                <Link
-                  href="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-4 py-3 text-sm font-medium text-slate-300 hover:text-white text-center rounded-lg hover:bg-white/5"
-                >
-                  Dashboard
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   )
 }
