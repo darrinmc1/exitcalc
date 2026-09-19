@@ -1,223 +1,118 @@
-import Link from "next/link"
-import { siteConfig } from "@/config/site.config"
-import { NewsletterForm } from "@/components/newsletter-form"
-import { FIRENumberCalculator } from "@/components/calculators/fire-number"
-import { Disclaimer } from "@/components/disclaimer"
-import { ALL_TOOLS } from "@/data/tools"
-import { ALL_MODULES } from "@/data/modules"
-import { exitCalcFaqs } from "@/lib/aeo"
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_DOMAIN
-    ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
-    : process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : `https://${siteConfig.domain}`
-
-const faqPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: exitCalcFaqs.map((f) => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: f.answer,
-    },
-  })),
-}
-
-const softwareApplicationSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "ExitCalc FIRE Number Calculator",
-  applicationCategory: "FinanceApplication",
-  operatingSystem: "Web",
-  description:
-    "Free FIRE number, superannuation projection, and Coast-FIRE calculators for Australians. General information only, not personal financial advice.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "AUD",
-  },
-  url: siteUrl,
-}
-
-const FEATURED_LESSON_IDS = [
-  "what-is-fire-number",
-  "your-fire-number-au",
-  "coast-fire-explained",
-  "super-projection-walkthrough",
-]
-
-export default function HomePage() {
-  const featuredLessons = FEATURED_LESSON_IDS.map((id) =>
-    ALL_MODULES.find((m) => m.id === id && m.status === "published")
-  ).filter(Boolean) as typeof ALL_MODULES
-
+export default function MarketingPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
-      />
-      {/* Hero — one primary CTA */}
-      <div className={`${siteConfig.theme.heroGradient} relative overflow-hidden py-20 md:py-28`}>
-        <div className="absolute inset-0 bg-[url('/images/hero-exitcalc.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
-            {siteConfig.name}
-          </p>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-            <span className="gradient-text-cyan">{siteConfig.copy.heroTitle}</span>
+    <main className="flex flex-col min-h-screen">
+      {/* Hero Section - Above the fold */}
+      <section className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4 text-center">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight">
+            Retire Early.
+            <span className="text-emerald-400"> On Your Terms.</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-4">
-            {siteConfig.copy.heroSubtitle}
+          <p className="text-lg sm:text-xl text-slate-300 max-w-xl mx-auto">
+            Calculate exactly when you can achieve Financial Independence and Retire Early — personalized to your income, expenses, and goals.
           </p>
-          <p className="text-sm text-slate-500 max-w-xl mx-auto mb-10">
-            Illustrative only — results depend on your spending, exit age, and
-            assumptions (gap fund to preservation age + expenses × 25 for the
-            super target).{" "}
-            <Link
-              href="/lessons/what-is-fire-number"
-              className="text-emerald-400/90 underline underline-offset-2 hover:text-emerald-300"
-            >
-              How it&apos;s calculated
+
+          {/* PRIMARY CTA — single, high-contrast, above the fold */}
+          <div className="pt-4">
+            <Link href="/calculator">
+              <button className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-900 shadow-lg shadow-emerald-500/30 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-400/50">
+                Start Your Free FIRE Plan
+              </button>
             </Link>
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="#calculator"
-              className="px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-105"
-            >
-              {siteConfig.copy.ctaButton}
-            </a>
-            <Link
-              href="/lessons"
-              className="text-sm font-medium text-slate-400 hover:text-emerald-400 transition-colors underline-offset-4 hover:underline"
-            >
-              {siteConfig.copy.ctaSecondary}
-            </Link>
+            <p className="mt-3 text-sm text-slate-400">No credit card required &middot; Free forever</p>
           </div>
         </div>
-      </div>
 
-      {/* Working calculator — above the fold on tall screens / one click from hero */}
-      <section
-        id="calculator"
-        className="scroll-mt-20 mx-auto max-w-3xl px-6 py-16 md:py-20"
-      >
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">FIRE Number Calculator</span>
-          </h2>
-          <p className="text-slate-400 text-sm max-w-xl mx-auto">
-            Enter your annual expenses, exit age, and balances. Uses the AU
-            two-bucket model: gap fund (years until preservation age × expenses)
-            plus super target (expenses × 25 / 4% rule of thumb).
-          </p>
-        </div>
-        <div className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-6 md:p-10">
-          <FIRENumberCalculator />
-          <div className="mt-6">
-            <Disclaimer variant="full" />
-          </div>
-        </div>
-        <p className="mt-4 text-center text-xs text-slate-500">
-          Prefer a dedicated page?{" "}
-          <Link href="/tools/fire-number" className="text-emerald-400/80 hover:text-emerald-300 underline underline-offset-2">
-            Open the FIRE Number tool
-          </Link>
-        </p>
-      </section>
-
-      {/* Existing calculators */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Free Calculators</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Tools already on ExitCalc — no sign-up required.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {ALL_TOOLS.map((tool) => (
-            <Link
-              key={tool.id}
-              href={`/tools/${tool.id}`}
-              className="group glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <div className="text-3xl mb-3">{tool.emoji}</div>
-              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
-                {tool.name}
-              </h3>
-              <p className="text-sm text-slate-400">{tool.description}</p>
-            </Link>
-          ))}
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 animate-bounce">
+          <svg className="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
       </section>
 
-      {/* Featured lessons from existing curriculum */}
-      <section className="mx-auto max-w-6xl px-6 py-16 border-t border-white/5">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold mb-3">
-            <span className="gradient-text-cyan">Start with a Lesson</span>
-          </h2>
-          <p className="text-slate-400 text-sm">
-            Guided explainers that pair with the calculators above.
-          </p>
+      {/* Social Proof */}
+      <section className="bg-slate-800 py-10 px-4">
+        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-8 text-center">
+          <div>
+            <p className="text-3xl font-bold text-emerald-400">12,000+</p>
+            <p className="text-slate-400 text-sm mt-1">FIRE plans created</p>
+          </div>
+          <div className="hidden sm:block w-px h-10 bg-slate-600" />
+          <div>
+            <p className="text-3xl font-bold text-emerald-400">$2.4M</p>
+            <p className="text-slate-400 text-sm mt-1">Avg. projected portfolio</p>
+          </div>
+          <div className="hidden sm:block w-px h-10 bg-slate-600" />
+          <div>
+            <p className="text-3xl font-bold text-emerald-400">8 yrs</p>
+            <p className="text-slate-400 text-sm mt-1">Avg. time to FIRE</p>
+          </div>
         </div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {featuredLessons.map((mod) => (
-            <Link
-              key={mod.id}
-              href={`/lessons/${mod.id}`}
-              className="block glass-card p-6 rounded-2xl hover:border-emerald-500/30 transition-all"
-            >
-              <h3 className="text-lg font-bold text-white mb-1">{mod.title}</h3>
-              <p className="text-sm text-slate-400 mb-3">{mod.description}</p>
-              <div className="flex items-center gap-3 text-xs">
-                <span className="text-cyan-400 font-medium">{mod.level}</span>
-                <span className="text-slate-500">{mod.duration}</span>
+      </section>
+
+      {/* Features */}
+      <section className="bg-slate-900 py-20 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-white text-center mb-12">Everything you need to reach FIRE</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="bg-slate-800 rounded-2xl p-6 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
-            </Link>
-          ))}
+              <h3 className="text-white font-semibold text-lg">FIRE Calculator</h3>
+              <p className="text-slate-400 text-sm">Input your numbers and instantly see your FIRE date, savings rate, and required portfolio size.</p>
+            </div>
+            <div className="bg-slate-800 rounded-2xl p-6 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <h3 className="text-white font-semibold text-lg">Progress Tracking</h3>
+              <p className="text-slate-400 text-sm">Track your net worth and savings rate over time with beautiful charts and milestone alerts.</p>
+            </div>
+            <div className="bg-slate-800 rounded-2xl p-6 space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+              </div>
+              <h3 className="text-white font-semibold text-lg">Scenario Modeling</h3>
+              <p className="text-slate-400 text-sm">Model different withdrawal rates, market returns, and spending scenarios to stress-test your plan.</p>
+            </div>
+          </div>
         </div>
-        <div className="mt-8 text-center">
-          <Link
-            href="/lessons"
-            className="text-sm font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-4"
-          >
-            Browse all lessons →
+      </section>
+
+      {/* Bottom CTA — single reinforcing CTA, no competing links */}
+      <section className="bg-emerald-500 py-20 px-4">
+        <div className="max-w-2xl mx-auto text-center space-y-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Ready to find your FIRE date?</h2>
+          <p className="text-slate-800 text-lg">Join thousands of people who have already mapped their path to financial independence.</p>
+          <Link href="/calculator">
+            <button className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl bg-slate-900 hover:bg-slate-800 active:bg-slate-950 text-white shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-700/50">
+              Start Your Free FIRE Plan
+            </button>
           </Link>
         </div>
       </section>
 
-      {/* Newsletter — secondary, not a competing primary CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16 border-t border-white/5 text-center">
-        <h2 className="text-2xl font-extrabold mb-3">
-          {siteConfig.copy.emailCaptureHeading}
-        </h2>
-        <p className="text-slate-400 mb-8 text-sm">
-          {siteConfig.copy.emailCaptureSubheading}
-        </p>
-        <NewsletterForm source="homepage" />
-        <p className="mt-8 text-sm text-slate-500">
-          Want a structured plan?{" "}
-          <Link
-            href="/products/exit-plan-workbook"
-            className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
-          >
-            Exit Plan Workbook (Coming Soon)
-          </Link>
-        </p>
-      </section>
-    </div>
-  )
+      {/* Minimal footer — no competing nav CTAs */}
+      <footer className="bg-slate-900 border-t border-slate-800 py-8 px-4">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-sm">
+          <p>&copy; {new Date().getFullYear()} FIRE Planner. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms</Link>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
 }
