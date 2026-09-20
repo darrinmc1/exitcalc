@@ -3,151 +3,192 @@ import { siteConfig } from "@/config/site.config"
 
 export const metadata = {
   title: `Pricing | ${siteConfig.name}`,
-  description: "Free FIRE calculators forever. Upgrade to Pro for guided lessons, advanced projections, and expert resources.",
+  description: "Simple, transparent pricing. Choose the plan that fits your FIRE journey — from a one-time workbook to a full membership.",
 }
 
-const freeTierFeatures = [
-  "FIRE Number Calculator",
-  "Coast FIRE Calculator",
-  "Super / Pension Projection Tool",
-  "All future free calculators",
-  "Community blog & updates",
-  "No account required",
-]
-
-const proTierFeatures = [
-  "Everything in Free",
-  "Full guided lesson library",
-  "Step-by-step FIRE roadmap modules",
-  "Advanced scenario modelling",
-  "Downloadable worksheets & checklists",
-  "XP progress tracking & badges",
-  "Priority email support",
-  "Early access to new tools & lessons",
-]
+const features = {
+  free: [
+    "All free FIRE calculators",
+    "Coast FIRE & FI Number tools",
+    "Public lessons & guides",
+    "Newsletter access",
+  ],
+  membership: [
+    "Everything in Free",
+    "Full lesson library (all modules)",
+    "Progress tracking & XP badges",
+    "Downloadable worksheets",
+    "Early access to new tools",
+    "Members-only community updates",
+    "Cancel anytime",
+  ],
+  workbook: [
+    "One-time purchase, yours forever",
+    "Step-by-step FIRE planning workbook",
+    "Printable & fillable PDF format",
+    "Covers savings rate, FI number, timeline",
+    "Bonus: Coast FIRE cheat sheet",
+    "Lifetime updates included",
+  ],
+}
 
 export default function PricingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Hero */}
-      <section className="py-20 px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <span className="inline-block bg-emerald-500/10 text-emerald-400 text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-emerald-500/20">
-            Simple, transparent pricing
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
-            Calculators are free. <br />
-            <span className="text-emerald-400">Mastery is Pro.</span>
-          </h1>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Every FIRE calculator on {siteConfig.name} is free, forever. Upgrade to Pro when you\'re ready for structured lessons, deeper tools, and a clear path to financial independence.
-          </p>
-        </div>
+      <section className="max-w-4xl mx-auto px-6 pt-20 pb-12 text-center">
+        <span className="inline-block bg-emerald-500/10 text-emerald-400 text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6 border border-emerald-500/20">
+          Pricing
+        </span>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+          Invest in your{" "}
+          <span className="text-emerald-400">financial independence</span>
+        </h1>
+        <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          Start free. Upgrade when you&apos;re ready. No hidden fees, no upsells — just tools and knowledge to help you reach FIRE faster.
+        </p>
       </section>
 
       {/* Pricing Cards */}
-      <section className="pb-24 px-4">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-start">
+      <section className="max-w-5xl mx-auto px-6 pb-20">
+        <div className="grid md:grid-cols-3 gap-8 items-stretch">
 
-          {/* Free Tier */}
-          <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-8 flex flex-col">
+          {/* Free */}
+          <div className="flex flex-col bg-slate-900/60 border border-slate-800 rounded-2xl p-8">
             <div className="mb-6">
-              <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-2">Free</p>
-              <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">$0</span>
-                <span className="text-slate-400 mb-2">/ forever</span>
+              <p className="text-xs font-semibold tracking-widest uppercase text-slate-500 mb-2">Free</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-4xl font-extrabold text-white">$0</span>
               </div>
-              <p className="text-slate-400 text-sm">No credit card. No account needed. Just open a calculator and go.</p>
+              <p className="text-slate-400 text-sm">Always free. No credit card needed.</p>
             </div>
             <ul className="space-y-3 mb-8 flex-1">
-              {freeTierFeatures.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-sm text-slate-300">
-                  <span className="mt-0.5 text-emerald-400 text-base">✓</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/tools"
-              className="block text-center rounded-xl border border-emerald-500/40 text-emerald-400 font-semibold py-3 px-6 hover:bg-emerald-500/10 transition-colors"
-            >
-              Open Free Calculators
-            </Link>
-          </div>
-
-          {/* Pro Tier */}
-          <div className="rounded-2xl border border-emerald-500/50 bg-gradient-to-br from-emerald-950/60 to-slate-900/80 p-8 flex flex-col relative overflow-hidden">
-            <div className="absolute top-4 right-4 bg-emerald-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Most Popular
-            </div>
-            <div className="mb-6">
-              <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-2">Pro</p>
-              <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">$9</span>
-                <span className="text-slate-400 mb-2">/ month</span>
-              </div>
-              <p className="text-slate-400 text-sm">Cancel anytime. Billed monthly. Annual plan coming soon.</p>
-            </div>
-            <ul className="space-y-3 mb-8 flex-1">
-              {proTierFeatures.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-sm text-slate-200">
-                  <span className="mt-0.5 text-emerald-400 text-base">✓</span>
+              {features.free.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm text-slate-300">
+                  <span className="text-emerald-400 mt-0.5">✓</span>
                   {f}
                 </li>
               ))}
             </ul>
             <Link
               href="/sign-up"
-              className="block text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-6 transition-colors"
+              className="block text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors"
             >
-              Get Pro Access
+              Get Started Free
             </Link>
           </div>
+
+          {/* Membership — highlighted */}
+          <div className="flex flex-col bg-emerald-500/10 border-2 border-emerald-500/50 rounded-2xl p-8 relative">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+              <span className="bg-emerald-500 text-slate-950 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full">
+                Most Popular
+              </span>
+            </div>
+            <div className="mb-6">
+              <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-2">Membership</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-4xl font-extrabold text-white">$5</span>
+                <span className="text-slate-400 text-sm mb-1">/month</span>
+              </div>
+              <p className="text-slate-400 text-sm">Cancel anytime. No lock-in.</p>
+            </div>
+            <ul className="space-y-3 mb-8 flex-1">
+              {features.membership.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm text-slate-300">
+                  <span className="text-emerald-400 mt-0.5">✓</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/sign-up"
+              className="block text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-6 rounded-xl transition-colors"
+            >
+              Start Membership
+            </Link>
+          </div>
+
+          {/* Workbook */}
+          <div className="flex flex-col bg-slate-900/60 border border-slate-800 rounded-2xl p-8">
+            <div className="mb-6">
+              <p className="text-xs font-semibold tracking-widest uppercase text-slate-500 mb-2">Workbook</p>
+              <div className="flex items-end gap-1 mb-1">
+                <span className="text-4xl font-extrabold text-white">$59</span>
+                <span className="text-slate-400 text-sm mb-1">one-time</span>
+              </div>
+              <p className="text-slate-400 text-sm">Buy once, use forever.</p>
+            </div>
+            <ul className="space-y-3 mb-8 flex-1">
+              {features.workbook.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm text-slate-300">
+                  <span className="text-emerald-400 mt-0.5">✓</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/products"
+              className="block text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors"
+            >
+              Get the Workbook
+            </Link>
+          </div>
+
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="pb-24 px-4">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-10">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Are the calculators really free?</h3>
-              <p className="text-slate-400 text-sm">Yes — every calculator on {siteConfig.name} is completely free to use with no account required. We believe everyone deserves access to the core tools for planning financial independence.</p>
+      <section className="max-w-3xl mx-auto px-6 pb-24">
+        <h2 className="text-2xl font-bold text-center mb-10">Frequently asked questions</h2>
+        <div className="space-y-6">
+          {[
+            {
+              q: "Can I really use the calculators for free?",
+              a: "Yes — all FIRE calculators (FI Number, Coast FIRE, Super Projection) are completely free, forever. No account required.",
+            },
+            {
+              q: "What's included in the $5/month membership?",
+              a: "The membership unlocks the full lesson library, progress tracking, XP badges, downloadable worksheets, and early access to new tools. Cancel any time from your account settings.",
+            },
+            {
+              q: "Is the $59 workbook a subscription?",
+              a: "No — it's a one-time purchase. You get lifetime access and all future updates at no extra cost.",
+            },
+            {
+              q: "Do I need a membership to buy the workbook?",
+              a: "Nope. The workbook is a standalone product. You can purchase it without a membership account.",
+            },
+            {
+              q: "How do I cancel my membership?",
+              a: "You can cancel anytime from your account settings page. You'll keep access until the end of your billing period.",
+            },
+          ].map(({ q, a }) => (
+            <div key={q} className="bg-slate-900/60 border border-slate-800 rounded-xl p-6">
+              <h3 className="font-semibold text-white mb-2">{q}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{a}</p>
             </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">What do I get with Pro?</h3>
-              <p className="text-slate-400 text-sm">Pro unlocks the full guided lesson library, structured FIRE roadmap modules, XP tracking, badges, downloadable resources, and early access to new features. It&apos;s for people who want a clear, step-by-step path — not just numbers.</p>
-            </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Can I cancel anytime?</h3>
-              <p className="text-slate-400 text-sm">Absolutely. Cancel your Pro subscription at any time from your account settings. You&apos;ll retain access until the end of your billing period.</p>
-            </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Is there a free trial for Pro?</h3>
-              <p className="text-slate-400 text-sm">We&apos;re working on a trial offer. In the meantime, sign up and explore the free tier — it&apos;s genuinely useful on its own. Upgrade when you&apos;re ready to go deeper.</p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="pb-24 px-4">
-        <div className="max-w-2xl mx-auto text-center rounded-2xl border border-emerald-500/30 bg-emerald-950/30 p-12">
-          <h2 className="text-3xl font-bold mb-4">Start free. Upgrade when ready.</h2>
-          <p className="text-slate-400 mb-8">Open any calculator right now — no sign-up needed. When you want a structured plan to reach FIRE, Pro is here.</p>
+      {/* Bottom CTA */}
+      <section className="max-w-2xl mx-auto px-6 pb-24 text-center">
+        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-10">
+          <h2 className="text-2xl font-bold mb-3">Not sure where to start?</h2>
+          <p className="text-slate-400 mb-6">Try the free calculators first — no sign-up required. Upgrade when you want more.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/tools"
-              className="rounded-xl border border-emerald-500/40 text-emerald-400 font-semibold py-3 px-8 hover:bg-emerald-500/10 transition-colors"
+              className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-8 rounded-xl transition-colors"
             >
-              Try Free Calculators
+              Try Free Tools
             </Link>
             <Link
-              href="/sign-up"
-              className="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-8 transition-colors"
+              href="/lessons"
+              className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 px-8 rounded-xl transition-colors"
             >
-              Get Pro Access
+              Browse Lessons
             </Link>
           </div>
         </div>
