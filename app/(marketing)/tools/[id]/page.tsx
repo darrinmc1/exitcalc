@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_TOOLS, getToolById } from "@/data/tools"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { Disclaimer } from "@/components/disclaimer"
 import { SuperProjectionCalculator } from "@/components/calculators/super-projection"
@@ -14,11 +15,16 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }) {
   const tool = getToolById(params.id)
-  if (!tool) return { title: "Not Found" }
-  return {
+  if (!tool) {
+    return withCanonical(`/tools/${params.id}`, {
+      title: `Page Not Found | ${siteConfig.name}`,
+      description: "That calculator is not on ExitCalc.",
+    })
+  }
+  return withCanonical(`/tools/${params.id}`, {
     title: `${tool.name} | ${siteConfig.name}`,
     description: tool.description,
-  }
+  })
 }
 
 function CalculatorWidget({ toolId }: { toolId: string }) {

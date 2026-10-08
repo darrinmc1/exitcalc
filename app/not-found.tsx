@@ -1,6 +1,11 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 
+export const metadata = {
+  title: `Page Not Found | ${siteConfig.name}`,
+  description: "That page is not on ExitCalc.",
+}
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-slate-50 px-4">

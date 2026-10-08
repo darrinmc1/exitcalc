@@ -1,5 +1,12 @@
 import Link from "next/link"
 import { ALL_MODULES } from "@/data/modules"
+import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+
+export const metadata = withCanonical("/dashboard/lessons", {
+  title: `My Lessons | ${siteConfig.name}`,
+  description: "Published ExitCalc lessons linked from your dashboard.",
+})
 
 export default function DashboardLessonsPage() {
   return (

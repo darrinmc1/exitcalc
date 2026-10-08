@@ -1,11 +1,13 @@
 import Link from "next/link"
 import { ALL_UPDATES } from "@/data/updates"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
-  title: `Updates | ${siteConfig.name}`,
-  description: "Latest news and weekly updates.",
-}
+export const metadata = withCanonical("/updates", {
+  title: `ExitCalc Updates`,
+  description:
+    "Updates on ExitCalc calculators, lessons, and planning resources for Australian superannuation and FIRE.",
+})
 
 export default function UpdatesPage() {
   return (

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_MODULES, getModuleById } from "@/data/modules"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 
 export function generateStaticParams() {
@@ -10,11 +11,16 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }) {
   const mod = getModuleById(params.id)
-  if (!mod) return { title: "Not Found" }
-  return {
+  if (!mod) {
+    return withCanonical(`/lessons/${params.id}`, {
+      title: `Page Not Found | ${siteConfig.name}`,
+      description: "That lesson is not on ExitCalc.",
+    })
+  }
+  return withCanonical(`/lessons/${params.id}`, {
     title: `${mod.title} | ${siteConfig.name}`,
     description: mod.description,
-  }
+  })
 }
 
 export default function LessonPage({ params }: { params: { id: string } }) {

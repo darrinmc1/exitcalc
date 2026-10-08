@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = withCanonical("/pricing", {
   title: `Pricing | ${siteConfig.name}`,
   description: "Free FIRE calculators forever. Upgrade to Pro for guided lessons, advanced projections, and expert resources.",
-}
+})
 
 const freeTierFeatures = [
   "FIRE Number Calculator",

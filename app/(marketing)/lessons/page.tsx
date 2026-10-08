@@ -1,11 +1,13 @@
 import Link from "next/link"
 import { ALL_MODULES } from "@/data/modules"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
-  title: `Lessons | ${siteConfig.name}`,
-  description: "Browse all available lessons.",
-}
+export const metadata = withCanonical("/lessons", {
+  title: `Australian FIRE Lessons | ${siteConfig.name}`,
+  description:
+    "Lessons on the FIRE number, super contributions, Coast-FIRE, the gap before preservation age, and drawdown, written for Australian rules.",
+})
 
 export default function LessonsPage() {
   return (
