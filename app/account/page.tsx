@@ -52,14 +52,6 @@ export default async function AccountPage() {
                         {product.description}
                       </p>
                     </div>
-                    <form action={`/api/checkout?download=${product.id}`} method="GET">
-                      <button
-                        type="submit"
-                        className="px-4 py-2 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all"
-                      >
-                        Download
-                      </button>
-                    </form>
                   </div>
                 )
               )}

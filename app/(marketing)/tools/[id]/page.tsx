@@ -52,11 +52,6 @@ export default function ToolPage({ params }: { params: { id: string } }) {
     applicationCategory: "FinanceApplication",
     operatingSystem: "Web",
     featureList: tool.features,
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "AUD",
-    },
   }
 
   return (

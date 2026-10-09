@@ -38,11 +38,6 @@ const softwareApplicationSchema = {
   operatingSystem: "Web",
   description:
     "Free FIRE number, superannuation projection, and Coast-FIRE calculators for Australians. General information only, not personal financial advice.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "AUD",
-  },
   url: siteUrl,
 }
 
