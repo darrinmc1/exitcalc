@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_UPDATES, getUpdateById } from "@/data/updates"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 
 export function generateStaticParams() {
@@ -10,11 +11,19 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }) {
   const update = getUpdateById(params.id)
-  if (!update) return { title: "Not Found" }
-  return {
-    title: `${update.title} | ${siteConfig.name}`,
-    description: update.description,
+  if (!update) {
+    return withCanonical(`/updates/${params.id}`, {
+      title: `Page Not Found | ${siteConfig.name}`,
+      description: "That update is not on ExitCalc.",
+    })
   }
+  const title = update.title.includes(siteConfig.name)
+    ? update.title
+    : `${update.title} | ${siteConfig.name}`
+  return withCanonical(`/updates/${params.id}`, {
+    title,
+    description: update.description,
+  })
 }
 
 export default function UpdatePage({ params }: { params: { id: string } }) {

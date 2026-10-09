@@ -1,8 +1,11 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = withCanonical("/cookies", {
   title: `Cookies Policy | ${siteConfig.name}`,
-}
+  description:
+    "How ExitCalc uses cookies for preferences, sign-in, and basic measurement of how the site is used.",
+})
 
 export default function CookiesPage() {
   return (

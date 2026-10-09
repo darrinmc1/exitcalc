@@ -1,11 +1,12 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 import { ALL_TOOLS } from "@/data/tools"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = withCanonical("/tools", {
   title: `Calculators | ${siteConfig.name}`,
   description: "Free AU superannuation and FIRE planning calculators.",
-}
+})
 
 export default function ToolsPage() {
   return (

@@ -1,11 +1,13 @@
 import Link from "next/link"
 import { ALL_PRODUCTS } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
-  title: `Products | ${siteConfig.name}`,
-  description: "Browse our digital products and bundles.",
-}
+export const metadata = withCanonical("/products", {
+  title: `Planning Resources | ${siteConfig.name}`,
+  description:
+    "ExitCalc planning resources for an Australian FIRE exit, including the Exit Plan Workbook and spreadsheet pack.",
+})
 
 export default function ProductsPage() {
   return (
@@ -33,14 +35,7 @@ export default function ProductsPage() {
               <h2 className="text-lg font-bold text-white mb-1">{product.name}</h2>
               <p className="text-sm text-slate-400 mb-4 flex-1">{product.description}</p>
               <div className="flex items-end justify-between gap-3">
-                <div>
-                  <span className="text-2xl font-extrabold text-white">${product.price}</span>
-                  {product.comingSoon && (
-                    <span className="ml-2 text-xs font-medium text-amber-400">
-                      Coming Soon
-                    </span>
-                  )}
-                </div>
+                <span className="text-sm font-medium text-slate-300">Coming soon</span>
                 <span className="text-xs text-cyan-400 font-medium">{product.category}</span>
               </div>
             </Link>

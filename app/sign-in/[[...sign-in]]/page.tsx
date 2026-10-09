@@ -1,8 +1,11 @@
 import { SignIn } from "@clerk/nextjs"
+import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
-  title: "Sign In",
-}
+export const metadata = withCanonical("/sign-in", {
+  title: `Sign In | ${siteConfig.name}`,
+  description: "Sign in to ExitCalc to open your dashboard, lessons, and account.",
+})
 
 export default function SignInPage() {
   return (

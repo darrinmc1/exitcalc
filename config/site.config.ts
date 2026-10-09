@@ -66,12 +66,6 @@ export interface CopyConfig {
   feedbackPlaceholder: string
 }
 
-export interface PricingConfig {
-  founder: { monthly: number; yearly: number }
-  standard: { monthly: number; yearly: number }
-  premium: { monthly: number; yearly: number }
-}
-
 export interface ContactConfig {
   email: string
   github: string
@@ -87,7 +81,6 @@ export interface SiteConfig {
   categories: Category[]
   nav: NavConfig
   copy: CopyConfig
-  pricing: PricingConfig
   contact: ContactConfig
 }
 
@@ -215,12 +208,6 @@ export const siteConfig: SiteConfig = {
     emailCaptureSubheading:
       "AU super strategies, FIRE milestones, and calculator updates — straight to your inbox.",
     feedbackPlaceholder: "What topic should we cover next?",
-  },
-
-  pricing: {
-    founder: { monthly: 5, yearly: 48 },
-    standard: { monthly: 9, yearly: 90 },
-    premium: { monthly: 19, yearly: 180 },
   },
 
   contact: {

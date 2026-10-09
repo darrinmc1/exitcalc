@@ -6,6 +6,9 @@ import { Disclaimer } from "@/components/disclaimer"
 import { ALL_TOOLS } from "@/data/tools"
 import { ALL_MODULES } from "@/data/modules"
 import { exitCalcFaqs } from "@/lib/aeo"
+import { withCanonical } from "@/lib/seo"
+
+export const metadata = withCanonical("/")
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_DOMAIN
@@ -35,11 +38,6 @@ const softwareApplicationSchema = {
   operatingSystem: "Web",
   description:
     "Free FIRE number, superannuation projection, and Coast-FIRE calculators for Australians. General information only, not personal financial advice.",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "AUD",
-  },
   url: siteUrl,
 }
 
@@ -69,7 +67,6 @@ export default function HomePage() {
       <div className={`${siteConfig.theme.heroGradient} relative overflow-hidden py-20 md:py-28`}>
         <div className="absolute inset-0 bg-[url('/images/hero-exitcalc.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
             {siteConfig.name}
           </p>

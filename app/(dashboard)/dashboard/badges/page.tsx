@@ -1,4 +1,10 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+
+export const metadata = withCanonical("/dashboard/badges", {
+  title: `Badges | ${siteConfig.name}`,
+  description: "ExitCalc badge tiers and the XP required for each one.",
+})
 
 export default function BadgesPage() {
   return (
