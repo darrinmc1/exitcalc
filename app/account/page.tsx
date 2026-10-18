@@ -4,6 +4,7 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 import { getUserEntitlements } from "@/lib/entitlements"
 import { ALL_PRODUCTS } from "@/data/products"
+import { CHECKOUT_OFFERS } from "@/lib/offers"
 
 export const metadata = {
   title: `My Account | ${siteConfig.name}`,
@@ -15,6 +16,8 @@ export default async function AccountPage() {
 
   const entitlements = await getUserEntitlements(userId)
   const purchasedIds = new Set(entitlements.map((e) => e.product_id))
+  const hasPro = purchasedIds.has(CHECKOUT_OFFERS.pro.entitlementId)
+  const purchasedProducts = ALL_PRODUCTS.filter((p) => purchasedIds.has(p.id))
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -22,10 +25,28 @@ export default async function AccountPage() {
         <h1 className="text-3xl font-extrabold mb-8">My Account</h1>
 
         <section className="mb-12">
+          <h2 className="text-xl font-bold mb-4">Pro membership</h2>
+          <div className="glass-card p-6 rounded-2xl">
+            {hasPro ? (
+              <p className="text-slate-300 text-sm">
+                Pro is active on this account. It stays linked to your sign-in and ends when the subscription is canceled.
+              </p>
+            ) : (
+              <p className="text-slate-400 text-sm">
+                No Pro membership on this account.{" "}
+                <Link href="/pricing" className="text-cyan-400 hover:underline">
+                  View pricing
+                </Link>
+              </p>
+            )}
+          </div>
+        </section>
+
+        <section className="mb-12">
           <h2 className="text-xl font-bold mb-4">My Purchases</h2>
-          {purchasedIds.size === 0 ? (
+          {purchasedProducts.length === 0 ? (
             <div className="glass-card p-6 rounded-2xl text-center">
-              <p className="text-slate-400 mb-4">No purchases yet.</p>
+              <p className="text-slate-400 mb-4">No workbook purchases yet.</p>
               <Link
                 href="/products"
                 className="text-cyan-400 hover:underline text-sm"
@@ -35,7 +56,7 @@ export default async function AccountPage() {
             </div>
           ) : (
             <div className="space-y-4">
-              {ALL_PRODUCTS.filter((p) => purchasedIds.has(p.id)).map(
+              {purchasedProducts.map(
                 (product) => (
                   <div
                     key={product.id}

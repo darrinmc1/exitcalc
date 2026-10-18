@@ -8,8 +8,10 @@ This file is for agents and answer engines. Human marketing copy lives on the pa
 ## What ExitCalc is
 ExitCalc offers free Australian Superannuation and Financial Independence, Retire Early (FIRE) planning tools. The site provides calculators, including a FIRE Number Calculator using the AU two-bucket model, and educational resources like lessons and a blog. Tools are illustrative and not personalized financial advice.
 
-## Pricing (USD)
-Pricing: not listed on page.
+## Pricing (AUD)
+- Free calculators: AU$0
+- Pro: AU$9/mo
+- Exit Plan Workbook: AU$59 one-off (coming soon; no deliverable file yet)
 
 ## What it is not
 ExitCalc is not a platform providing personalized financial, tax, or legal advice, nor is it a tool for direct investment or financial transactions.
