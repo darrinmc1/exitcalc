@@ -6,7 +6,7 @@ import { Disclaimer } from "@/components/disclaimer"
 import { ALL_TOOLS } from "@/data/tools"
 import { ALL_MODULES } from "@/data/modules"
 import { exitCalcFaqs } from "@/lib/aeo"
-import { publicStripeEnabled } from "@/lib/offers"
+import { CHECKOUT_OFFERS, offerIsPurchasable } from "@/lib/offers"
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_DOMAIN
@@ -55,7 +55,7 @@ export default function HomePage() {
   const featuredLessons = FEATURED_LESSON_IDS.map((id) =>
     ALL_MODULES.find((m) => m.id === id && m.status === "published")
   ).filter(Boolean) as typeof ALL_MODULES
-  const checkoutClosed = !publicStripeEnabled()
+  const workbookComingSoon = !offerIsPurchasable(CHECKOUT_OFFERS.workbook)
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -216,7 +216,7 @@ export default function HomePage() {
             href="/products/exit-plan-workbook"
             className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
           >
-            Exit Plan Workbook{checkoutClosed ? " (Coming Soon)" : ""}
+            Exit Plan Workbook{workbookComingSoon ? " (Coming Soon)" : ""}
           </Link>
         </p>
       </section>

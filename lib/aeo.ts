@@ -10,6 +10,7 @@ import { ALL_MODULES } from "@/data/modules"
 import { ALL_PRODUCTS } from "@/data/products"
 import { ALL_UPDATES } from "@/data/updates"
 import { CHECKOUT_OFFERS } from "@/lib/offers"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 
 const siteUrl = () =>
   process.env.NEXT_PUBLIC_SITE_DOMAIN
@@ -37,7 +38,11 @@ export const exitCalcFaqs = [
   {
     question: "How much does ExitCalc cost?",
     answer:
-      `The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack ($${CHECKOUT_OFFERS.workbook.priceUsd}) is coming soon — join the waitlist on the products page. Pro membership is $${CHECKOUT_OFFERS.pro.priceUsd}/month.`,
+      `The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack (${CHECKOUT_OFFERS.workbook.priceLabel} one-off) is coming soon — join the waitlist on the products page. Pro membership is ${CHECKOUT_OFFERS.pro.priceLabel}.`,
+  },
+  {
+    question: "What is the refund policy?",
+    answer: REFUND_POLICY,
   },
   {
     question: "Does ExitCalc give financial advice?",
@@ -83,9 +88,9 @@ ${updateBlock}
 
 ## Pricing
 
-- Free calculators: USD 0 — ${base}/tools
-- Pro: USD ${CHECKOUT_OFFERS.pro.priceUsd}/month — ${base}/pricing
-- Exit Plan Workbook (USD ${CHECKOUT_OFFERS.workbook.priceUsd} one-off, coming soon / waitlist): ${base}/products
+- Free calculators: AU$0 — ${base}/tools
+- Pro: ${CHECKOUT_OFFERS.pro.priceLabel} — ${base}/pricing
+- Exit Plan Workbook (${CHECKOUT_OFFERS.workbook.priceLabel} one-off, coming soon / waitlist): ${base}/products
 
 ## FAQs
 

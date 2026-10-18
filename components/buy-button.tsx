@@ -3,16 +3,15 @@
 import { useState } from "react"
 import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
 import { NewsletterForm } from "@/components/newsletter-form"
-import { CHECKOUT_OFFERS, type CheckoutSku } from "@/lib/offers"
+import { CHECKOUT_OFFERS, offerIsPurchasable, type CheckoutSku } from "@/lib/offers"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 import { getSupportEmail } from "@/lib/support-email"
 
 /**
- * When NEXT_PUBLIC_STRIPE_ENABLED is not the string "true", this renders a
- * disabled "Coming soon: $X" control plus the waitlist and never calls
- * /api/checkout. The server flag STRIPE_ENABLED is a separate gate.
+ * Buy stays a disabled "Coming soon: AU$…" control, and never calls
+ * /api/checkout, unless NEXT_PUBLIC_STRIPE_ENABLED is "true" AND the offer's
+ * available flag is true. The server flag STRIPE_ENABLED is a separate gate.
  */
-const paymentsOn = process.env.NEXT_PUBLIC_STRIPE_ENABLED === "true"
-
 export function BuyButton({
   sku,
   variant = "emerald",
@@ -25,10 +24,11 @@ export function BuyButton({
   const offer = CHECKOUT_OFFERS[sku]
   const supportEmail = getSupportEmail()
   const width = fullWidth ? "w-full" : ""
+  const onSale = offerIsPurchasable(offer)
 
   return (
     <div className={fullWidth ? "w-full" : "max-w-md"}>
-      {paymentsOn ? (
+      {onSale ? (
         <EnabledBuy sku={sku} variant={variant} width={width} label={`Buy — ${offer.priceLabel}`} />
       ) : (
         <button
@@ -43,6 +43,8 @@ export function BuyButton({
 
       <MerchantOfRecordDisclosure />
 
+      <p className="mt-2 text-xs text-slate-500">{REFUND_POLICY}</p>
+
       {supportEmail ? (
         <p className="mt-2 text-xs text-slate-500">
           Questions about a purchase?{" "}
@@ -52,13 +54,15 @@ export function BuyButton({
         </p>
       ) : null}
 
-      {paymentsOn ? null : (
+      {onSale ? null : (
         <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-5">
           <p className="mb-1 text-sm font-semibold text-white">Notify me when checkout opens</p>
           <p className="mb-4 text-sm text-slate-400">
-            {sku === "workbook"
-              ? "Checkout is not live yet. Join the waitlist and we'll email you when the workbook ships."
-              : "Checkout is not live yet. Join the waitlist and we'll email you when Pro checkout opens."}
+            {!offer.available
+              ? "This product is not ready to ship yet. Join the waitlist and we'll email you when it is."
+              : sku === "workbook"
+                ? "Checkout is not live yet. Join the waitlist and we'll email you when the workbook ships."
+                : "Checkout is not live yet. Join the waitlist and we'll email you when Pro checkout opens."}
           </p>
           <NewsletterForm
             source={`waitlist-${sku}`}

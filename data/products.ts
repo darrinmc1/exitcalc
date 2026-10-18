@@ -60,7 +60,7 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
 - Division 293 tax impact for higher earners`,
   // Retired sandbox price — not used for Checkout, and not deleted in Stripe:
   // price_1U4Jt5PVyAgWnzPrm2FpenbR
-  price: CHECKOUT_OFFERS.workbook.priceUsd,
+  price: CHECKOUT_OFFERS.workbook.priceAud,
   sku: "workbook",
   features: [
     "40-page Exit Plan Workbook (PDF)",
@@ -72,8 +72,10 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
     "Scenario modelling tabs",
   ],
   category: "Workbook",
-  // ZIP path for a signed download after purchase. Confirm the file is in the
-  // Supabase `downloads` bucket before STRIPE_ENABLED is turned on.
+  // Intended ZIP path for a signed download after purchase. No file with this
+  // name exists in the repo or in git history, and this environment has no
+  // Supabase credentials to confirm the downloads bucket. Checkout stays closed
+  // via CHECKOUT_OFFERS.workbook.available until a real file is in place.
   downloadPath: "products/exit-plan-workbook.zip",
   emoji: "\u{1F4D3}",
   tags: ["fire", "workbook", "spreadsheet", "super", "planning"],

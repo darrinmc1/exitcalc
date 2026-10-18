@@ -37,6 +37,9 @@ export async function POST(req: NextRequest) {
   if (!offer) {
     return NextResponse.json({ error: "Unknown sku" }, { status: 400 })
   }
+  if (!offer.available) {
+    return NextResponse.json({ error: "This product is not available yet" }, { status: 503 })
+  }
 
   const origin = req.headers.get("origin") ?? req.nextUrl.origin
   const result = await createCheckoutSession({ offer, userId, origin })

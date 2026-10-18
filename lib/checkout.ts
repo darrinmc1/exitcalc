@@ -1,6 +1,7 @@
 import type Stripe from "stripe"
 import { stripe } from "@/lib/stripe"
 import {
+  CHECKOUT_CURRENCY,
   STATEMENT_DESCRIPTOR_SUFFIX,
   lookupKeyFor,
   stripeSiteKey,
@@ -48,6 +49,10 @@ export async function createCheckoutSession(args: {
   userId: string
   origin: string
 }): Promise<CheckoutReady | CheckoutFailed> {
+  if (!args.offer.available) {
+    return { error: "This product is not available yet", status: 503 }
+  }
+
   if (!stripe) {
     return { error: "Stripe not configured", status: 503 }
   }
@@ -70,8 +75,8 @@ export async function createCheckoutSession(args: {
     return { error: "Price is not available", status: 404 }
   }
 
-  const expectedCents = args.offer.priceUsd * 100
-  if (price.currency !== "usd" || price.unit_amount !== expectedCents) {
+  const expectedCents = args.offer.priceAud * 100
+  if (price.currency !== CHECKOUT_CURRENCY || price.unit_amount !== expectedCents) {
     console.error("[checkout] price currency or amount does not match the allowlist", {
       lookupKey,
       currency: price.currency,
@@ -108,6 +113,7 @@ export async function createCheckoutSession(args: {
 
   const session = await stripe.checkout.sessions.create({
     mode: args.offer.mode,
+    currency: CHECKOUT_CURRENCY,
     line_items: [{ price: price.id, quantity: 1 }],
     success_url: `${args.origin}/account?purchased=${encodeURIComponent(args.offer.entitlementId)}`,
     cancel_url:

@@ -4,7 +4,7 @@ import { ALL_PRODUCTS, getProductById } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { BuyButton } from "@/components/buy-button"
-import { publicStripeEnabled } from "@/lib/offers"
+import { CHECKOUT_OFFERS, offerIsPurchasable } from "@/lib/offers"
 import { Check } from "lucide-react"
 
 export function generateStaticParams() {
@@ -16,14 +16,15 @@ export function generateMetadata({ params }: { params: { id: string } }) {
   if (!product) return { title: "Not Found" }
   return {
     title: `${product.name} | ${siteConfig.name}`,
-    description: product.description,
+    description: `${product.description} Price: ${CHECKOUT_OFFERS[product.sku].priceLabel} one-off.`,
   }
 }
 
 export default function ProductPage({ params }: { params: { id: string } }) {
   const product = getProductById(params.id)
   if (!product) notFound()
-  const checkoutClosed = !publicStripeEnabled()
+  const offer = CHECKOUT_OFFERS[product.sku]
+  const comingSoon = !offerIsPurchasable(offer)
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -46,7 +47,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 <span className="inline-block rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs font-medium text-amber-400">
                   {product.category}
                 </span>
-                {checkoutClosed && (
+                {comingSoon && (
                   <span className="inline-block rounded-full bg-white/5 border border-white/15 px-3 py-1 text-xs font-medium text-slate-300">
                     Coming Soon
                   </span>
@@ -80,8 +81,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
         <div className="mt-8">
           <div className="mb-4">
-            <span className="text-4xl font-extrabold text-white">${product.price}</span>
-            <span className="text-slate-400 ml-1">one-time</span>
+            <span className="text-4xl font-extrabold text-white">{offer.priceLabel}</span>
+            <span className="text-slate-400 ml-2">one-off</span>
           </div>
           <BuyButton sku={product.sku} variant="cyan" />
         </div>

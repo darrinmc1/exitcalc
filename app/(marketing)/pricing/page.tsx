@@ -2,10 +2,11 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 import { BuyButton } from "@/components/buy-button"
 import { CHECKOUT_OFFERS } from "@/lib/offers"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 
 export const metadata = {
   title: `Pricing | ${siteConfig.name}`,
-  description: "Free FIRE calculators forever. Upgrade to Pro for guided lessons, advanced projections, and expert resources.",
+  description: `Free FIRE calculators. Upgrade to Pro (${CHECKOUT_OFFERS.pro.priceLabel}) for guided lessons, advanced projections, and expert resources.`,
 }
 
 const freeTierFeatures = [
@@ -42,7 +43,7 @@ export default function PricingPage() {
             <span className="text-emerald-400">Mastery is Pro.</span>
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Every FIRE calculator on {siteConfig.name} is free, forever. Upgrade to Pro when you&apos;re ready for structured lessons, deeper tools, and a clear path to financial independence.
+            Every FIRE calculator on {siteConfig.name} is free to use. Upgrade to Pro when you&apos;re ready for structured lessons, deeper tools, and a clear path to financial independence.
           </p>
         </div>
       </section>
@@ -56,8 +57,7 @@ export default function PricingPage() {
             <div className="mb-6">
               <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-2">Free</p>
               <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">$0</span>
-                <span className="text-slate-400 mb-2">/ forever</span>
+                <span className="text-5xl font-extrabold text-white">AU$0</span>
               </div>
               <p className="text-slate-400 text-sm">No credit card. No account needed. Just open a calculator and go.</p>
             </div>
@@ -82,8 +82,8 @@ export default function PricingPage() {
             <div className="mb-6">
               <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-2">Pro</p>
               <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">${CHECKOUT_OFFERS.pro.priceUsd}</span>
-                <span className="text-slate-400 mb-2">/ month</span>
+                <span className="text-5xl font-extrabold text-white">AU${CHECKOUT_OFFERS.pro.priceAud}</span>
+                <span className="text-slate-400 mb-2">/mo</span>
               </div>
               <p className="text-slate-400 text-sm">Cancel anytime. Billed monthly. Annual plan coming soon.</p>
             </div>
@@ -114,8 +114,8 @@ export default function PricingPage() {
               <p className="text-slate-400 text-sm">Pro unlocks the full guided lesson library, structured FIRE roadmap modules, XP tracking, badges, downloadable resources, and early access to new features. It&apos;s for people who want a clear, step-by-step path — not just numbers.</p>
             </div>
             <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
-              <h3 className="font-semibold text-white mb-2">Can I cancel anytime?</h3>
-              <p className="text-slate-400 text-sm">Absolutely. Cancel your Pro subscription at any time from your account settings. You&apos;ll retain access until the end of your billing period.</p>
+              <h3 className="font-semibold text-white mb-2">Can I cancel, and can I get a refund?</h3>
+              <p className="text-slate-400 text-sm">{REFUND_POLICY}</p>
             </div>
             <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
               <h3 className="font-semibold text-white mb-2">Is there a free trial for Pro?</h3>
