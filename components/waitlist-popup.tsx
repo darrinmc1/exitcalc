@@ -98,17 +98,17 @@ export function WaitlistPopup() {
                   <Gift className="h-5 w-5" />
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-                  <Sparkles className="h-3 w-3 animate-pulse" /> Free Guide
+                  <Sparkles className="h-3 w-3 animate-pulse" /> Newsletter
                 </div>
               </div>
 
               <h2 className="text-2xl font-extrabold tracking-tight text-white mb-2 font-display">
-                Get the <span className="gradient-text-cyan">FIRE Cheat Sheet</span>
+                Get <span className="gradient-text-cyan">weekly FIRE tips</span>
               </h2>
 
               <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Weekly AU super strategies, FIRE milestones, and calculator
-                updates — plus a free one-page FIRE planning cheat sheet.
+                AU super strategies, FIRE milestones, and calculator updates.
+                No spam. Unsubscribe anytime.
               </p>
 
               <form
@@ -162,7 +162,7 @@ export function WaitlistPopup() {
                 You&apos;re In!
               </h2>
               <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-[320px]">
-                Check your inbox for the FIRE cheat sheet. Weekly tips start next Monday.
+                Thanks — look for a welcome email. Weekly tips follow when we send them.
               </p>
               <button
                 onClick={handleClose}

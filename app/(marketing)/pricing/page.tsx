@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
+import { BuyButton } from "@/components/buy-button"
+import { CHECKOUT_OFFERS } from "@/lib/offers"
 
 export const metadata = {
   title: `Pricing | ${siteConfig.name}`,
@@ -40,7 +42,7 @@ export default function PricingPage() {
             <span className="text-emerald-400">Mastery is Pro.</span>
           </h1>
           <p className="text-slate-400 text-lg max-w-xl mx-auto">
-            Every FIRE calculator on {siteConfig.name} is free, forever. Upgrade to Pro when you\'re ready for structured lessons, deeper tools, and a clear path to financial independence.
+            Every FIRE calculator on {siteConfig.name} is free, forever. Upgrade to Pro when you&apos;re ready for structured lessons, deeper tools, and a clear path to financial independence.
           </p>
         </div>
       </section>
@@ -76,14 +78,11 @@ export default function PricingPage() {
           </div>
 
           {/* Pro Tier */}
-          <div className="rounded-2xl border border-emerald-500/50 bg-gradient-to-br from-emerald-950/60 to-slate-900/80 p-8 flex flex-col relative overflow-hidden">
-            <div className="absolute top-4 right-4 bg-emerald-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Most Popular
-            </div>
+          <div className="rounded-2xl border border-emerald-500/50 bg-gradient-to-br from-emerald-950/60 to-slate-900/80 p-8 flex flex-col">
             <div className="mb-6">
               <p className="text-xs font-semibold tracking-widest uppercase text-emerald-400 mb-2">Pro</p>
               <div className="flex items-end gap-2 mb-1">
-                <span className="text-5xl font-extrabold text-white">$9</span>
+                <span className="text-5xl font-extrabold text-white">${CHECKOUT_OFFERS.pro.priceUsd}</span>
                 <span className="text-slate-400 mb-2">/ month</span>
               </div>
               <p className="text-slate-400 text-sm">Cancel anytime. Billed monthly. Annual plan coming soon.</p>
@@ -96,12 +95,7 @@ export default function PricingPage() {
                 </li>
               ))}
             </ul>
-            <Link
-              href="/sign-up"
-              className="block text-center rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-6 transition-colors"
-            >
-              Get Pro Access
-            </Link>
+            <BuyButton sku="pro" fullWidth />
           </div>
         </div>
       </section>
@@ -136,19 +130,14 @@ export default function PricingPage() {
         <div className="max-w-2xl mx-auto text-center rounded-2xl border border-emerald-500/30 bg-emerald-950/30 p-12">
           <h2 className="text-3xl font-bold mb-4">Start free. Upgrade when ready.</h2>
           <p className="text-slate-400 mb-8">Open any calculator right now — no sign-up needed. When you want a structured plan to reach FIRE, Pro is here.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col items-center gap-6">
             <Link
               href="/tools"
               className="rounded-xl border border-emerald-500/40 text-emerald-400 font-semibold py-3 px-8 hover:bg-emerald-500/10 transition-colors"
             >
               Try Free Calculators
             </Link>
-            <Link
-              href="/sign-up"
-              className="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 px-8 transition-colors"
-            >
-              Get Pro Access
-            </Link>
+            <BuyButton sku="pro" />
           </div>
         </div>
       </section>

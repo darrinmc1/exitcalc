@@ -2,21 +2,22 @@
 // EXITCALC — DIGITAL PRODUCTS
 // =============================================================================
 
+import { CHECKOUT_OFFERS } from "@/lib/offers"
+
 export interface Product {
   id: string
   name: string
   description: string
   content: string
   price: number
-  stripePriceId: string
+  /** Checkout SKU. The server maps this to a Stripe lookup key. */
+  sku: "workbook"
   features: string[]
   category: string
   downloadPath: string
   emoji: string
   tags: string[]
   dateAdded: string
-  /** No checkout or download file yet — show Coming Soon / waitlist. */
-  comingSoon?: boolean
 }
 
 // ---------------------------------------------------------------------------
@@ -57,8 +58,10 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
 - How concessional and non-concessional caps work, with pointers to current ATO limits
 - Preservation age rules and transition-to-retirement considerations
 - Division 293 tax impact for higher earners`,
-  price: 59,
-  stripePriceId: "price_1U4Jt5PVyAgWnzPrm2FpenbR",
+  // Retired sandbox price — not used for Checkout, and not deleted in Stripe:
+  // price_1U4Jt5PVyAgWnzPrm2FpenbR
+  price: CHECKOUT_OFFERS.workbook.priceUsd,
+  sku: "workbook",
   features: [
     "40-page Exit Plan Workbook (PDF)",
     "Super Projection Spreadsheet",
@@ -67,14 +70,14 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
     "Drawdown Planner Spreadsheet",
     "AU super rules framework (check ATO for current figures)",
     "Scenario modelling tabs",
-    "Lifetime updates",
   ],
   category: "Workbook",
+  // ZIP path for a signed download after purchase. Confirm the file is in the
+  // Supabase `downloads` bucket before STRIPE_ENABLED is turned on.
   downloadPath: "products/exit-plan-workbook.zip",
   emoji: "\u{1F4D3}",
   tags: ["fire", "workbook", "spreadsheet", "super", "planning"],
   dateAdded: "2026-07-01",
-  comingSoon: true,
 }
 
 // ---------------------------------------------------------------------------

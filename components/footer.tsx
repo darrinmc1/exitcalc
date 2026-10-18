@@ -1,8 +1,12 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 import { NewsletterForm } from "@/components/newsletter-form"
+import { MerchantOfRecordDisclosure } from "@/components/merchant-of-record-disclosure"
+import { getSupportEmail } from "@/lib/support-email"
 
 export function Footer() {
+  const supportEmail = getSupportEmail()
+
   return (
     <footer className="border-t border-white/10 bg-black/20 backdrop-blur-sm mt-20">
       {/* Email Capture Banner */}
@@ -32,6 +36,17 @@ export function Footer() {
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
           </nav>
           <p className="text-xs text-slate-600">&copy; {new Date().getFullYear()} {siteConfig.name}</p>
+        </div>
+        <div className="mt-8 max-w-3xl">
+          <MerchantOfRecordDisclosure className="text-xs leading-relaxed text-slate-500" />
+          {supportEmail ? (
+            <p className="mt-2 text-xs text-slate-500">
+              Contact:{" "}
+              <a href={`mailto:${supportEmail}`} className="text-slate-400 hover:text-white">
+                {supportEmail}
+              </a>
+            </p>
+          ) : null}
         </div>
       </div>
     </footer>

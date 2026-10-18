@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site.config"
 import { ALL_MODULES } from "@/data/modules"
 import { ALL_PRODUCTS } from "@/data/products"
 import { ALL_UPDATES } from "@/data/updates"
+import { CHECKOUT_OFFERS } from "@/lib/offers"
 
 const siteUrl = () =>
   process.env.NEXT_PUBLIC_SITE_DOMAIN
@@ -36,7 +37,7 @@ export const exitCalcFaqs = [
   {
     question: "How much does ExitCalc cost?",
     answer:
-      "The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack ($59) is coming soon — join the waitlist on the products page. Optional membership plans start at $5/month.",
+      `The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack ($${CHECKOUT_OFFERS.workbook.priceUsd}) is coming soon — join the waitlist on the products page. Pro membership is $${CHECKOUT_OFFERS.pro.priceUsd}/month.`,
   },
   {
     question: "Does ExitCalc give financial advice?",
@@ -82,10 +83,9 @@ ${updateBlock}
 
 ## Pricing
 
-- Founder: USD ${siteConfig.pricing.founder.monthly}/month — ${base}/pricing
-- Standard: USD ${siteConfig.pricing.standard.monthly}/month — ${base}/pricing
-- Premium: USD ${siteConfig.pricing.premium.monthly}/month — ${base}/pricing
-- Exit Plan Workbook ($59, coming soon / waitlist): ${base}/products
+- Free calculators: USD 0 — ${base}/tools
+- Pro: USD ${CHECKOUT_OFFERS.pro.priceUsd}/month — ${base}/pricing
+- Exit Plan Workbook (USD ${CHECKOUT_OFFERS.workbook.priceUsd} one-off, coming soon / waitlist): ${base}/products
 
 ## FAQs
 

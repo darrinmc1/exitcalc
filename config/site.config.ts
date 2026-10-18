@@ -210,13 +210,15 @@ export const siteConfig: SiteConfig = {
     ctaSecondary: "Browse lessons",
     loginTitle: "Welcome back",
     signupTitle: "Create your account",
-    foundingMemberHeading: "Founding Member — Lock In Early Access Pricing",
+    foundingMemberHeading: "Founding member updates",
     emailCaptureHeading: "Weekly FIRE Planning Tips",
     emailCaptureSubheading:
       "AU super strategies, FIRE milestones, and calculator updates — straight to your inbox.",
     feedbackPlaceholder: "What topic should we cover next?",
   },
 
+  // Template tier numbers are not offered and must not be rendered.
+  // Live prices are Pro at USD 9/month and the Exit Plan Workbook at USD 59 one-off.
   pricing: {
     founder: { monthly: 5, yearly: 48 },
     standard: { monthly: 9, yearly: 90 },

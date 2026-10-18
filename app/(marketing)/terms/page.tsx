@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site.config"
+import { SupportEmailLink } from "@/components/support-email-link"
 
 export const metadata = {
   title: `Terms of Service | ${siteConfig.name}`,
@@ -32,12 +33,11 @@ export default function TermsPage() {
           <h2>Payments and Refunds</h2>
           <p>
             All purchases are processed through Stripe. Refund requests within 14
-            days of purchase will be honored.
+            days of purchase will be honored. Email <SupportEmailLink />.
           </p>
           <h2>Contact</h2>
           <p>
-            Questions? Email us at{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+            Questions? Email us at <SupportEmailLink />.
           </p>
         </article>
       </div>

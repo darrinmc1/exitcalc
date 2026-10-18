@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ALL_PRODUCTS } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
+import { publicStripeEnabled } from "@/lib/offers"
 
 export const metadata = {
   title: `Products | ${siteConfig.name}`,
@@ -8,6 +9,8 @@ export const metadata = {
 }
 
 export default function ProductsPage() {
+  const checkoutClosed = !publicStripeEnabled()
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
       <div className={`${siteConfig.theme.heroGradient} py-16`}>
@@ -35,7 +38,7 @@ export default function ProductsPage() {
               <div className="flex items-end justify-between gap-3">
                 <div>
                   <span className="text-2xl font-extrabold text-white">${product.price}</span>
-                  {product.comingSoon && (
+                  {checkoutClosed && (
                     <span className="ml-2 text-xs font-medium text-amber-400">
                       Coming Soon
                     </span>
