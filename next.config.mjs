@@ -18,15 +18,13 @@ const nextConfig = {
       },
     ]
   },
-  async redirects() {
-    return [
-      { source: "/pricing", destination: "/products", permanent: true },
-    ]
-  },
   webpack: (config, { dev }) => {
     if (dev) {
-      config.resolve.alias['@clerk/nextjs'] = path.resolve(__dirname, './clerk-mock.tsx')
-      config.resolve.alias['@clerk/nextjs/server'] = path.resolve(__dirname, './clerk-mock.tsx')
+      // Exact matches. A prefix alias for @clerk/nextjs would swallow
+      // @clerk/nextjs/server and point it at clerk-mock.tsx/server.
+      const mock = path.resolve(__dirname, './clerk-mock.tsx')
+      config.resolve.alias['@clerk/nextjs/server$'] = mock
+      config.resolve.alias['@clerk/nextjs$'] = mock
     }
     return config
   },

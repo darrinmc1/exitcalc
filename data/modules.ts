@@ -116,7 +116,7 @@ const fireNumberAu: Module = {
   level: "beginner",
   content: `## Your FIRE Number If You Earn $X in AU
 
-Your FIRE number is the investment portfolio size that generates enough passive income to cover your living expenses forever — or at least until super kicks in.
+Your FIRE number is the investment portfolio size that generates enough passive income to cover your living expenses for the long term — or at least until super kicks in.
 
 ### The Basic Formula
 
@@ -386,7 +386,7 @@ Employers must pay a legislated percentage of your ordinary time earnings into s
 
 ### Transfer Balance Cap
 
-When you start a retirement-phase pension, there's a lifetime cap on how much you can move from accumulation into the tax-free pension phase. It's indexed, so it changes over time; amounts above it stay in accumulation. Check the current transfer balance cap on the ATO website.
+When you start a retirement-phase pension, the transfer balance cap limits how much you can move from accumulation into the tax-free pension phase. It's indexed, so it changes over time; amounts above it stay in accumulation. Check the current transfer balance cap on the ATO website.
 
 ### Key Dates
 

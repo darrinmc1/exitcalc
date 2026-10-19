@@ -1,5 +1,7 @@
 import { siteConfig } from "@/config/site.config"
 import { withCanonical } from "@/lib/seo"
+import { SupportEmailLink } from "@/components/support-email-link"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 
 export const metadata = withCanonical("/terms", {
   title: `Terms of Service | ${siteConfig.name}`,
@@ -34,13 +36,12 @@ export default function TermsPage() {
           </p>
           <h2>Payments and Refunds</h2>
           <p>
-            All purchases are processed through Stripe. Refund requests within 14
-            days of purchase will be honored.
+            All purchases are processed through Stripe. {REFUND_POLICY} Email{" "}
+            <SupportEmailLink /> to request a refund.
           </p>
           <h2>Contact</h2>
           <p>
-            Questions? Email us at{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+            Questions? Email us at <SupportEmailLink />.
           </p>
         </article>
       </div>

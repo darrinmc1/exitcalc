@@ -15,7 +15,7 @@ export interface WeeklyUpdate {
 const launchAnnouncement: WeeklyUpdate = {
   id: "exitcalc-launch",
   title: "ExitCalc Is Live",
-  description: "Free AU superannuation and FIRE calculators — plus 12 lessons to help you plan your exit.",
+  description: "Free AU superannuation and FIRE calculators — plus 13 lessons to help you plan your exit.",
   content: `## ExitCalc Is Live
 
 We built ExitCalc because Australian FIRE planning has unique quirks that global calculators ignore — superannuation, preservation age, the gap fund, franking credits, Division 293. Every tool and lesson here is built for the AU context.
@@ -28,13 +28,13 @@ Three calculators, no sign-up required:
 - **FIRE Number** — calculate your total target using the two-bucket approach (gap fund + super)
 - **Coast-FIRE** — find out if compound growth alone will get you there
 
-### 12 Lessons
+### 13 Lessons
 
 Covering everything from your FIRE number to drawdown strategies, super contribution optimisation, property planning, and investing outside super.
 
 ### Exit Plan Workbook
 
-For those ready to get serious: a structured 40-page workbook with companion spreadsheets is coming soon ($59 one-time when available). Join the waitlist on the products page.
+For those ready to get serious: a structured 40-page workbook with companion spreadsheets is coming soon (AU$59 one-off when available). Join the waitlist on the products page.
 
 ### Coming Soon
 

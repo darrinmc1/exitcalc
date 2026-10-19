@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site.config"
 import { withCanonical } from "@/lib/seo"
+import { SupportEmailLink } from "@/components/support-email-link"
 
 export const metadata = withCanonical("/privacy", {
   title: `Privacy Policy | ${siteConfig.name}`,
@@ -31,8 +32,7 @@ export default function PrivacyPage() {
           </p>
           <h2>Contact</h2>
           <p>
-            Questions? Email us at{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+            Questions? Email us at <SupportEmailLink />.
           </p>
         </article>
       </div>

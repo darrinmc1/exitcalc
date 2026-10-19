@@ -5,6 +5,7 @@ import "./globals.css"
 import GAAnalytics from "./components/Analytics"
 import { siteConfig } from "@/config/site.config"
 import { ogImage } from "@/lib/seo"
+import { getSupportEmail } from "@/lib/support-email"
 import { WaitlistPopup } from "@/components/waitlist-popup"
 import { FeedbackWidget } from "@/components/feedback-widget"
 import { Analytics } from "@vercel/analytics/react"
@@ -57,6 +58,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const supportEmail = getSupportEmail()
+
   return (
     <html lang="en" className="dark">
       <body
@@ -80,7 +83,7 @@ export default function RootLayout({
                   name: siteConfig.name,
                   url: siteUrl,
                   description: siteConfig.description,
-                  email: siteConfig.contact.email,
+                  ...(supportEmail ? { email: supportEmail } : {}),
                   sameAs: [siteConfig.contact.github],
                 },
                 {

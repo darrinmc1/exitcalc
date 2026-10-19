@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ALL_PRODUCTS } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
 import { withCanonical } from "@/lib/seo"
+import { CHECKOUT_OFFERS, offerIsPurchasable } from "@/lib/offers"
 
 export const metadata = withCanonical("/products", {
   title: `Planning Resources | ${siteConfig.name}`,
@@ -25,28 +26,32 @@ export default function ProductsPage() {
 
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ALL_PRODUCTS.map((product) => (
-            <Link
-              key={product.id}
-              href={`/products/${product.id}`}
-              className="glass-card p-6 rounded-2xl transition-all hover:scale-[1.02] flex flex-col"
-            >
-              <div className="text-4xl mb-3">{product.emoji}</div>
-              <h2 className="text-lg font-bold text-white mb-1">{product.name}</h2>
-              <p className="text-sm text-slate-400 mb-4 flex-1">{product.description}</p>
-              <div className="flex items-end justify-between gap-3">
-                <div>
-                  <span className="text-2xl font-extrabold text-white">${product.price}</span>
-                  {product.comingSoon && (
-                    <span className="ml-2 text-xs font-medium text-amber-400">
-                      Coming Soon
-                    </span>
-                  )}
+          {ALL_PRODUCTS.map((product) => {
+            const offer = CHECKOUT_OFFERS[product.sku]
+            const comingSoon = !offerIsPurchasable(offer)
+            return (
+              <Link
+                key={product.id}
+                href={`/products/${product.id}`}
+                className="glass-card p-6 rounded-2xl transition-all hover:scale-[1.02] flex flex-col"
+              >
+                <div className="text-4xl mb-3">{product.emoji}</div>
+                <h2 className="text-lg font-bold text-white mb-1">{product.name}</h2>
+                <p className="text-sm text-slate-400 mb-4 flex-1">{product.description}</p>
+                <div className="flex items-end justify-between gap-3">
+                  <div>
+                    <span className="text-2xl font-extrabold text-white">{offer.priceLabel}</span>
+                    {comingSoon && (
+                      <span className="ml-2 text-xs font-medium text-amber-400">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-xs text-cyan-400 font-medium">{product.category}</span>
                 </div>
-                <span className="text-xs text-cyan-400 font-medium">{product.category}</span>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </div>

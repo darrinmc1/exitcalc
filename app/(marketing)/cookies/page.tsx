@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site.config"
 import { withCanonical } from "@/lib/seo"
+import { SupportEmailLink } from "@/components/support-email-link"
 
 export const metadata = withCanonical("/cookies", {
   title: `Cookies Policy | ${siteConfig.name}`,
@@ -53,8 +54,7 @@ export default function CookiesPage() {
           </p>
           <h2>Contact</h2>
           <p>
-            Questions about this policy? Email us at{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+            Questions about this policy? Email us at <SupportEmailLink />.
           </p>
         </article>
       </div>

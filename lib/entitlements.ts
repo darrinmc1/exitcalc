@@ -20,7 +20,28 @@ export async function getUserEntitlements(
     console.error("[entitlements] fetch failed", error)
     return []
   }
-  return data ?? []
+  const now = Date.now()
+  return (data ?? []).filter((row) => {
+    if (!row.expires_at) return true
+    return new Date(row.expires_at).getTime() > now
+  })
+}
+
+export async function revokeEntitlement(
+  userId: string,
+  productId: string
+): Promise<boolean> {
+  if (!supabaseAdmin) return false
+  const { error } = await supabaseAdmin
+    .from("entitlements")
+    .delete()
+    .eq("user_id", userId)
+    .eq("product_id", productId)
+  if (error) {
+    console.error("[entitlements] revoke failed", error)
+    return false
+  }
+  return true
 }
 
 export async function grantEntitlement(
