@@ -1,12 +1,14 @@
 import Link from "next/link"
 import { ALL_PRODUCTS } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { CHECKOUT_OFFERS, offerIsPurchasable } from "@/lib/offers"
 
-export const metadata = {
-  title: `Products | ${siteConfig.name}`,
-  description: "Browse our digital products and bundles.",
-}
+export const metadata = withCanonical("/products", {
+  title: `Planning Resources | ${siteConfig.name}`,
+  description:
+    "ExitCalc planning resources for an Australian FIRE exit, including the Exit Plan Workbook and spreadsheet pack.",
+})
 
 export default function ProductsPage() {
   return (

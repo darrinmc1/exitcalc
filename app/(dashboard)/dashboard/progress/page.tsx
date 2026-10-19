@@ -1,4 +1,10 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+
+export const metadata = withCanonical("/dashboard/progress", {
+  title: `Progress | ${siteConfig.name}`,
+  description: "Badge tiers and XP progress on your ExitCalc account.",
+})
 
 export default function ProgressPage() {
   return (

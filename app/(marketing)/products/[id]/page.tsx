@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_PRODUCTS, getProductById } from "@/data/products"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { BuyButton } from "@/components/buy-button"
 import { CHECKOUT_OFFERS, offerIsPurchasable } from "@/lib/offers"
@@ -13,11 +14,16 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: { params: { id: string } }) {
   const product = getProductById(params.id)
-  if (!product) return { title: "Not Found" }
-  return {
+  if (!product) {
+    return withCanonical(`/products/${params.id}`, {
+      title: `Page Not Found | ${siteConfig.name}`,
+      description: "That resource is not on ExitCalc.",
+    })
+  }
+  return withCanonical(`/products/${params.id}`, {
     title: `${product.name} | ${siteConfig.name}`,
     description: `${product.description} Price: ${CHECKOUT_OFFERS[product.sku].priceLabel} one-off.`,
-  }
+  })
 }
 
 export default function ProductPage({ params }: { params: { id: string } }) {

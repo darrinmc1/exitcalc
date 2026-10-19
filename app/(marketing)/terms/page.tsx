@@ -1,10 +1,13 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { SupportEmailLink } from "@/components/support-email-link"
 import { REFUND_POLICY } from "@/lib/refund-policy"
 
-export const metadata = {
+export const metadata = withCanonical("/terms", {
   title: `Terms of Service | ${siteConfig.name}`,
-}
+  description:
+    "Terms for using ExitCalc. Calculators, lessons, and the workbook are general information, not personal financial advice.",
+})
 
 export default function TermsPage() {
   return (

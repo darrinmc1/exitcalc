@@ -1,9 +1,12 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { SupportEmailLink } from "@/components/support-email-link"
 
-export const metadata = {
+export const metadata = withCanonical("/privacy", {
   title: `Privacy Policy | ${siteConfig.name}`,
-}
+  description:
+    "How ExitCalc collects, uses, and protects information you provide, including your email and purchase details.",
+})
 
 export default function PrivacyPage() {
   return (

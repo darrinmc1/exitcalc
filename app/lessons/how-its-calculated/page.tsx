@@ -1,4 +1,12 @@
 import Link from 'next/link';
+import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+
+export const metadata = withCanonical("/lessons/how-its-calculated", {
+  title: `How Your Score Is Calculated | ${siteConfig.name}`,
+  description:
+    "How the score is built from savings rate, emergency fund, debt-to-income, lessons completed, and goal progress.",
+})
 
 export default function HowItsCalculatedPage() {
   return (

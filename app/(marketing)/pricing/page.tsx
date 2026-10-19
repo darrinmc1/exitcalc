@@ -1,13 +1,14 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { BuyButton } from "@/components/buy-button"
 import { CHECKOUT_OFFERS } from "@/lib/offers"
 import { REFUND_POLICY } from "@/lib/refund-policy"
 
-export const metadata = {
+export const metadata = withCanonical("/pricing", {
   title: `Pricing | ${siteConfig.name}`,
   description: `Free FIRE calculators. Upgrade to Pro (${CHECKOUT_OFFERS.pro.priceLabel}) for guided lessons, advanced projections, and expert resources.`,
-}
+})
 
 const freeTierFeatures = [
   "FIRE Number Calculator",

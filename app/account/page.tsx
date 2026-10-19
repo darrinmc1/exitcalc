@@ -4,11 +4,13 @@ import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 import { getUserEntitlements } from "@/lib/entitlements"
 import { ALL_PRODUCTS } from "@/data/products"
+import { withCanonical } from "@/lib/seo"
 import { CHECKOUT_OFFERS } from "@/lib/offers"
 
-export const metadata = {
+export const metadata = withCanonical("/account", {
   title: `My Account | ${siteConfig.name}`,
-}
+  description: "Purchases linked to your ExitCalc account.",
+})
 
 export default async function AccountPage() {
   const { userId } = await auth()
