@@ -36,7 +36,7 @@ export const exitCalcFaqs = [
   {
     question: "How much does ExitCalc cost?",
     answer:
-      "The calculators and lessons are free. Paid plans and the Exit Plan Workbook are coming soon. Join the list on the products page.",
+      "The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack ($59) is coming soon — join the waitlist on the products page. Optional membership plans start at $5/month.",
   },
   {
     question: "Does ExitCalc give financial advice?",
@@ -80,11 +80,12 @@ ${moduleBlock}
 
 ${updateBlock}
 
-## Plans
+## Pricing
 
-Paid plans and the Exit Plan Workbook are coming soon. Join the list. No prices are listed.
-- Coming soon: ${base}/pricing
-- Products: ${base}/products
+- Founder: USD ${siteConfig.pricing.founder.monthly}/month — ${base}/pricing
+- Standard: USD ${siteConfig.pricing.standard.monthly}/month — ${base}/pricing
+- Premium: USD ${siteConfig.pricing.premium.monthly}/month — ${base}/pricing
+- Exit Plan Workbook ($59, coming soon / waitlist): ${base}/products
 
 ## FAQs
 
