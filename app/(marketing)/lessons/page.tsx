@@ -18,7 +18,8 @@ export default function LessonsPage() {
             <span className="gradient-text-cyan">Lessons</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Browse our complete curriculum.
+            14 written lessons. Educational calculators only — not personal
+            financial advice.
           </p>
         </div>
       </div>

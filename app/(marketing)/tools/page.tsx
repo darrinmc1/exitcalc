@@ -5,7 +5,8 @@ import { withCanonical } from "@/lib/seo"
 
 export const metadata = withCanonical("/tools", {
   title: `Calculators | ${siteConfig.name}`,
-  description: "Free AU superannuation and FIRE planning calculators.",
+  description:
+    "Three free Australian FIRE calculators: FIRE number, super projection, and Coast-FIRE. Educational illustrations — not personal financial advice.",
 })
 
 export default function ToolsPage() {
@@ -17,7 +18,8 @@ export default function ToolsPage() {
             <span className="gradient-text-cyan">Free Calculators</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Run your numbers in 60 seconds. No sign-up required.
+            Three working calculators. No sign-up. Any other /tools/ address is
+            Coming Soon — we do not list tools that are not built.
           </p>
         </div>
       </div>

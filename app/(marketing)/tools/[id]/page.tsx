@@ -109,6 +109,17 @@ export default function ToolPage({ params }: { params: { id: string } }) {
             </div>
           )}
           <CalculatorWidget toolId={tool.id} />
+          <p className="mt-5 text-sm text-slate-400">
+            Exact formulas, tax assumptions, and what this tool does not model
+            are on{" "}
+            <Link
+              href="/lessons/how-its-calculated"
+              className="text-emerald-400 underline underline-offset-2 hover:text-emerald-300"
+            >
+              How the calculators work
+            </Link>
+            .
+          </p>
           <div className="mt-6">
             <Disclaimer variant="full" />
           </div>

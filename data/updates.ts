@@ -15,34 +15,30 @@ export interface WeeklyUpdate {
 const launchAnnouncement: WeeklyUpdate = {
   id: "exitcalc-launch",
   title: "ExitCalc Is Live",
-  description: "Free AU superannuation and FIRE calculators — plus 13 lessons to help you plan your exit.",
+  description:
+    "Three free AU FIRE calculators and 14 written lessons. The Exit Plan Workbook is Coming Soon.",
   content: `## ExitCalc Is Live
 
-We built ExitCalc because Australian FIRE planning has unique quirks that global calculators ignore — superannuation, preservation age, the gap fund, franking credits, Division 293. Every tool and lesson here is built for the AU context.
+ExitCalc is for Australian FIRE planning: superannuation, preservation age, and the years between leaving work and accessing super. The tools are educational calculators, not personal financial advice.
 
-### Free Calculators
+### What is live
 
-Three calculators, no sign-up required:
+**Three calculators** (no sign-up):
 
-- **Super Projection** — see where your super is headed based on salary, SG, and salary sacrifice
-- **FIRE Number** — calculate your total target using the two-bucket approach (gap fund + super)
-- **Coast-FIRE** — find out if compound growth alone will get you there
+- [Super Projection](/tools/super-projection) — salary, SG, salary sacrifice, one return rate, 15% concessional tax in the model
+- [FIRE Number](/tools/fire-number) — gap fund (expenses × years to preservation age) plus super target (expenses × 25)
+- [Coast-FIRE](/tools/coast-fire) — one FIRE number discounted at one growth rate versus today's balances
 
-### 13 Lessons
+Formulas: [How the calculators work](/lessons/how-its-calculated).
 
-Covering everything from your FIRE number to drawdown strategies, super contribution optimisation, property planning, and investing outside super.
+**14 written lessons** in the [lesson list](/lessons), including the methodology page above.
 
-### Exit Plan Workbook
+### What is not live
 
-For those ready to get serious: a structured 40-page workbook with companion spreadsheets is coming soon (AU$59 one-off when available). Join the waitlist on the products page.
+- The [Exit Plan Workbook + Spreadsheet Pack](/products/exit-plan-workbook) is listed (AU$59 one-off when available) and is **Coming Soon**. There is no checkout and no file to download yet.
+- There is no second catalog of calculators, videos, or a community forum on this site.
 
-### Coming Soon
-
-- Additional calculators (salary sacrifice optimiser, franking credit calculator)
-- Video walkthroughs for each calculator
-- Community forum for AU FIRE seekers
-
-Thanks for being here from the start.`,
+Thanks for reading the actual inventory.`,
   date: "2026-07-06",
   tags: ["launch", "announcement"],
   category: "Announcement",

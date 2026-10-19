@@ -4,6 +4,7 @@ import { ALL_MODULES, getModuleById } from "@/data/modules"
 import { siteConfig } from "@/config/site.config"
 import { withCanonical } from "@/lib/seo"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
+import { Disclaimer } from "@/components/disclaimer"
 
 export function generateStaticParams() {
   return ALL_MODULES.map((mod) => ({ id: mod.id }))
@@ -55,6 +56,9 @@ export default function LessonPage({ params }: { params: { id: string } }) {
       <div className="mx-auto max-w-3xl px-6 py-12">
         <article className="rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-10">
           <MarkdownRenderer content={mod.content} />
+          <div className="mt-8">
+            <Disclaimer variant="full" />
+          </div>
         </article>
 
         <div className="mt-8 flex flex-wrap gap-2">

@@ -55,9 +55,10 @@ export function FIRENumberCalculator() {
           <span className="text-2xl font-extrabold text-white">${totalFireNumber.toLocaleString()}</span>
         </div>
         <p className="text-xs text-slate-500 mb-3">
-          Illustrative total using the two-bucket inputs above. Gap fund = expenses
-          × years until preservation age; super target = expenses × 25 (4% rule of
-          thumb). Not a prediction — adjust assumptions to match your plan.
+          Illustrative only. Gap fund = expenses × years to preservation age
+          (no growth, no inflation). Super target = expenses × 25 at
+          preservation age, not a present value. Progress compares today&apos;s
+          combined balances with those two future targets.
         </p>
         <div className="w-full bg-white/10 rounded-full h-3 mb-2">
           <div
