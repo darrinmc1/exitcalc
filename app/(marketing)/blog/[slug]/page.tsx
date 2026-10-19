@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar } from "lucide-react"
 import posts from "@/lib/blog"
 import { siteConfig } from "@/config/site.config"
 import { Disclaimer } from "@/components/disclaimer"
+import { withCanonical } from "@/lib/seo"
 
 type Section = { heading: string; paragraphs: string[] }
 
@@ -204,10 +205,10 @@ function formatDate(iso: string) {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = posts.find((p) => p.s === slug)
-  return {
-    title: post ? `${post.t} | ${siteConfig.name}` : `Blog | ${siteConfig.name}`,
-    description: post?.e,
-  }
+  return withCanonical(`/blog/${slug}`, {
+    title: post ? `${post.t} | ${siteConfig.name}` : `Page Not Found | ${siteConfig.name}`,
+    description: post?.e ?? "That article is not on ExitCalc.",
+  })
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {

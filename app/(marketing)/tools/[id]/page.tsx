@@ -1,9 +1,10 @@
+import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ALL_TOOLS, getToolById } from "@/data/tools"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 import { MarkdownRenderer } from "@/components/markdown-renderer"
 import { Disclaimer } from "@/components/disclaimer"
-import { ComingSoonResource } from "@/components/coming-soon-resource"
 import { SuperProjectionCalculator } from "@/components/calculators/super-projection"
 import { FIRENumberCalculator } from "@/components/calculators/fire-number"
 import { CoastFIRECalculator } from "@/components/calculators/coast-fire"
@@ -15,16 +16,15 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { id: string } }) {
   const tool = getToolById(params.id)
   if (!tool) {
-    return {
-      title: `Coming Soon | ${siteConfig.name}`,
-      description:
-        "This calculator is not live yet. ExitCalc currently has three working tools.",
-    }
+    return withCanonical(`/tools/${params.id}`, {
+      title: `Page Not Found | ${siteConfig.name}`,
+      description: "That calculator is not on ExitCalc.",
+    })
   }
-  return {
+  return withCanonical(`/tools/${params.id}`, {
     title: `${tool.name} | ${siteConfig.name}`,
     description: tool.description,
-  }
+  })
 }
 
 function CalculatorWidget({ toolId }: { toolId: string }) {
@@ -42,9 +42,7 @@ function CalculatorWidget({ toolId }: { toolId: string }) {
 
 export default function ToolPage({ params }: { params: { id: string } }) {
   const tool = getToolById(params.id)
-  if (!tool) {
-    return <ComingSoonResource kind="calculator" requestedId={params.id} />
-  }
+  if (!tool) notFound()
 
   const toolSchema = {
     "@context": "https://schema.org",

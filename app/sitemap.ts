@@ -19,6 +19,7 @@ export default function sitemap() {
     { url: `${base}/tools`, lastModified: new Date(), priority: 0.9 },
     { url: `${base}/updates`, lastModified: new Date(), priority: 0.8 },
     { url: `${base}/products`, lastModified: new Date(), priority: 0.8 },
+    { url: `${base}/pricing`, lastModified: new Date(), priority: 0.8 },
     { url: `${base}/about`, lastModified: new Date(), priority: 0.6 },
     { url: `${base}/privacy`, lastModified: new Date(), priority: 0.3 },
     { url: `${base}/terms`, lastModified: new Date(), priority: 0.3 },

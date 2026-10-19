@@ -1,8 +1,12 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+import { SupportEmailLink } from "@/components/support-email-link"
 
-export const metadata = {
+export const metadata = withCanonical("/privacy", {
   title: `Privacy Policy | ${siteConfig.name}`,
-}
+  description:
+    "How ExitCalc collects, uses, and protects information you provide, including your email and purchase details.",
+})
 
 export default function PrivacyPage() {
   return (
@@ -18,19 +22,17 @@ export default function PrivacyPage() {
           </p>
           <h2>Information We Collect</h2>
           <p>
-            We collect information you provide directly, such as an email address
-            for the waitlist or newsletter. Checkout is not live, so we do not
-            currently collect payment card details on this site.
+            We collect information you provide directly: email address, name, and
+            payment information when you make a purchase.
           </p>
           <h2>How We Use Your Information</h2>
           <p>
-            We use your information to operate the site, send updates you have
-            opted into, and improve the calculators and lessons.
+            We use your information to provide our services, process payments, send
+            updates you&apos;ve opted into, and improve our platform.
           </p>
           <h2>Contact</h2>
           <p>
-            Questions? Email us at{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+            Questions? Email us at <SupportEmailLink />.
           </p>
         </article>
       </div>

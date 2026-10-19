@@ -1,9 +1,12 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+import { SupportEmailLink } from "@/components/support-email-link"
 
-export const metadata = {
-  title: `About | ${siteConfig.name}`,
-  description: `Learn more about ${siteConfig.name}.`,
-}
+export const metadata = withCanonical("/about", {
+  title: `About ExitCalc | Australian FIRE Tools`,
+  description:
+    "ExitCalc is for Australians planning financial independence with superannuation, preservation age, and a gap fund, instead of US retirement-account calculators.",
+})
 
 export default function AboutPage() {
   return (
@@ -38,14 +41,7 @@ export default function AboutPage() {
             — it is not a live download.
           </p>
           <p className="text-slate-300 leading-relaxed">
-            Questions or feedback? Reach out at{" "}
-            <a
-              href={`mailto:${siteConfig.contact.email}`}
-              className="text-cyan-400 hover:underline"
-            >
-              {siteConfig.contact.email}
-            </a>
-            .
+            Questions or feedback? Reach out at <SupportEmailLink />.
           </p>
         </article>
       </div>

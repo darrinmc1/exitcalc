@@ -1,12 +1,13 @@
 import Link from "next/link"
 import { ALL_MODULES } from "@/data/modules"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
-  title: `Lessons | ${siteConfig.name}`,
+export const metadata = withCanonical("/lessons", {
+  title: `Australian FIRE Lessons | ${siteConfig.name}`,
   description:
-    "14 written lessons on Australian FIRE planning, super, and the three ExitCalc calculators. Educational only — not personal financial advice.",
-}
+    "Lessons on the FIRE number, super contributions, Coast-FIRE, the gap before preservation age, and drawdown, written for Australian rules.",
+})
 
 export default function LessonsPage() {
   return (
@@ -18,7 +19,7 @@ export default function LessonsPage() {
           </h1>
           <p className="text-lg text-slate-400">
             14 written lessons. Educational calculators only — not personal
-            financial advice. No invented extra courses.
+            financial advice.
           </p>
         </div>
       </div>

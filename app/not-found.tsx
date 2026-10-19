@@ -1,6 +1,11 @@
 import Link from "next/link"
 import { siteConfig } from "@/config/site.config"
 
+export const metadata = {
+  title: `Page Not Found | ${siteConfig.name}`,
+  description: "That page is not on ExitCalc.",
+}
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-slate-50 px-4">
@@ -11,8 +16,7 @@ export default function NotFound() {
         downloads that have no file, are listed as Coming Soon rather than sold.
       </p>
       <p className="text-slate-500 mb-8 text-center text-sm max-w-md">
-        Live today: three calculators and 14 written lessons. One workbook is
-        listed and is Coming Soon.
+        Live today: three calculators and 14 written lessons.
       </p>
       <div className="flex flex-wrap gap-3 justify-center">
         <Link

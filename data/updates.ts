@@ -35,8 +35,8 @@ Formulas: [How the calculators work](/lessons/how-its-calculated).
 
 ### What is not live
 
-- The [Exit Plan Workbook + Spreadsheet Pack](/products/exit-plan-workbook) is listed and is **Coming Soon**. There is no checkout and no file to download.
-- There is no second catalog of calculators, videos, or a community forum on this site. If a /tools/ or /products/ address is not one of the items above, it shows Coming Soon.
+- The [Exit Plan Workbook + Spreadsheet Pack](/products/exit-plan-workbook) is listed (AU$59 one-off when available) and is **Coming Soon**. There is no checkout and no file to download yet.
+- There is no second catalog of calculators, videos, or a community forum on this site.
 
 Thanks for reading the actual inventory.`,
   date: "2026-07-06",

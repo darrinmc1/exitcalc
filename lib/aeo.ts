@@ -9,6 +9,8 @@ import { siteConfig } from "@/config/site.config"
 import { ALL_MODULES } from "@/data/modules"
 import { ALL_PRODUCTS } from "@/data/products"
 import { ALL_UPDATES } from "@/data/updates"
+import { CHECKOUT_OFFERS } from "@/lib/offers"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 
 const siteUrl = () =>
   process.env.NEXT_PUBLIC_SITE_DOMAIN
@@ -36,7 +38,11 @@ export const exitCalcFaqs = [
   {
     question: "How much does ExitCalc cost?",
     answer:
-      "The three calculators and the written lessons are free. The Exit Plan Workbook + Spreadsheet Pack is listed at $59 and is Coming Soon — there is no live checkout. There is no paid membership product for sale on this site.",
+      `The calculators and lessons are free. The Exit Plan Workbook + Spreadsheet Pack (${CHECKOUT_OFFERS.workbook.priceLabel} one-off) is coming soon — join the waitlist on the products page. Pro membership is ${CHECKOUT_OFFERS.pro.priceLabel}.`,
+  },
+  {
+    question: "What is the refund policy?",
+    answer: REFUND_POLICY,
   },
   {
     question: "Does ExitCalc give financial advice?",
@@ -82,9 +88,9 @@ ${updateBlock}
 
 ## Pricing
 
-- Calculators and written lessons: free
-- Exit Plan Workbook ($59 listed, Coming Soon / waitlist — no checkout): ${base}/products
-- No live membership or subscription checkout
+- Free calculators: AU$0 — ${base}/tools
+- Pro: ${CHECKOUT_OFFERS.pro.priceLabel} — ${base}/pricing
+- Exit Plan Workbook (${CHECKOUT_OFFERS.workbook.priceLabel} one-off, coming soon / waitlist): ${base}/products
 
 ## FAQs
 

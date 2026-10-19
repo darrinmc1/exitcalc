@@ -2,11 +2,12 @@ import Link from "next/link"
 import { ArrowRight, Calendar } from "lucide-react"
 import posts from "@/lib/blog"
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = withCanonical("/blog", {
   title: `Blog | ${siteConfig.name}`,
   description: "Practical FIRE articles for Australians planning their exit from the 9-to-5.",
-}
+})
 
 function formatDate(iso: string) {
   const [y, m, d] = iso.split("-").map(Number)

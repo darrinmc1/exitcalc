@@ -1,8 +1,10 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
 
-export const metadata = {
+export const metadata = withCanonical("/dashboard", {
   title: `Dashboard | ${siteConfig.name}`,
-}
+  description: "Your ExitCalc dashboard for lessons completed, badges, and progress.",
+})
 
 export default function DashboardPage() {
   return (

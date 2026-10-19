@@ -1,8 +1,13 @@
 import { siteConfig } from "@/config/site.config"
+import { withCanonical } from "@/lib/seo"
+import { SupportEmailLink } from "@/components/support-email-link"
+import { REFUND_POLICY } from "@/lib/refund-policy"
 
-export const metadata = {
+export const metadata = withCanonical("/terms", {
   title: `Terms of Service | ${siteConfig.name}`,
-}
+  description:
+    "Terms for using ExitCalc. Calculators, lessons, and the workbook are general information, not personal financial advice.",
+})
 
 export default function TermsPage() {
   return (
@@ -31,15 +36,12 @@ export default function TermsPage() {
           </p>
           <h2>Payments and Refunds</h2>
           <p>
-            No digital product is for sale on this site yet. The Exit Plan
-            Workbook is listed as Coming Soon. There is no live checkout and no
-            downloadable file. When a purchase path exists, payment details will
-            be published here.
+            All purchases are processed through Stripe. {REFUND_POLICY} Email{" "}
+            <SupportEmailLink /> to request a refund.
           </p>
           <h2>Contact</h2>
           <p>
-            Questions? Email us at{" "}
-            <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>.
+            Questions? Email us at <SupportEmailLink />.
           </p>
         </article>
       </div>

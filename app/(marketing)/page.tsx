@@ -6,6 +6,10 @@ import { Disclaimer } from "@/components/disclaimer"
 import { ALL_TOOLS } from "@/data/tools"
 import { ALL_MODULES } from "@/data/modules"
 import { exitCalcFaqs } from "@/lib/aeo"
+import { withCanonical } from "@/lib/seo"
+import { CHECKOUT_OFFERS, offerIsPurchasable } from "@/lib/offers"
+
+export const metadata = withCanonical("/")
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_DOMAIN
@@ -54,6 +58,7 @@ export default function HomePage() {
   const featuredLessons = FEATURED_LESSON_IDS.map((id) =>
     ALL_MODULES.find((m) => m.id === id && m.status === "published")
   ).filter(Boolean) as typeof ALL_MODULES
+  const workbookComingSoon = !offerIsPurchasable(CHECKOUT_OFFERS.workbook)
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
@@ -69,7 +74,6 @@ export default function HomePage() {
       <div className={`${siteConfig.theme.heroGradient} relative overflow-hidden py-20 md:py-28`}>
         <div className="absolute inset-0 bg-[url('/images/hero-exitcalc.jpg')] bg-cover bg-center opacity-25" aria-hidden="true" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <div className="text-6xl mb-6 animate-float">{siteConfig.theme.emoji}</div>
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400 mb-4">
             {siteConfig.name}
           </p>
@@ -214,7 +218,7 @@ export default function HomePage() {
             href="/products/exit-plan-workbook"
             className="text-slate-300 hover:text-emerald-400 underline underline-offset-2 transition-colors"
           >
-            Exit Plan Workbook (Coming Soon)
+            Exit Plan Workbook{workbookComingSoon ? " (Coming Soon)" : ""}
           </Link>
         </p>
       </section>
