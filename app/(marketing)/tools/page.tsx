@@ -18,8 +18,7 @@ export default function ToolsPage() {
             <span className="gradient-text-cyan">Free Calculators</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Three working calculators. No sign-up. Any other /tools/ address is
-            Coming Soon — we do not list tools that are not built.
+            Three working calculators. No sign-up.
           </p>
         </div>
       </div>
