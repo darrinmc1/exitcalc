@@ -882,7 +882,7 @@ The three tools:
 - [Super Projection Calculator](/tools/super-projection)
 - [Coast-FIRE Calculator](/tools/coast-fire)
 
-There is no financial-health score, no credit score, and no hidden engine. If an address under /tools/ is not one of those three, it is Coming Soon — not a broken download and not a product for sale.
+There is no financial-health score or credit score on this site.
 
 ### Shared limits
 

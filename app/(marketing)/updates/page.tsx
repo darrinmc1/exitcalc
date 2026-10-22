@@ -18,7 +18,7 @@ export default function UpdatesPage() {
             <span className="gradient-text-cyan">Updates</span>
           </h1>
           <p className="text-lg text-slate-400">
-            Site notes. One launch update is published.
+            News and changes to the calculators and lessons.
           </p>
         </div>
       </div>

@@ -12,8 +12,7 @@ export default function NotFound() {
       <div className="text-6xl mb-6">{siteConfig.theme.emoji}</div>
       <h1 className="text-4xl font-extrabold mb-4">Page not found</h1>
       <p className="text-slate-400 mb-3 text-center max-w-md">
-        This address is not a live page. Calculators that are not built yet, and
-        downloads that have no file, are listed as Coming Soon rather than sold.
+        This page doesn&apos;t exist. It may have moved, or the link may be wrong.
       </p>
       <p className="text-slate-500 mb-8 text-center text-sm max-w-md">
         Live today: three calculators and 14 written lessons.
