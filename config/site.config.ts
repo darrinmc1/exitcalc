@@ -219,7 +219,7 @@ export const siteConfig: SiteConfig = {
 
   // Template tier numbers are not offered and must not be rendered.
   // Live prices are Pro at AU$9/mo and the Exit Plan Workbook at AU$59 one-off.
-  // Checkout currency is AUD. Lookup keys: exitcalc_pro_m_aud9, exitcalc_workbook_once_aud59.
+  // Display currency is AUD. Buy stays Coming soon until a purchase flow exists.
   pricing: {
     founder: { monthly: 5, yearly: 48 },
     standard: { monthly: 9, yearly: 90 },

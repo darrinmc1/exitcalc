@@ -10,7 +10,7 @@ export interface Product {
   description: string
   content: string
   price: number
-  /** Checkout SKU. The server maps this to a Stripe lookup key. */
+  /** Catalog SKU used for the price label and waitlist. */
   sku: "workbook"
   features: string[]
   category: string
@@ -58,8 +58,6 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
 - How concessional and non-concessional caps work, with pointers to current ATO limits
 - Preservation age rules and transition-to-retirement considerations
 - Division 293 tax impact for higher earners`,
-  // Retired sandbox price — not used for Checkout, and not deleted in Stripe:
-  // price_1U4Jt5PVyAgWnzPrm2FpenbR
   price: CHECKOUT_OFFERS.workbook.priceAud,
   sku: "workbook",
   features: [
@@ -74,8 +72,8 @@ Australians aged 30–50 earning $80k+ who are serious about FIRE but don't have
   category: "Workbook",
   // Intended ZIP path for a signed download after purchase. No file with this
   // name exists in the repo or in git history, and this environment has no
-  // Supabase credentials to confirm the downloads bucket. Checkout stays closed
-  // via CHECKOUT_OFFERS.workbook.available until a real file is in place.
+  // Supabase credentials to confirm the downloads bucket. The buy control stays
+  // Coming soon via CHECKOUT_OFFERS.workbook.available until a real file is in place.
   downloadPath: "products/exit-plan-workbook.zip",
   emoji: "\u{1F4D3}",
   tags: ["fire", "workbook", "spreadsheet", "super", "planning"],
